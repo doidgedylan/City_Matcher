@@ -8,27 +8,96 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/questionText"
+        android:id="@+id/quizHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/quizHeader"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Question 1 -->
+    <TextView
+        android:id="@+id/valueQuestionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/priorityQuestionPrompt"
         android:textColor="#FF5945"
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:textStyle="bold"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/priorityQuestionPrompt" />
-
-    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toTopOf="parent" />
+    <Spinner
+        android:id="@+id/valuesSpinner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recyclerView">
+        android:layout_height="35dp"
+        android:visibility="visible" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <!-- Question 2 -->
+    <TextView
+        android:id="@+id/industryQuestionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/industryQuestionPrompt"
+        android:textColor="#FF5945"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Spinner
+        android:id="@+id/industrySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:visibility="visible" />
 
+    <!-- Question 2 -->
+    <TextView
+        android:id="@+id/distanceQuestionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_vertical"
+        android:text="@string/distanceQuestionPrompt"
+        android:textColor="#FF5945"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Spinner
+        android:id="@+id/distanceSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:visibility="visible" />
+
+    <!-- Submit button -->
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit" />
 
 </LinearLayout>

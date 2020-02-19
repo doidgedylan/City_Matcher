@@ -1,4 +1,33 @@
 <resources>
     <string name="app_name">City-Matcher</string>
-    <string name="priorityQuestionPrompt">What aspect of your life would you consider most important?</string>
+    <string name="quizHeader">Personality And Preference Quiz</string>
+
+    <string name="priorityQuestionPrompt">1. What would you consider most important?</string>
+    <string-array name="priorityQuestionAnswers">
+        <item>Select</item>
+        <item>Career</item>
+        <item>Family</item>
+        <item>Cost of Living</item>
+        <item>Quality of Life</item>
+    </string-array>
+
+    <string name="industryQuestionPrompt">2. What industry are you in?</string>
+    <string-array name="industryQuestionAnswers">
+        <item>Select</item>
+        <item>Engineering</item>
+        <item>Marketing</item>
+        <item>Finance and Accounting</item>
+        <item>Teaching</item>
+        <item>Human Resources</item>
+        <item>Arts and Design</item>
+    </string-array>
+
+    <string name="distanceQuestionPrompt">3. How far away are you willing to move?</string>
+    <string-array name="distanceQuestionAnswers">
+        <item>Select</item>
+        <item> less than 100mi</item>
+        <item> less than 200mi</item>
+        <item> less than 300mi </item>
+        <item> no limit </item>
+    </string-array>
 </resources>
