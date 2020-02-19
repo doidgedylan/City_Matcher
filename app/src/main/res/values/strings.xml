@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">City-Matcher</string>
-    <string name="priorityQuestionPrompt">What aspect of your life is most important?</string>
+    <string name="priorityQuestionPrompt">What aspect of your life would you consider most important?</string>
 </resources>
