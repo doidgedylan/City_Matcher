@@ -1,15 +1,22 @@
-package com.example.city_matcher;
+package com.example.city_matcher.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+
+import com.example.city_matcher.R;
 
 
 public class QuestionActivity extends AppCompatActivity {
 
     private static final String TAG = "QuestionActivity";
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,14 +24,25 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.question_activity);
         Log.d(TAG, "OnCreate: started.");
         initSpinners();
+
+        //handle submit button
+        button = (Button) findViewById(R.id.submitButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openResult();
+            }
+        });
     }
 
-    // ***** HELPER METHODS ***** //
 
+    // ***** PRIVATE HELPER METHODS ***** //
 
-    /*
-        method used to initialize and setup the spinners for the personality quiz
-     */
+    private void openResult() {
+        Intent mIntent = new Intent(this, ResultActivity.class);
+        startActivity(mIntent);
+    }
+
     private void initSpinners() {
         Spinner valuesSpinner = findViewById(R.id.valuesSpinner);
         Spinner industrySpinner = findViewById(R.id.industrySpinner);
