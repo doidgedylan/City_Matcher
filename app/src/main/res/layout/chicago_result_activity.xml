@@ -21,4 +21,10 @@
         android:layout_height="245dp"
         android:src="@drawable/chicago" />
 
+    <fragment
+        android:name="com.example.city_matcher.UI.ChicagoResultFragment"
+        android:id="@+id/chicagoResultFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>
