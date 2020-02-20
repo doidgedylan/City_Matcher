@@ -14,6 +14,6 @@ public class ChicagoResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chicago_result_activity);
-        Log.d(TAG, "OnCreate: Hit and activated");
+        Log.d(TAG, "OnCreate: started.");
     }
 }
