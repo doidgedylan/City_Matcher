@@ -22,7 +22,16 @@
         <item>Arts and Design</item>
     </string-array>
 
-    <string name="distanceQuestionPrompt">3. How far away are you willing to move?</string>
+    <string name="drinkQuestionPrompt">3. whats your favorite drink?</string>
+    <string-array name="drinkQuestionAnswers">
+        <item>Select</item>
+        <item>Coffee</item>
+        <item>Beer</item>
+        <item>Soda</item>
+        <item>Water</item>
+    </string-array>
+
+    <string name="distanceQuestionPrompt">4. How far away are you willing to move?</string>
     <string-array name="distanceQuestionAnswers">
         <item>Select</item>
         <item> less than 100mi</item>
@@ -30,4 +39,5 @@
         <item> less than 300mi </item>
         <item> no limit </item>
     </string-array>
+
 </resources>

@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.ResultActivity" />
+        <activity android:name=".UI.ChicagoResultActivity" />
     </application>
 
 </manifest>
