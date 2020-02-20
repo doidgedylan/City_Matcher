@@ -7,9 +7,6 @@
     tools:context=".UI.LandingActivity"
     android:orientation="vertical">
 
-    <Button
-        android:layout_height="wrap_content"
-        android:text="Take Quiz" />
 
     <TextView
         android:id="@+id/landingHeader"
@@ -20,6 +17,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
+        android:includeFontPadding="false"
         android:text="City Matcher"
         android:textColor="#000"
         android:textSize="25sp"
@@ -27,5 +25,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/goToQuizButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find a place to live!" />
 
 </LinearLayout>

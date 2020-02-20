@@ -23,7 +23,6 @@ public class LandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing_activity);
         Log.d(TAG, "OnCreate: hit and activated");
-        initSpinners();
 
         //handle goToQuiz button
         button = (Button) findViewById(R.id.goToQuizButton);
@@ -41,9 +40,5 @@ public class LandingActivity extends AppCompatActivity {
     private void openResult() {
         Intent mIntent = new Intent(this, QuestionActivity.class);
         startActivity(mIntent);
-    }
-
-    private void initSpinners() {
-
     }
 }
