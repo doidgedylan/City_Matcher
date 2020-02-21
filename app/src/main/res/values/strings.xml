@@ -1,3 +1,49 @@
 <resources>
+    <!--  landing page  -->
+    <string name="quizButtonPrompt"> Find a place to live!</string>
+
+    <!-- quiz page -->
     <string name="app_name">City-Matcher</string>
+    <string name="quizHeader">Personality And Preference Quiz</string>
+
+    <string name="priorityQuestionPrompt">1. What would you consider most important?</string>
+    <string-array name="priorityQuestionAnswers">
+        <item>Select</item>
+        <item>Career</item>
+        <item>Family</item>
+        <item>Cost of Living</item>
+        <item>Education</item>
+    </string-array>
+
+    <string name="industryQuestionPrompt">2. What industry are you in?</string>
+    <string-array name="industryQuestionAnswers">
+        <item>Select</item>
+        <item>Engineering</item>
+        <item>Marketing</item>
+        <item>Finance and Accounting</item>
+        <item>Teaching</item>
+        <item>Human Resources</item>
+        <item>Arts and Design</item>
+    </string-array>
+
+    <string name="drinkQuestionPrompt">3. whats your favorite drink?</string>
+    <string-array name="drinkQuestionAnswers">
+        <item>Select</item>
+        <item>Coffee</item>
+        <item>Beer</item>
+        <item>Soda</item>
+        <item>Water</item>
+    </string-array>
+
+    <string name="distanceQuestionPrompt">4. How far away are you willing to move?</string>
+    <string-array name="distanceQuestionAnswers">
+        <item>Select</item>
+        <item> less than 100mi</item>
+        <item> less than 200mi</item>
+        <item> less than 300mi </item>
+        <item> no limit </item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment for testing fragment injection</string>
+
 </resources>
