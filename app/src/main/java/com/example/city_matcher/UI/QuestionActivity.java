@@ -3,6 +3,7 @@ package com.example.city_matcher.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.nfc.tech.TagTechnology;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +12,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.city_matcher.R;
-
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -35,9 +35,37 @@ public class QuestionActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "OnStart: on the quiz page.");
+    }
+
+    @Override
+    protected void onResume () {
+        super.onResume();
+        Log.d(TAG, "OnResume: returned to the quiz page.");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "OnPause: paused to go to results activity");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "OnStop: Stopped activity");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "OnDestroy: Stopped activity");
+    }
 
     // ***** PRIVATE HELPER METHODS ***** //
-
     private void openResult() {
         Intent mIntent = new Intent(this, ChicagoResultActivity.class);
         startActivity(mIntent);

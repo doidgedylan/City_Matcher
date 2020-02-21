@@ -12,7 +12,7 @@
         <item>Career</item>
         <item>Family</item>
         <item>Cost of Living</item>
-        <item>Quality of Life</item>
+        <item>Education</item>
     </string-array>
 
     <string name="industryQuestionPrompt">2. What industry are you in?</string>
@@ -43,5 +43,7 @@
         <item> less than 300mi </item>
         <item> no limit </item>
     </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment for testing fragment injection</string>
 
 </resources>
