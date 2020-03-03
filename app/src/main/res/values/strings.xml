@@ -1,6 +1,13 @@
 <resources>
     <!--  landing page  -->
     <string name="quizButtonPrompt"> Find a place to live!</string>
+    <string name="loginButtonPrompt">Login</string>
+    <string name="logoutButtonPrompt">Logout</string>
+
+    <!--  login page  -->
+    <string name="usernameEditTextPrompt">username</string>
+    <string name="loginHeader">City-Matcher Login</string>
+    <string name="createAccountPrompt">Create Account</string>
 
     <!-- quiz page -->
     <string name="app_name">City-Matcher</string>

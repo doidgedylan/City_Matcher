@@ -4,12 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-
 import com.example.city_matcher.R;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -25,11 +21,20 @@ public class LandingActivity extends AppCompatActivity {
         Log.d(TAG, "OnCreate: hit and activated");
 
         //handle goToQuiz button
-        button = (Button) findViewById(R.id.goToQuizButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button quizButton = (Button) findViewById(R.id.goToQuizButton);
+        quizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openResult();
+            }
+        });
+
+        //handle login button
+        Button loginButton = (Button) findViewById(R.id.goToLoginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLogin();
             }
         });
     }
@@ -39,6 +44,11 @@ public class LandingActivity extends AppCompatActivity {
 
     private void openResult() {
         Intent mIntent = new Intent(this, QuestionActivity.class);
+        startActivity(mIntent);
+    }
+
+    private void openLogin() {
+        Intent mIntent = new Intent(this, LoginActivity.class);
         startActivity(mIntent);
     }
 }

@@ -26,8 +26,8 @@ public class QuestionActivity extends AppCompatActivity {
         initSpinners();
 
         //handle submit button
-        button = (Button) findViewById(R.id.submitButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button submitButton = (Button) findViewById(R.id.submitButton);
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openResult();
