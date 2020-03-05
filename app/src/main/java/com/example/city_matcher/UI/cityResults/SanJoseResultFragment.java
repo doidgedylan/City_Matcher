@@ -1,4 +1,4 @@
-package com.example.city_matcher.UI;
+package com.example.city_matcher.UI.cityResults;
 
 import android.content.Context;
 import android.os.Bundle;

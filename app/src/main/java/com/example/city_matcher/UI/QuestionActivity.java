@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.example.city_matcher.Model.ResultsCalculator;
+import com.example.city_matcher.ResultsCalculator;
 import com.example.city_matcher.R;
 
 public class QuestionActivity extends AppCompatActivity {

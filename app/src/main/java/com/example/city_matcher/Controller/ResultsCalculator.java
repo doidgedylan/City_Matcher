@@ -1,4 +1,4 @@
-package com.example.city_matcher.Model;
+package com.example.city_matcher;
 
 import android.util.Log;
 

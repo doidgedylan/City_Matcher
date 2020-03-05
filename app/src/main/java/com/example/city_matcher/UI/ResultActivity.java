@@ -8,6 +8,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.city_matcher.R;
+import com.example.city_matcher.UI.cityResults.ChicagoResultFragment;
+import com.example.city_matcher.UI.cityResults.DallasResultFragment;
+import com.example.city_matcher.UI.cityResults.HoustonResultFragment;
+import com.example.city_matcher.UI.cityResults.LosAngelesResultFragment;
+import com.example.city_matcher.UI.cityResults.NewYorkResultFragment;
+import com.example.city_matcher.UI.cityResults.PhiladelphiaResultFragment;
+import com.example.city_matcher.UI.cityResults.PhoenixResultFragment;
+import com.example.city_matcher.UI.cityResults.SanAntonioResultFragment;
+import com.example.city_matcher.UI.cityResults.SanDiegoResultFragment;
+import com.example.city_matcher.UI.cityResults.SanJoseResultFragment;
 
 
 public class ResultActivity extends AppCompatActivity {

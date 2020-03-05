@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ChicagoResultFragment">
+    tools:context=".UI.cityResults.ChicagoResultFragment">
 
     <FrameLayout
         android:id="@+id/fragment_container"
