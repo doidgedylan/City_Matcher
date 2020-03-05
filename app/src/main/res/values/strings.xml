@@ -3,13 +3,14 @@
     <string name="quizButtonPrompt"> Find a place to live!</string>
     <string name="loginButtonPrompt">Login</string>
     <string name="logoutButtonPrompt">Logout</string>
+    <string name="deleteButtonPrompt">Delete Account</string>
 
     <!--  login page / new user page  -->
     <string name="enterEmailPrompt">enter email</string>
     <string name="enterPasswordPrompt">enter password</string>
     <string name="loginHeader">City-Matcher Login</string>
     <string name="createAccountPrompt">Create Account</string>
-    <string name="confirmPasswordPrompt">Confirm Password</string>
+    <string name="confirmPasswordPrompt">confirm Password</string>
 
 
     <!-- quiz page -->

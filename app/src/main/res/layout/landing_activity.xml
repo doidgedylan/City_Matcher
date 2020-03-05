@@ -33,15 +33,15 @@
         android:text="@string/quizButtonPrompt"/>
 
     <Button
-        android:id="@+id/goToLoginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/loginButtonPrompt" />
-
-    <Button
-        android:id="@+id/goToLogoutButton"
+        android:id="@+id/logoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/logoutButtonPrompt" />
+
+    <Button
+        android:id="@+id/deleteAccountButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/deleteButtonPrompt" />
 
 </LinearLayout>

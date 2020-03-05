@@ -1,19 +1,19 @@
 package com.example.city_matcher.Model;
 
 public class Account {
-    private String username;
-    private String password;
+    private String email;
+    private String matchedCity;
 
-    public Account(String mUsername, String mPassword) {
-        username = mUsername;
-        password = mPassword;
+    public Account(String mEmail, String mCity) {
+        email = mEmail;
+        matchedCity = mCity;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() { return email; }
+
+    public String getCity() {
+        return matchedCity;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public void setMatchedCity(String mCity) { matchedCity = mCity; }
 }

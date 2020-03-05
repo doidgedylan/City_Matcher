@@ -10,15 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
         <activity
-            android:name=".UI.LandingActivity">
+            android:name=".UI.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".UI.LandingActivity"/>
         <activity android:name=".UI.QuestionActivity" />
         <activity android:name=".UI.ChicagoResultActivity" />
-        <activity android:name=".UI.LoginActivity" />
         <activity android:name=".UI.NewUserActivity"/>
     </application>
 
