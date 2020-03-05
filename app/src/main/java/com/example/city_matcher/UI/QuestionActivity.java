@@ -1,7 +1,6 @@
 package com.example.city_matcher.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.nfc.tech.TagTechnology;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-
 import com.example.city_matcher.R;
 
 public class QuestionActivity extends AppCompatActivity {
@@ -70,7 +68,7 @@ public class QuestionActivity extends AppCompatActivity {
         indQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         drinkQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         distQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        
+
         // set adapters
         valuesSpinner.setAdapter(valQuestionAdapter);
         industrySpinner.setAdapter(indQuestionAdapter);

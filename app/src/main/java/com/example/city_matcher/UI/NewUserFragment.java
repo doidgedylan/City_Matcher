@@ -23,11 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class NewUserFragment extends Fragment {
+    private static final String TAG = "NewUserFragment";
     private FirebaseAuth mAuth;
     private Account account;
     private String email;
     private String password;
-    private static final String TAG = "NewUserFragment";
 
     // get database references
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
