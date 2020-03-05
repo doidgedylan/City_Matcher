@@ -19,25 +19,31 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class NewUserFragment extends Fragment {
     private static final String TAG = "NewUserFragment";
+
+    // firebase inits
+    private DatabaseReference mRootRef;
+    private DatabaseReference mAccountsRef;
+    private DatabaseReference mCitiesRef;
     private FirebaseAuth mAuth;
+
+    // storage props
     private Account account;
     private String email;
     private String password;
 
-    // get database references
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mAccountsRef = mRootRef.child("accounts");
-
     // set UI element properties
-    EditText EditTextEmail;
-    EditText EditTextPassword;
-    EditText EditTextConfirmPassword;
-    Button mCreateAccountButton;
+    private EditText EditTextEmail;
+    private EditText EditTextPassword;
+    private EditText EditTextConfirmPassword;
+    private Button mCreateAccountButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +54,13 @@ public class NewUserFragment extends Fragment {
         EditTextPassword = (EditText) v.findViewById(R.id.newAccountPassword);
         EditTextConfirmPassword = (EditText) v.findViewById(R.id.newAccountPasswordConfirm);
         mCreateAccountButton = (Button) v.findViewById(R.id.submitCreateAccountButton);
+
+        // firebase inits
         mAuth = FirebaseAuth.getInstance();
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mAccountsRef = mRootRef.child("accounts");
+        mCitiesRef = mRootRef.child("cities");
+
         return v;
     }
 
@@ -70,7 +82,7 @@ public class NewUserFragment extends Fragment {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // write user to real time database to access later
-                                    Account loginAccount = new Account(email, "default");
+                                    Account loginAccount = new Account(email, "nothing");
                                     String id = mAccountsRef.push().getKey();
                                     mAccountsRef.child(id).setValue(loginAccount);
 
