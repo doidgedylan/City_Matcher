@@ -21,8 +21,8 @@
 
         <activity android:name=".UI.LandingActivity"/>
         <activity android:name=".UI.QuestionActivity" />
-        <activity android:name=".UI.ChicagoResultActivity" />
         <activity android:name=".UI.NewUserActivity"/>
+        <activity android:name=".UI.ResultActivity" />
     </application>
 
 </manifest>

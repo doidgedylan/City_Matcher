@@ -21,7 +21,7 @@ public class ChicagoResultFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "OnCreateView: started.");
-        return inflater.inflate(R.layout.chicago_result_fragment, container, false);
+        return inflater.inflate(R.layout.chicago_fragment, container, false);
     }
 
     @Override
