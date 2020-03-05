@@ -1,4 +1,4 @@
-package com.example.city_matcher.UI;
+package com.example.myapplication.UI;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,18 +12,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.city_matcher.Model.Account;
-import com.example.city_matcher.Model.AccountSingleton;
-import com.example.city_matcher.R;
+import com.example.myapplication.Model.Account;
+import com.example.myapplication.Model.AccountSingleton;
+import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class NewUserFragment extends Fragment {
     private static final String TAG = "NewUserFragment";
@@ -31,7 +28,6 @@ public class NewUserFragment extends Fragment {
     // firebase inits
     private DatabaseReference mRootRef;
     private DatabaseReference mAccountsRef;
-    private DatabaseReference mCitiesRef;
     private FirebaseAuth mAuth;
 
     // storage props
@@ -50,17 +46,15 @@ public class NewUserFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.new_user_fragment, container, false);
         // get UI references by id
-        EditTextEmail = (EditText) v.findViewById(R.id.newAccountEmail);
-        EditTextPassword = (EditText) v.findViewById(R.id.newAccountPassword);
-        EditTextConfirmPassword = (EditText) v.findViewById(R.id.newAccountPasswordConfirm);
-        mCreateAccountButton = (Button) v.findViewById(R.id.submitCreateAccountButton);
+        EditTextEmail = v.findViewById(R.id.newAccountEmail);
+        EditTextPassword = v.findViewById(R.id.newAccountPassword);
+        EditTextConfirmPassword = v.findViewById(R.id.newAccountPasswordConfirm);
+        mCreateAccountButton = v.findViewById(R.id.submitCreateAccountButton);
 
         // firebase inits
-        mAuth = FirebaseAuth.getInstance();
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mAccountsRef = mRootRef.child("accounts");
-        mCitiesRef = mRootRef.child("cities");
-
+        mAuth = FirebaseAuth.getInstance();
         return v;
     }
 
@@ -68,6 +62,7 @@ public class NewUserFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart: TEST");
         // onClick sign up new user
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +78,8 @@ public class NewUserFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     // write user to real time database to access later
                                     Account loginAccount = new Account(email, "nothing");
-                                    String id = mAccountsRef.push().getKey();
+                                    //String id = mAccountsRef.push().getKey();
+                                    String id = mAuth.getCurrentUser().getUid();
                                     mAccountsRef.child(id).setValue(loginAccount);
 
                                     // save unique id

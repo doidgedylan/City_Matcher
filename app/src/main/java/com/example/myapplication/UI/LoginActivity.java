@@ -1,14 +1,17 @@
-package com.example.city_matcher.UI;
+package com.example.myapplication.UI;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.city_matcher.R;
+
+import com.example.myapplication.R;
 
 
-public class NewUserActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_user_activity);
+        setContentView(R.layout.login_activity);
     }
 }

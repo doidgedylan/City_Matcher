@@ -1,4 +1,4 @@
-package com.example.city_matcher.UI.cityResults;
+package com.example.myapplication.UI.cityResults;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.city_matcher.R;
+import com.example.myapplication.R;
 
 public class LosAngelesResultFragment extends Fragment {
     private static final String TAG = "LAResultFragment";

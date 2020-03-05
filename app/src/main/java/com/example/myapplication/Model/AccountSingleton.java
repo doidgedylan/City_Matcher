@@ -1,6 +1,4 @@
-package com.example.city_matcher.Model;
-
-import android.content.Context;
+package com.example.myapplication.Model;
 
 import java.util.HashMap;
 
@@ -28,4 +26,6 @@ public class AccountSingleton {
     }
 
     public void removeAccount(String email) { accountIDs.remove(email); }
+
+    public HashMap getMap() {return accountIDs;}
 }

@@ -1,4 +1,4 @@
-package com.example.city_matcher;
+package com.example.myapplication;
 
 import org.junit.Test;
 

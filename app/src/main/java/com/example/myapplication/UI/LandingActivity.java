@@ -1,4 +1,4 @@
-package com.example.city_matcher.UI;
+package com.example.myapplication.UI;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,17 +7,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.city_matcher.Model.AccountSingleton;
-import com.example.city_matcher.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.Model.AccountSingleton;
+import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 
 public class LandingActivity extends AppCompatActivity {
@@ -70,7 +70,7 @@ public class LandingActivity extends AppCompatActivity {
         quizButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openResult();
+                openQuiz();
             }
         });
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +89,7 @@ public class LandingActivity extends AppCompatActivity {
 
 
     // ***** PRIVATE HELPER METHODS ***** //
-    private void openResult() {
+    private void openQuiz() {
         Intent mIntent = new Intent(this, QuestionActivity.class);
         startActivity(mIntent);
     }
