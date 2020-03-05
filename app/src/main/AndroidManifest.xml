@@ -19,6 +19,7 @@
         <activity android:name=".UI.QuestionActivity" />
         <activity android:name=".UI.ChicagoResultActivity" />
         <activity android:name=".UI.LoginActivity" />
+        <activity android:name=".UI.NewUserActivity"/>
     </application>
 
 </manifest>

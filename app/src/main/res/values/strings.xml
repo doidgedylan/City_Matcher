@@ -4,10 +4,13 @@
     <string name="loginButtonPrompt">Login</string>
     <string name="logoutButtonPrompt">Logout</string>
 
-    <!--  login page  -->
-    <string name="usernameEditTextPrompt">username</string>
+    <!--  login page / new user page  -->
+    <string name="enterEmailPrompt">enter email</string>
+    <string name="enterPasswordPrompt">enter password</string>
     <string name="loginHeader">City-Matcher Login</string>
     <string name="createAccountPrompt">Create Account</string>
+    <string name="confirmPasswordPrompt">Confirm Password</string>
+
 
     <!-- quiz page -->
     <string name="app_name">City-Matcher</string>

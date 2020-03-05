@@ -3,8 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <fragment
-        android:name="com.example.city_matcher.UI.LoginFragment"
-        android:id="@+id/loginFragment"
+        android:name="com.example.city_matcher.UI.NewUserFragment"
+        android:id="@+id/newUserFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>
