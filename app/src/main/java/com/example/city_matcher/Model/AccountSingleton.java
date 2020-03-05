@@ -26,4 +26,6 @@ public class AccountSingleton {
     public void addAccount(String email, String id) {
         accountIDs.put(email, id);
     }
+
+    public void removeAccount(String email) { accountIDs.remove(email); }
 }
