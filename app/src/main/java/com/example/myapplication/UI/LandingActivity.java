@@ -104,8 +104,10 @@ public class LandingActivity extends AppCompatActivity {
         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String city = dataSnapshot.getValue().toString();
-                Toast.makeText(getBaseContext(), city , Toast.LENGTH_LONG).show();
+                if (dataSnapshot.getValue() != null) {
+                    String city = dataSnapshot.getValue().toString();
+                    Toast.makeText(getBaseContext(), city , Toast.LENGTH_LONG).show();
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
