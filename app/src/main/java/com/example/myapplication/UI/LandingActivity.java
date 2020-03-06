@@ -137,7 +137,7 @@ public class LandingActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "user account deleted");
                             // delete from real time database as well
-                            String id = AccountSingleton.getInstance().getID(user.getEmail());
+                            String id = user.getUid();
                             AccountSingleton.getInstance().removeAccount(user.getEmail());
                             mAccountsRef.child(id).removeValue();
 
