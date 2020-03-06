@@ -141,9 +141,8 @@ public class LandingActivity extends AppCompatActivity {
                             AccountSingleton.getInstance().removeAccount(user.getEmail());
                             mAccountsRef.child(id).removeValue();
 
-                            // go back to sign in page
+                            //go back to login
                             startActivity(loginIntent);
-                            classLevelThis.finish();
                         }
                     }
                 });
