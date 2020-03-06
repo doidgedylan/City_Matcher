@@ -4,6 +4,7 @@
     <string name="loginButtonPrompt">Login</string>
     <string name="logoutButtonPrompt">Logout</string>
     <string name="deleteButtonPrompt">Delete Account</string>
+    <string name="currentMatchedCityPrompt">Currently Matched City</string>
 
     <!--  login page / new user page  -->
     <string name="enterEmailPrompt">enter email</string>

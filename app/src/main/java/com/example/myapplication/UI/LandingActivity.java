@@ -1,11 +1,14 @@
 package com.example.myapplication.UI;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +19,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class LandingActivity extends AppCompatActivity {
@@ -27,7 +33,11 @@ public class LandingActivity extends AppCompatActivity {
     // get database references
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mAccountsRef = mRootRef.child("accounts");
+    DatabaseReference mCityRef = mRootRef.child("cities");
     FirebaseUser user;
+    ValueEventListener postListener;
+    //database reference
+    private FirebaseAuth mAuth;
 
     //intent
     Intent loginIntent;
@@ -35,11 +45,12 @@ public class LandingActivity extends AppCompatActivity {
 
     // get UI elements
     Button quizButton;
+    Button displayMatchedCityButton;
     Button logoutButton;
     Button deleteAccountButton;
 
-    //database reference
-    private FirebaseAuth mAuth;
+    //class level this for onDataChange
+    private Context localThis = this;
 
 
     @Override
@@ -52,12 +63,10 @@ public class LandingActivity extends AppCompatActivity {
         quizButton = (Button) findViewById(R.id.goToQuizButton);
         logoutButton = (Button) findViewById(R.id.logoutButton);
         deleteAccountButton = (Button) findViewById(R.id.deleteAccountButton);
+        displayMatchedCityButton = (Button) findViewById(R.id.showMatchedCityButton);
 
         // init auth reference
         mAuth = FirebaseAuth.getInstance();
-
-        // to access activity within inner class deleting accounts
-        classLevelThis = this;
     }
 
     @Override
@@ -73,6 +82,12 @@ public class LandingActivity extends AppCompatActivity {
                 openQuiz();
             }
         });
+        displayMatchedCityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toastCity();
+            }
+        });
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +100,18 @@ public class LandingActivity extends AppCompatActivity {
                 deleteAccount();
             }
         });
+
+        postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String city = dataSnapshot.getValue().toString();
+                Toast.makeText(getBaseContext(), city , Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
     }
 
 
@@ -120,5 +147,10 @@ public class LandingActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void toastCity() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        mAccountsRef.child(user.getUid()).child("city").addValueEventListener(postListener);
     }
 }

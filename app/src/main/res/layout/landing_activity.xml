@@ -33,6 +33,12 @@
         android:text="@string/quizButtonPrompt"/>
 
     <Button
+        android:id="@+id/showMatchedCityButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/currentMatchedCityPrompt" />
+
+    <Button
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

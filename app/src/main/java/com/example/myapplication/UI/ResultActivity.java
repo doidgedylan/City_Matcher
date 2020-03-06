@@ -46,7 +46,6 @@ public class ResultActivity extends AppCompatActivity {
         // update database with max city
         user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();
-        Log.d(TAG, "onCreate: ******* " + id + " ******");
         mAccountsRef.child(id).child("city").setValue(maxScoreCity);
 
         // display max value fragment
