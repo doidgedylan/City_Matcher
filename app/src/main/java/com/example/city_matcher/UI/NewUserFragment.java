@@ -1,4 +1,4 @@
-package com.example.myapplication.UI;
+package com.example.city_matcher.UI;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,9 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.Model.Account;
-import com.example.myapplication.Model.AccountSingleton;
-import com.example.myapplication.R;
+import com.example.city_matcher.Model.Account;
+import com.example.city_matcher.Model.AccountSingleton;
+import com.example.city_matcher.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

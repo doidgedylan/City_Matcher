@@ -1,4 +1,4 @@
-package com.example.myapplication.Controller;
+package com.example.city_matcher.Controller;
 
 import android.util.Log;
 

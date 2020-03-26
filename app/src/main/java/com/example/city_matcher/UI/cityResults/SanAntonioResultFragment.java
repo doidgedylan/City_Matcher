@@ -1,4 +1,4 @@
-package com.example.myapplication.UI.cityResults;
+package com.example.city_matcher.UI.cityResults;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,16 +9,16 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.R;
+import com.example.city_matcher.R;
 
-public class LosAngelesResultFragment extends Fragment {
-    private static final String TAG = "LAResultFragment";
+public class SanAntonioResultFragment extends Fragment {
+    private static final String TAG = "SAResultFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "OnCreateView: started.");
-        return inflater.inflate(R.layout.los_angeles_fragment, container, false);
+        return inflater.inflate(R.layout.san_antonio_fragment, container, false);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.myapplication.UI;
+package com.example.city_matcher.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.R;
-import com.example.myapplication.Controller.ResultsCalculator;
+import com.example.city_matcher.R;
+import com.example.city_matcher.Controller.ResultsCalculator;
 
 public class QuestionActivity extends AppCompatActivity {
 

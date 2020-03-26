@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication">
+    package="com.example.city_matcher">
 
     <application
         android:allowBackup="true"
@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
-        <activity android:name=".UI.LoginActivity">
+        <activity android:name="com.example.city_matcher.UI.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.LandingActivity"></activity>
-        <activity android:name=".UI.NewUserActivity"></activity>
-        <activity android:name=".UI.QuestionActivity"></activity>
-        <activity android:name=".UI.ResultActivity"></activity>
+        <activity android:name="com.example.city_matcher.UI.LandingActivity"></activity>
+        <activity android:name="com.example.city_matcher.UI.NewUserActivity"></activity>
+        <activity android:name="com.example.city_matcher.UI.QuestionActivity"></activity>
+        <activity android:name="com.example.city_matcher.UI.ResultActivity"></activity>
     </application>
 
 </manifest>

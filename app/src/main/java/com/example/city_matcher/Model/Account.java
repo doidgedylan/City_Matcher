@@ -1,4 +1,4 @@
-package com.example.myapplication.Model;
+package com.example.city_matcher.Model;
 
 public class Account {
     private String email;
