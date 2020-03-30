@@ -35,21 +35,18 @@ public class LandingActivity extends AppCompatActivity {
     DatabaseReference mCityRef = mRootRef.child("cities");
     FirebaseUser user;
     ValueEventListener postListener;
-    //database reference
+
+    //database authentication reference
     private FirebaseAuth mAuth;
 
     //intent
     Intent loginIntent;
-    Activity classLevelThis;
 
     // get UI elements
     Button quizButton;
     Button displayMatchedCityButton;
     Button logoutButton;
     Button deleteAccountButton;
-
-    //class level this for onDataChange
-    private Context localThis = this;
 
 
     @Override
@@ -99,7 +96,6 @@ public class LandingActivity extends AppCompatActivity {
                 deleteAccount();
             }
         });
-
         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -137,6 +133,7 @@ public class LandingActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "user account deleted");
+
                             // delete from real time database as well
                             String id = user.getUid();
                             AccountSingleton.getInstance().removeAccount(user.getEmail());

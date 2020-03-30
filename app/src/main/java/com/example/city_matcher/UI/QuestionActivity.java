@@ -14,10 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.city_matcher.R;
 import com.example.city_matcher.Controller.ResultsCalculator;
 
+import javax.xml.transform.Result;
+
 public class QuestionActivity extends AppCompatActivity {
 
     private static final String TAG = "QuestionActivity";
-    private ResultsCalculator resultEngine = new ResultsCalculator();
+    private ResultsCalculator resultEngine;
     private Button button;
 
     private Spinner valuesSpinner;
@@ -30,6 +32,8 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_activity);
         Log.d(TAG, "OnCreate: hit and activated");
+
+        resultEngine = new ResultsCalculator();
 
         // grab ui elements
         valuesSpinner = findViewById(R.id.valuesSpinner);
@@ -65,7 +69,10 @@ public class QuestionActivity extends AppCompatActivity {
     // ***** PRIVATE HELPER METHODS ***** //
     private void openResult() {
         Intent mIntent = new Intent(this, ResultActivity.class);
-        mIntent.putExtra("result", resultEngine.calculateResult());
+
+        // calculate and get result and pass the information to the result activity/fragment
+        resultEngine.calculateResult();
+        mIntent.putExtra("result", resultEngine.getResult());
         startActivity(mIntent);
     }
 
@@ -97,12 +104,10 @@ public class QuestionActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 String s = (String) parent.getItemAtPosition(position);
-                resultEngine.calculateValuesScore(s);
+                resultEngine.setValue(s);
             }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 
@@ -112,12 +117,10 @@ public class QuestionActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 String s = (String) parent.getItemAtPosition(position);
-                resultEngine.calculateIndustryScore(s);
+                resultEngine.setIndustry(s);
             }
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 }

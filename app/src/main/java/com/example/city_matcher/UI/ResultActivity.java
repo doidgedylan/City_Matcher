@@ -77,9 +77,8 @@ public class ResultActivity extends AppCompatActivity {
         // update database with max city
         user = FirebaseAuth.getInstance().getCurrentUser();
         String id = AccountSingleton.getInstance().getID(user.getEmail());
-        Log.d(TAG, "onStart: " +AccountSingleton.getInstance().getMap().toString() );
+        Log.d(TAG, "onStart: " + AccountSingleton.getInstance().getMap().toString() );
         Log.d(TAG, "onCreate: ******* " + id + " ******");
-        Log.d(TAG, "UID: " + user.getUid());
     }
 }
 
