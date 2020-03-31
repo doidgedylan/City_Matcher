@@ -2,6 +2,7 @@ package com.example.city_matcher.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,12 +54,12 @@ public class QuestionActivity extends AppCompatActivity {
         initSpinners();
         valuesSpinnerData();
         industrySpinnerData();
+        drinkSpinnerData();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        resultEngine = new ResultsCalculator();
 
         //handle submit button
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +73,7 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        resultEngine.wipeResult();
+        resultEngine = new ResultsCalculator(); //reset engine
     }
 
     // ***** PRIVATE HELPER METHODS ***** //
@@ -97,17 +98,43 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
+
+        /*
+        * process input scores
+        * note: industry input is to calculate "career"
+        * value, so no processing needed for that option
+        */
         processValueScore();
+        processDrinkScore();
     }
 
     private void processValueScore() {
-        if (resultEngine.getHighestValue().equals("Career")) {
-            //do an extra 'industry' value process count for each city
-            String jobCountIndexByIndustry = resultEngine.getJobCountIndex(resultEngine.getIndustry());
-            for (int i = 1; i <= 10; i++) {
-                mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
-            }
+        switch(resultEngine.getHighestValue()) {
+            case ("Career"):
+                //do an extra 'industry' value process count for each city
+                String jobCountIndexByIndustry = resultEngine.getJobCountIndex(resultEngine.getIndustry());
+                for (int i = 1; i <= 10; i++) {
+                    mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
+                }
+                break;
+            case ("Family"):
+                Log.d(TAG, "processValueScore: family value");
+                break;
+            case ("Cost of Living"):
+                for (int i = 1; i <= 10; i++) {
+                    mCityRef.child(Integer.toString(i)).child("3").addValueEventListener(processFirebaseRead);
+                }
+                break;
+            case ("Education"):
+                Log.d(TAG, "processValueScore: education value");
+                break;
+            default:
+                Log.d(TAG, "processValueScore: select value");
         }
+    }
+    
+    private void processDrinkScore() {
+        Log.d(TAG, "processDrinkScore: ");
     }
 
     private void showResult() {
@@ -158,6 +185,19 @@ public class QuestionActivity extends AppCompatActivity {
                                        int position, long id) {
                 String s = (String) parent.getItemAtPosition(position);
                 resultEngine.setIndustry(s);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
+
+    public void drinkSpinnerData() {
+        drinkSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                String s = (String) parent.getItemAtPosition(position);
+                resultEngine.setDrink(s);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}

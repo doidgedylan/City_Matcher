@@ -38,7 +38,6 @@ public class ResultActivity extends AppCompatActivity {
 
         // get max city
         String maxScoreCity = getIntent().getStringExtra("result");
-        Toast.makeText(this, "Select: " + maxScoreCity, Toast.LENGTH_SHORT).show();
         if (maxScoreCity.isEmpty()) {
             maxScoreCity = "New York";
         }
@@ -66,9 +65,7 @@ public class ResultActivity extends AppCompatActivity {
                 default: fragment = new NewYorkResultFragment();
             }
         }
-        fm.beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .commit();
+        fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
     }
 
     @Override
@@ -81,4 +78,3 @@ public class ResultActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: ******* " + id + " ******");
     }
 }
-

@@ -32,7 +32,7 @@ public class LandingActivity extends AppCompatActivity {
     // get database references
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference mAccountsRef = mRootRef.child("accounts");
-    DatabaseReference mCityRef = mRootRef.child("cities");
+    //DatabaseReference mCityRef = mRootRef.child("cities");
     FirebaseUser user;
     ValueEventListener postListener;
 
@@ -53,13 +53,12 @@ public class LandingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing_activity);
-        Log.d(TAG, "OnCreate: hit and activated");
 
         // grab button elements by id
-        quizButton = (Button) findViewById(R.id.goToQuizButton);
-        logoutButton = (Button) findViewById(R.id.logoutButton);
-        deleteAccountButton = (Button) findViewById(R.id.deleteAccountButton);
-        displayMatchedCityButton = (Button) findViewById(R.id.showMatchedCityButton);
+        quizButton = findViewById(R.id.goToQuizButton);
+        logoutButton = findViewById(R.id.logoutButton);
+        deleteAccountButton = findViewById(R.id.deleteAccountButton);
+        displayMatchedCityButton = findViewById(R.id.showMatchedCityButton);
 
         // init auth reference
         mAuth = FirebaseAuth.getInstance();
