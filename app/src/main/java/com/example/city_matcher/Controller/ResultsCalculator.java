@@ -1,26 +1,13 @@
 package com.example.city_matcher.Controller;
 
-import android.content.Intent;
 import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class ResultsCalculator {
 
@@ -39,31 +26,24 @@ public class ResultsCalculator {
     // error logging
     private static final String TAG = "ResultCalculator";
 
-    // get database references
-    private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    private DatabaseReference mCityRef = mRootRef.child("cities");
-    private ValueEventListener industryListener;
-
     // map to store city index numbers for firebase reference
-    private HashMap<String, String> citiesIndex;
     private HashMap<String, String> jobCountIndex;
-    private String cityReadResult;
-    HashMap<String,String> industryJobCounts;
+    private static HashMap<String,Integer> industryJobCounts;
 
     // used to keep track of city scores and answers
     private static HashMap<String, Integer> cityScores;
+    private static HashMap<String, String> citiesIndex;
     private static String highestValue;
     private static String industry;
-    //private static String favoriteDrink;
-    //private static String distance;
+    private static int iterateCount;
 
 
     public ResultsCalculator() {
         cityScores = new HashMap<>(); // keep track of city scores
         industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
-
-        citiesIndex = new HashMap<>();
-        jobCountIndex = new HashMap<>();
+        citiesIndex = new HashMap<>(); // index of cities in real time database
+        jobCountIndex = new HashMap<>(); // index of job count in real time database
+        iterateCount = 0;
 
         cityScores.put("Chicago", 0);
         cityScores.put("New York", 0);
@@ -87,6 +67,7 @@ public class ResultsCalculator {
         citiesIndex.put("8", "San Antonio");
         citiesIndex.put("9", "San Diego");
         citiesIndex.put("10", "San Jose");
+
         jobCountIndex.put("Engineering", "7");
         jobCountIndex.put("Marketing", "8");
         jobCountIndex.put("Finance and Accounting", "9");
@@ -95,88 +76,49 @@ public class ResultsCalculator {
         jobCountIndex.put("Arts and Design", "12");
     }
 
-    // partial credit: using a tutorial on sorting here to help write this function
-    private static HashMap sortByValues(HashMap map) {
-        List tempList = new LinkedList(map.entrySet());
-        // Defined Custom Comparator here
-        Collections.sort(tempList, new Comparator() {
-            public int compare(Object o1, Object o2) {
-                return ((Comparable) ((Map.Entry) (o1)).getValue())
-                        .compareTo(((Map.Entry) (o2)).getValue());
+    // function to sort hashmap by values
+    private static HashMap<String, Integer> sortByValues(HashMap<String, Integer> hm)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<String, Integer> > list = new LinkedList<>(hm.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() {
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
             }
         });
 
-        HashMap sortedHashMap = new LinkedHashMap();
-        for (Iterator it = tempList.iterator(); it.hasNext();) {
-            Map.Entry entry = (Map.Entry) it.next();
-            sortedHashMap.put(entry.getKey(), entry.getValue());
+        // put data from sorted list to hashmap
+        HashMap<String, Integer> temp = new LinkedHashMap<>();
+        for (Map.Entry<String, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
         }
-        return sortedHashMap;
+        return temp;
     }
 
-    /*
-    * rank cities with the job count that's best for their industry,
-    * add the corresponding point totals (1-10)
-    */
-    private void processCareerCalculation(String mIndustry) {
-        // define value event listeners for read processing
-        //cityScores.get(i).setCityScore(cityScores.get(i).getCityScore() + getRandPosInt());
-        industryJobCounts.clear();
-
-        industryListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cityReadResult = dataSnapshot.getValue().toString();
-                DatabaseReference parentCity = dataSnapshot.getRef().getParent();
-                industryJobCounts.put(parentCity.getKey(), cityReadResult);
-                if (industryJobCounts.size() > 1) {
-                    HashMap<String, String> sortedCounts = sortByValues(industryJobCounts);
-
-                    // add points accordingly
-                    int i = 1;
-                    for (Map.Entry<String,String> entry : sortedCounts.entrySet()) {
-                        Log.d(TAG, "onDataChange: entry " + entry.getValue());
-                        String city = citiesIndex.get(entry.getKey());
-                        Log.d(TAG, "onDataChange: city " + city);
-                        cityScores.put(city, cityScores.get(city) + i);
-                        i += 1;
-                    }
-
-                }
+    private static void processIndustryData(String data, String parentCityIndex) {
+        industryJobCounts.put(parentCityIndex, Integer.parseInt(data));
+        if (industryJobCounts.size() >= 10) { //***
+            // add points according to ranking now that we've added every city count
+            HashMap<String, Integer> sortedCounts = sortByValues(industryJobCounts);
+            int i = 1;
+            for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
+                String city = citiesIndex.get(entry.getKey());
+                cityScores.put(city, cityScores.get(city) + i);
+                i += 1;
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}
-        };
-        mCityRef.child("1").child(jobCountIndex.get(mIndustry)).addValueEventListener(industryListener);
-        mCityRef.child("2").child(jobCountIndex.get(mIndustry)).addValueEventListener(industryListener);
-    }
-
-    private void calculateValuesScore() {
-        switch(highestValue) {
-            case("Career"):
-                processCareerCalculation(industry);
-                break;
-            case("Family"): break;
-            case("Education"): break;
-            case("Cost of Living"): break;
-            default: break;
         }
     }
 
-    private void calculateIndustryScore() {
-
-    }
-
-    private void calculateDrinkScore() {
-
-    }
-
-    private void calculateDistanceScore() {
-
+    // **** PUBLIC METHODS ****
+    public void processData(String data, String valueIndex, String parentCity) {
+        iterateCount+=1; // when this is 10 move to result page
+        if (Integer.parseInt(valueIndex) > 6) {processIndustryData(data, parentCity);}
     }
 
     public String getResult() {
-        Log.d(TAG, "getResult: result " + cityScores.toString());
+        Log.d(TAG, "getResult: result cities " + cityScores.toString());
         String result = "";
         int maxScore = 0;
         for (Map.Entry<String,Integer> entry : cityScores.entrySet()) {
@@ -185,14 +127,7 @@ public class ResultsCalculator {
                 result = entry.getKey();
             }
         }
-        return "New York";
-    }
-
-    public void calculateResult() {
-        calculateValuesScore();
-        calculateIndustryScore();
-        calculateDrinkScore();
-        calculateDistanceScore();
+        return result;
     }
 
     public void wipeResult() {
@@ -204,4 +139,8 @@ public class ResultsCalculator {
     // setter methods for question activity to call
     public void setValue(String highestPriority) { highestValue = highestPriority; }
     public void setIndustry(String mIndustry) { industry = mIndustry; }
+    public String getHighestValue() { return highestValue; }
+    public String getIndustry() {return industry; }
+    public String getJobCountIndex(String city) { return jobCountIndex.get(city); }
+    public int getIterateCount() {return iterateCount; }
 }
