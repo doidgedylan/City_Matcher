@@ -24,7 +24,7 @@
         <item>Career</item>
         <item>Family</item>
         <item>Cost of Living</item>
-        <item>Education</item>
+        <item>Warm Weather</item>
     </string-array>
 
     <string name="industryQuestionPrompt">2. What industry are you in?</string>

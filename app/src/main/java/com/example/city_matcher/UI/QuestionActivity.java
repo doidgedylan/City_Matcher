@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -111,25 +112,30 @@ public class QuestionActivity extends AppCompatActivity {
     private void processValueScore() {
         switch(resultEngine.getHighestValue()) {
             case ("Career"):
-                //do an extra 'industry' value process count for each city
+                // calculate based on job count
                 String jobCountIndexByIndustry = resultEngine.getJobCountIndex(resultEngine.getIndustry());
                 for (int i = 1; i <= 10; i++) {
                     mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
                 }
                 break;
             case ("Family"):
-                Log.d(TAG, "processValueScore: family value");
+                // calculate based on cost of living and public park count
+                for (int i = 1; i <=10; i++) {
+                    mCityRef.child(Integer.toString(i)).child("5").addValueEventListener(processFirebaseRead);
+                }
                 break;
             case ("Cost of Living"):
+                // calculate based on cost of living index
                 for (int i = 1; i <= 10; i++) {
                     mCityRef.child(Integer.toString(i)).child("3").addValueEventListener(processFirebaseRead);
                 }
                 break;
-            case ("Education"):
+            case ("Warm Weather"):
+                // calculate based on average summer temp
                 Log.d(TAG, "processValueScore: education value");
                 break;
             default:
-                Log.d(TAG, "processValueScore: select value");
+                Toast.makeText(getBaseContext(), "Please select what's most important" , Toast.LENGTH_LONG).show();
         }
     }
     

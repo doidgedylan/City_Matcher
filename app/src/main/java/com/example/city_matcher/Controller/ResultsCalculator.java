@@ -30,6 +30,7 @@ public class ResultsCalculator {
     private HashMap<String, String> jobCountIndex;
     private static HashMap<String,Integer> industryJobCounts;
     private static HashMap<String, Integer> costOfLivingCounts;
+    private static HashMap<String, Integer> parkCounts;
 
     // used to keep track of city scores and answers
     private static HashMap<String, String> citiesIndex;
@@ -43,6 +44,7 @@ public class ResultsCalculator {
         cityScores = new HashMap<>(); // keep track of city scores
         industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
         costOfLivingCounts = new HashMap<>(); // keep track of cost of living indexes by city
+        parkCounts = new HashMap<>(); // keep track of park counts by city for score calculations
         citiesIndex = new HashMap<>(); // index of cities in real time database
         jobCountIndex = new HashMap<>(); // index of job count in real time database
         iterateCount = 0;
@@ -118,11 +120,25 @@ public class ResultsCalculator {
         if (costOfLivingCounts.size() >= 10) {
             // add points according to ranking now that we've added every city index
             HashMap<String, Integer> sortedCounts = sortByValues(costOfLivingCounts);
-            int i = 10;
+            int i = 10; // because lower is better for cost of living index
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
                 String city = citiesIndex.get(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i -= 1;
+            }
+        }
+    }
+
+    private static void processParkData (String data, String parentCityIndex) {
+        parkCounts.put(parentCityIndex, Integer.parseInt(data));
+        if (parkCounts.size() >= 10) {
+            // add points according to ranking now that we've added every city index
+            HashMap<String, Integer> sortedCounts = sortByValues(parkCounts);
+            int i = 1;
+            for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
+                String city = citiesIndex.get(entry.getKey());
+                cityScores.put(city, cityScores.get(city) + i);
+                i += 1;
             }
         }
     }
@@ -132,6 +148,7 @@ public class ResultsCalculator {
         iterateCount+=1; // when this is 10 move to result page
         if (Integer.parseInt(valueIndex) > 6) {processIndustryData(data, parentCity);}
         else if(Integer.parseInt(valueIndex) == 3) {processCostOfLivingData(data, parentCity);}
+        else if (Integer.parseInt(valueIndex) == 5) {processParkData(data, parentCity); }
     }
 
     public String getResult() {
