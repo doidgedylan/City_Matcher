@@ -78,6 +78,28 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     // ***** PRIVATE HELPER METHODS ***** //
+    private void initSpinners() {
+        // init adapters
+        ArrayAdapter<String> valQuestionAdapter = new ArrayAdapter<>(this,
+                R.layout.support_simple_spinner_dropdown_item, getResources().getStringArray(R.array.priorityQuestionAnswers));
+        ArrayAdapter<String> indQuestionAdapter = new ArrayAdapter<>(this,
+                R.layout.support_simple_spinner_dropdown_item, getResources().getStringArray(R.array.industryQuestionAnswers));
+        ArrayAdapter<String> drinkQuestionAdapter = new ArrayAdapter<>(this,
+                R.layout.support_simple_spinner_dropdown_item, getResources().getStringArray(R.array.drinkQuestionAnswers));
+        ArrayAdapter<String> distQuestionAdapter = new ArrayAdapter<>(this,
+                R.layout.support_simple_spinner_dropdown_item, getResources().getStringArray(R.array.distanceQuestionAnswers));
+
+        valQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        indQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        drinkQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        distQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+
+        valuesSpinner.setAdapter(valQuestionAdapter);
+        industrySpinner.setAdapter(indQuestionAdapter);
+        drinkSpinner.setAdapter(drinkQuestionAdapter);
+        distSpinner.setAdapter(distQuestionAdapter);
+    }
+
     private void openResult() {
         calculateResult();
     }
@@ -92,9 +114,7 @@ public class QuestionActivity extends AppCompatActivity {
                 String readKey = dataSnapshot.getRef().getKey();
 
                 resultEngine.processData(cityReadResult, readKey, parentCity);
-                if (resultEngine.getIterateCount() >= 10) { //***
-                    showResult();
-                }
+                processShowResultCommand();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
@@ -107,6 +127,7 @@ public class QuestionActivity extends AppCompatActivity {
         */
         processValueScore();
         processDrinkScore();
+        processDistanceScore();
     }
 
     private void processValueScore() {
@@ -131,44 +152,39 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 break;
             case ("Warm Weather"):
-                // calculate based on average summer temp
-                Log.d(TAG, "processValueScore: education value");
+                // calculate based on lowest difference between avg winter temp and avg summer temp
+                for (int i = 1; i <= 10; i++) {
+                    mCityRef.child(Integer.toString(i)).child("1").addValueEventListener(processFirebaseRead);
+                    mCityRef.child(Integer.toString(i)).child("2").addValueEventListener(processFirebaseRead);
+                }
                 break;
             default:
                 Toast.makeText(getBaseContext(), "Please select what's most important" , Toast.LENGTH_LONG).show();
         }
     }
-    
+
     private void processDrinkScore() {
         Log.d(TAG, "processDrinkScore: ");
+    }
+
+    private void processDistanceScore() {
+        Log.d(TAG, "processDistanceScore: ");
+    }
+
+    private void processShowResultCommand() {
+        if (resultEngine.getHighestValue().equals("Warm Weather") &&
+                resultEngine.getIterateCount() >= 20) { //***
+            showResult();
+        } else if (!resultEngine.getHighestValue().equals("Warm Weather") &&
+                resultEngine.getIterateCount() >= 10) {
+            showResult();
+        }
     }
 
     private void showResult() {
         Intent mIntent = new Intent(test, ResultActivity.class);
         mIntent.putExtra("result", resultEngine.getResult());
         startActivity(mIntent);
-    }
-
-    private void initSpinners() {
-        // init adapters
-        ArrayAdapter<String> valQuestionAdapter = new ArrayAdapter<>(this,
-                R.layout.support_simple_spinner_dropdown_item, getResources().getStringArray(R.array.priorityQuestionAnswers));
-        ArrayAdapter<String> indQuestionAdapter = new ArrayAdapter<>(this,
-                R.layout.support_simple_spinner_dropdown_item, getResources().getStringArray(R.array.industryQuestionAnswers));
-        ArrayAdapter<String> drinkQuestionAdapter = new ArrayAdapter<>(this,
-                R.layout.support_simple_spinner_dropdown_item, getResources().getStringArray(R.array.drinkQuestionAnswers));
-        ArrayAdapter<String> distQuestionAdapter = new ArrayAdapter<>(this,
-                R.layout.support_simple_spinner_dropdown_item, getResources().getStringArray(R.array.distanceQuestionAnswers));
-
-        valQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        indQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        drinkQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        distQuestionAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-
-        valuesSpinner.setAdapter(valQuestionAdapter);
-        industrySpinner.setAdapter(indQuestionAdapter);
-        drinkSpinner.setAdapter(drinkQuestionAdapter);
-        distSpinner.setAdapter(distQuestionAdapter);
     }
 
     public void valuesSpinnerData() {

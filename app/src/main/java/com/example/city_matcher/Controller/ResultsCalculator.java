@@ -1,6 +1,9 @@
 package com.example.city_matcher.Controller;
 
 import android.util.Log;
+
+import com.example.city_matcher.Model.WeatherWrapper;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -8,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 
 public class ResultsCalculator {
     /*
@@ -28,9 +32,11 @@ public class ResultsCalculator {
 
     // map to store city index numbers for firebase reference
     private HashMap<String, String> jobCountIndex;
+    // map to store real time database data for processing
     private static HashMap<String,Integer> industryJobCounts;
     private static HashMap<String, Integer> costOfLivingCounts;
     private static HashMap<String, Integer> parkCounts;
+    private static HashMap<String, WeatherWrapper> weatherCounts;
 
     // used to keep track of city scores and answers
     private static HashMap<String, String> citiesIndex;
@@ -47,6 +53,7 @@ public class ResultsCalculator {
         parkCounts = new HashMap<>(); // keep track of park counts by city for score calculations
         citiesIndex = new HashMap<>(); // index of cities in real time database
         jobCountIndex = new HashMap<>(); // index of job count in real time database
+        weatherCounts = new HashMap<>(); //hold weather data for processing
         iterateCount = 0;
 
         // scores to track option
@@ -143,12 +150,66 @@ public class ResultsCalculator {
         }
     }
 
+    private static void processWeatherData (String data, String valueIndex, String parentCityIndex){
+        if (valueIndex.equals("1")) {
+            if (weatherCounts.containsKey(parentCityIndex)) {
+                weatherCounts.get(parentCityIndex).setAvgSummerTemp(Integer.parseInt(data));
+            } else {
+                weatherCounts.put(parentCityIndex, new WeatherWrapper(Integer.parseInt(data),0));
+            }
+        } else {
+            if (weatherCounts.containsKey(parentCityIndex)) {
+                weatherCounts.get(parentCityIndex).setAvgWinterTemp(Integer.parseInt(data));
+            } else {
+                weatherCounts.put(parentCityIndex, new WeatherWrapper(0,Integer.parseInt(data)));
+            }
+        }
+        if (finishedGettingWeatherData(weatherCounts)) {
+            // calculate difference in averages and sort based on that
+            HashMap<String, Integer> weatherDifferenceMapping = new HashMap<>();
+            for (Map.Entry<String,WeatherWrapper> entry : weatherCounts.entrySet()) {
+                int avgDifference = entry.getValue().getAvgSummerTemp()
+                        - entry.getValue().getAvgWinterTemp();
+                weatherDifferenceMapping.put(entry.getKey(), avgDifference);
+            }
+
+            // add points according to ranking now that we've calculated difference
+            HashMap<String, Integer> sortedCounts = sortByValues(weatherDifferenceMapping);
+            int i = 10;
+            for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
+                String city = citiesIndex.get(entry.getKey());
+                cityScores.put(city, cityScores.get(city) + i);
+                i -= 1;
+            }
+        }
+    }
+
+    private static boolean finishedGettingWeatherData(HashMap<String, WeatherWrapper> wCounts) {
+        for (Map.Entry<String,WeatherWrapper> entry : wCounts.entrySet()) {
+            if ((entry.getValue().getAvgSummerTemp() == 0 ||
+                    entry.getValue().getAvgWinterTemp() == 0) || !(wCounts.size() == 10)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     // **** PUBLIC METHODS ****
     public void processData(String data, String valueIndex, String parentCity) {
         iterateCount+=1; // when this is 10 move to result page
-        if (Integer.parseInt(valueIndex) > 6) {processIndustryData(data, parentCity);}
-        else if(Integer.parseInt(valueIndex) == 3) {processCostOfLivingData(data, parentCity);}
-        else if (Integer.parseInt(valueIndex) == 5) {processParkData(data, parentCity); }
+        if (Integer.parseInt(valueIndex) > 6) {
+            processIndustryData(data, parentCity);
+        }
+        else if(Integer.parseInt(valueIndex) == 3) {
+            processCostOfLivingData(data, parentCity);
+        }
+        else if (Integer.parseInt(valueIndex) == 5) {
+            processParkData(data, parentCity);
+        }
+        else if (Integer.parseInt(valueIndex) == 1
+                || Integer.parseInt(valueIndex)== 2) {
+            processWeatherData(data, valueIndex, parentCity);
+        }
     }
 
     public String getResult() {
