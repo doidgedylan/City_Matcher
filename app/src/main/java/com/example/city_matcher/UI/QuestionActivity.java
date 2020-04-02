@@ -206,7 +206,7 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void processDistanceScore() {
-        switch (resultEngine.getDistance()) {
+        switch (resultEngine.getMaxDistance()) {
             case("no limit"):
                 Log.d(TAG, "processDistanceScore: no limit ");
                 break;
@@ -214,17 +214,20 @@ public class QuestionActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "select a distance" , Toast.LENGTH_SHORT).show();
                 break;
             default:
-                mCityRef.child("1").child("13").addValueEventListener(processFirebaseRead);
-                mCityRef.child("1").child("14").addValueEventListener(processFirebaseRead);
+                // calculate based on lowest difference between avg winter temp and avg summer temp
+                for (int i = 1; i <= 10; i++) {
+                    mCityRef.child(Integer.toString(i)).child("13").addValueEventListener(processFirebaseRead);
+                    mCityRef.child(Integer.toString(i)).child("14").addValueEventListener(processFirebaseRead);
+                }
         }
     }
 
     private void processShowResultCommand() {
         if (resultEngine.getHighestValue().equals("Warm Weather") &&
-                resultEngine.getIterateCount() >= 32) { //***
+                resultEngine.getIterateCount() >= 50) { //***
             showResult();
         } else if (!resultEngine.getHighestValue().equals("Warm Weather") &&
-                resultEngine.getIterateCount() >= 22) {
+                resultEngine.getIterateCount() >= 40) {
             showResult();
         }
     }
@@ -280,7 +283,7 @@ public class QuestionActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 String s = (String) parent.getItemAtPosition(position);
-                resultEngine.setDistance(s);
+                resultEngine.setMaxDistance(s);
                 // set current location
                 GPSTracker g = new GPSTracker(getApplicationContext());
                 Location l = g.getLocation();

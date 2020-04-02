@@ -50,7 +50,7 @@ public class ResultsCalculator {
     private static String highestValue;
     private static String industry;
     private static String drink;
-    private static String distance;
+    private static String maxDistance;
     private static int iterateCount;
     private static CoordinatesWrapper currentLoc;
 
@@ -217,7 +217,6 @@ public class ResultsCalculator {
                 cityScores.put(city, cityScores.get(city) + i);
                 i += 1;
             }
-            Log.d(TAG, "processDrinkData: " + sortedCounts.toString());
         }
     }
 
@@ -235,7 +234,34 @@ public class ResultsCalculator {
                 distanceCounts.put(parentCityIndex, new CoordinatesWrapper(0,Double.parseDouble(data)));
             }
         }
+        if (finishedGettingDistanceData(distanceCounts)) {
+            double test = DistanceCalculator.distanceInMiles(currentLoc,distanceCounts.get(parentCityIndex));
+            double maxDi = parseDistanceString(maxDistance);
+            // filter and remove cities with a distance further than 'maxDi'
+            
+        }
+    }
 
+    private static boolean finishedGettingDistanceData(HashMap<String, CoordinatesWrapper> dCounts) {
+        for (Map.Entry<String,CoordinatesWrapper> entry : dCounts.entrySet()) {
+            if ((entry.getValue().getLatitude() == 0 ||
+                    entry.getValue().getLongitude() == 0) || !(dCounts.size() == 10)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static double parseDistanceString(String disString) {
+        double result = 0;
+        if (maxDistance.equals("less than 250mi")) {
+            String number = disString.substring(disString.indexOf("2"),disString.indexOf("2")+3);
+            result = Double.parseDouble(number);
+        } else if (maxDistance.equals("less than 500mi")) {
+            String number = disString.substring(disString.indexOf("5"),disString.indexOf("5")+3);
+            result = Double.parseDouble(number);
+        }
+        return result;
     }
 
     // **** PUBLIC METHODS ****
@@ -265,8 +291,6 @@ public class ResultsCalculator {
     }
 
     public String getResult() {
-        //test location tracker class
-        Log.d(TAG, "getResult: result cities " + cityScores.toString());
         String result = "";
         int maxScore = 0;
         for (Map.Entry<String,Integer> entry : cityScores.entrySet()) {
@@ -282,11 +306,11 @@ public class ResultsCalculator {
     public void setValue(String highestPriority) { highestValue = highestPriority; }
     public void setIndustry(String mIndustry) { industry = mIndustry; }
     public void setDrink(String mDrink) { drink = mDrink; }
-    public void setDistance(String mDistance) {distance = mDistance;}
+    public void setMaxDistance(String mDistance) {maxDistance = mDistance;}
     public String getHighestValue() { return highestValue; }
     public String getIndustry() {return industry; }
     public String getDrink() {return drink; }
-    public String getDistance() {return distance; }
+    public String getMaxDistance() {return maxDistance; }
     public String getJobCountIndex(String city) { return jobCountIndex.get(city); }
     public int getIterateCount() {return iterateCount; }
     public void addToIterateCount(int amt) {iterateCount+=amt;}
