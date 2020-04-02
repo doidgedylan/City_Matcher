@@ -1,7 +1,12 @@
 package com.example.city_matcher.UI;
 
+import android.Manifest;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +17,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import com.example.city_matcher.Controller.GPSTracker;
 import com.example.city_matcher.R;
 import com.example.city_matcher.Controller.ResultsCalculator;
 import com.google.firebase.database.DataSnapshot;
@@ -61,6 +68,27 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        GPSTracker g = new GPSTracker(getApplicationContext());
+        Location l = g.getLocation();
+        if (l != null) {
+            Log.d(TAG, "onStart: longitude " + l.getLongitude());
+            Log.d(TAG, "onStart: latitude " + l.getLatitude());
+        }
+        // calculate and get result and pass the information to the result activity/fragment
+        processFirebaseRead = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String cityReadResult = dataSnapshot.getValue().toString();
+                String parentCity = dataSnapshot.getRef().getParent().getKey();
+                String readKey = dataSnapshot.getRef().getKey();
+
+                resultEngine.processData(cityReadResult, readKey, parentCity);
+                Log.d(TAG, "onDataChange: result " + resultEngine.getIterateCount());
+                processShowResultCommand();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        };
 
         //handle submit button
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -105,22 +133,6 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void calculateResult() {
-        // calculate and get result and pass the information to the result activity/fragment
-        processFirebaseRead = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String cityReadResult = dataSnapshot.getValue().toString();
-                String parentCity = dataSnapshot.getRef().getParent().getKey();
-                String readKey = dataSnapshot.getRef().getKey();
-
-                resultEngine.processData(cityReadResult, readKey, parentCity);
-                Log.d(TAG, "onDataChange: result " + resultEngine.getIterateCount());
-                processShowResultCommand();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}
-        };
-
         /*
         * process input scores
         * note: industry input is to calculate "career"

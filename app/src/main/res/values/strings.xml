@@ -50,9 +50,9 @@
     <string name="distanceQuestionPrompt">4. How far away are you willing to move?</string>
     <string-array name="distanceQuestionAnswers">
         <item>Select</item>
-        <item> less than 100mi</item>
-        <item> less than 200mi</item>
-        <item> less than 300mi </item>
+        <item> less than 250mi</item>
+        <item> less than 500mi</item>
+        <item> less than 1000mi </item>
         <item> no limit </item>
     </string-array>
 

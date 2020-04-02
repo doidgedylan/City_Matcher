@@ -1,5 +1,6 @@
 package com.example.city_matcher.Controller;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.city_matcher.Model.WeatherWrapper;
@@ -49,6 +50,7 @@ public class ResultsCalculator {
     private static int iterateCount;
 
     public ResultsCalculator() {
+
         cityScores = new HashMap<>(); // keep track of city scores
         industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
         costOfLivingCounts = new HashMap<>(); // keep track of cost of living indexes by city
@@ -235,6 +237,7 @@ public class ResultsCalculator {
     }
 
     public String getResult() {
+        //test location tracker class
         Log.d(TAG, "getResult: result cities " + cityScores.toString());
         String result = "";
         int maxScore = 0;
