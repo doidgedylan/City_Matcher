@@ -3,6 +3,7 @@ package com.example.city_matcher.Controller;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.city_matcher.Model.CoordinatesWrapper;
 import com.example.city_matcher.Model.WeatherWrapper;
 
 import java.util.Collections;
@@ -41,12 +42,14 @@ public class ResultsCalculator {
     private static HashMap<String, Integer> parkCounts;
     private static HashMap<String, WeatherWrapper> weatherCounts;
     private static HashMap<String, Integer> drinkCounts;
+    private static HashMap<String, CoordinatesWrapper> distanceCounts;
 
     // used to keep track of city scores and answers
     private static HashMap<String, Integer> cityScores;
     private static String highestValue;
     private static String industry;
     private static String drink;
+    private static String distance;
     private static int iterateCount;
 
     public ResultsCalculator() {
@@ -56,6 +59,7 @@ public class ResultsCalculator {
         costOfLivingCounts = new HashMap<>(); // keep track of cost of living indexes by city
         parkCounts = new HashMap<>(); // keep track of park counts by city for score calculations
         weatherCounts = new HashMap<>(); //hold weather data for processing
+        distanceCounts = new HashMap<>(); //hold distance calc from each city
         drinkCounts = new HashMap<>(); // keep track of how many drinks are in each city for processing
         citiesIndex = new HashMap<>(); // index of cities in real time database
         jobCountIndex = new HashMap<>(); // index of job count in real time database
@@ -214,6 +218,22 @@ public class ResultsCalculator {
         }
     }
 
+    private static void processDistanceData(String data, String valueIndex, String parentCityIndex) {
+        if (valueIndex.equals("13")) {
+            if (distanceCounts.containsKey(parentCityIndex)) {
+                distanceCounts.get(parentCityIndex).setLatitude(Double.parseDouble(data));
+            } else {
+                distanceCounts.put(parentCityIndex, new CoordinatesWrapper(Double.parseDouble(data),0));
+            }
+        } else {
+            if (distanceCounts.containsKey(parentCityIndex)) {
+                distanceCounts.get(parentCityIndex).setLongitude(Double.parseDouble(data));
+            } else {
+                distanceCounts.put(parentCityIndex, new CoordinatesWrapper(0,Double.parseDouble(data)));
+            }
+        }
+    }
+
     // **** PUBLIC METHODS ****
     public void processData(String data, String valueIndex, String parentCity) {
         iterateCount+=1; // when this is 10 move to result page
@@ -234,6 +254,10 @@ public class ResultsCalculator {
                 || Integer.parseInt(valueIndex) == 6) {
             processDrinkData(data, parentCity);
         }
+        else if (Integer.parseInt(valueIndex) == 13
+                || Integer.parseInt(valueIndex) == 14) {
+            processDistanceData(data, valueIndex, parentCity);
+        }
     }
 
     public String getResult() {
@@ -250,25 +274,16 @@ public class ResultsCalculator {
         return result;
     }
 
-    public void clearData() {
-        cityScores = new HashMap<>(); // keep track of city scores
-        industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
-        costOfLivingCounts = new HashMap<>(); // keep track of cost of living indexes by city
-        parkCounts = new HashMap<>(); // keep track of park counts by city for score calculations
-        citiesIndex = new HashMap<>(); // index of cities in real time database
-        jobCountIndex = new HashMap<>(); // index of job count in real time database
-        weatherCounts = new HashMap<>(); //hold weather data for processing
-        iterateCount = 0;
-    }
-
     // setter methods for question activity to call
     public void setValue(String highestPriority) { highestValue = highestPriority; }
     public void setIndustry(String mIndustry) { industry = mIndustry; }
     public void setDrink(String mDrink) { drink = mDrink; }
+    public void setDistance(String mDistance) {distance = mDistance;}
     public String getHighestValue() { return highestValue; }
     public String getIndustry() {return industry; }
     public String getDrink() {return drink; }
+    public String getDistance() {return distance; }
     public String getJobCountIndex(String city) { return jobCountIndex.get(city); }
     public int getIterateCount() {return iterateCount; }
-    public void addTenIterateCount() {iterateCount+=10;}
+    public void addToIterateCount(int amt) {iterateCount+=amt;}
 }

@@ -50,10 +50,9 @@
     <string name="distanceQuestionPrompt">4. How far away are you willing to move?</string>
     <string-array name="distanceQuestionAnswers">
         <item>Select</item>
-        <item> less than 250mi</item>
-        <item> less than 500mi</item>
-        <item> less than 1000mi </item>
-        <item> no limit </item>
+        <item>less than 250mi</item>
+        <item>less than 500mi</item>
+        <item>no limit</item>
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment for testing fragment injection</string>

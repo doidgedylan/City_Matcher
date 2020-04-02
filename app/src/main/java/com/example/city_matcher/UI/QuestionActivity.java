@@ -63,17 +63,12 @@ public class QuestionActivity extends AppCompatActivity {
         valuesSpinnerData();
         industrySpinnerData();
         drinkSpinnerData();
+        distanceSpinnerData();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        GPSTracker g = new GPSTracker(getApplicationContext());
-        Location l = g.getLocation();
-        if (l != null) {
-            Log.d(TAG, "onStart: longitude " + l.getLongitude());
-            Log.d(TAG, "onStart: latitude " + l.getLatitude());
-        }
         // calculate and get result and pass the information to the result activity/fragment
         processFirebaseRead = new ValueEventListener() {
             @Override
@@ -206,12 +201,22 @@ public class QuestionActivity extends AppCompatActivity {
             default:
                 // add ten iterations for result processing to be activated. But don't process data because
                 // "soda" and "water" answers don't really affect a moving choice.
-                resultEngine.addTenIterateCount();
+                resultEngine.addToIterateCount(10);
         }
     }
 
     private void processDistanceScore() {
-        Log.d(TAG, "processDistanceScore: ");
+        switch (resultEngine.getDistance()) {
+            case("no limit"):
+                Log.d(TAG, "processDistanceScore: no limit ");
+                break;
+            case ("Select"):
+                Toast.makeText(getBaseContext(), "select a distance" , Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                mCityRef.child("1").child("13").addValueEventListener(processFirebaseRead);
+                mCityRef.child("1").child("14").addValueEventListener(processFirebaseRead);
+        }
     }
 
     private void processShowResultCommand() {
@@ -263,6 +268,19 @@ public class QuestionActivity extends AppCompatActivity {
                                        int position, long id) {
                 String s = (String) parent.getItemAtPosition(position);
                 resultEngine.setDrink(s);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
+
+    public void distanceSpinnerData() {
+        distSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                String s = (String) parent.getItemAtPosition(position);
+                resultEngine.setDistance(s);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
