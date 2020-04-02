@@ -221,10 +221,10 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void processShowResultCommand() {
         if (resultEngine.getHighestValue().equals("Warm Weather") &&
-                resultEngine.getIterateCount() >= 30) { //***
+                resultEngine.getIterateCount() >= 32) { //***
             showResult();
         } else if (!resultEngine.getHighestValue().equals("Warm Weather") &&
-                resultEngine.getIterateCount() >= 20) {
+                resultEngine.getIterateCount() >= 22) {
             showResult();
         }
     }
@@ -281,6 +281,12 @@ public class QuestionActivity extends AppCompatActivity {
                                        int position, long id) {
                 String s = (String) parent.getItemAtPosition(position);
                 resultEngine.setDistance(s);
+                // set current location
+                GPSTracker g = new GPSTracker(getApplicationContext());
+                Location l = g.getLocation();
+                if (l != null) {
+                    resultEngine.setCurrentLocation(l.getLatitude(), l.getLongitude());
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}

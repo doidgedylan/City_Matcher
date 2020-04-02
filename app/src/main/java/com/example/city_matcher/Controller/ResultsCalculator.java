@@ -1,6 +1,7 @@
 package com.example.city_matcher.Controller;
 
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 
 import com.example.city_matcher.Model.CoordinatesWrapper;
@@ -51,6 +52,7 @@ public class ResultsCalculator {
     private static String drink;
     private static String distance;
     private static int iterateCount;
+    private static CoordinatesWrapper currentLoc;
 
     public ResultsCalculator() {
 
@@ -63,6 +65,7 @@ public class ResultsCalculator {
         drinkCounts = new HashMap<>(); // keep track of how many drinks are in each city for processing
         citiesIndex = new HashMap<>(); // index of cities in real time database
         jobCountIndex = new HashMap<>(); // index of job count in real time database
+        currentLoc = new CoordinatesWrapper(0,0);
         iterateCount = 0;
 
         // scores to track option
@@ -232,6 +235,7 @@ public class ResultsCalculator {
                 distanceCounts.put(parentCityIndex, new CoordinatesWrapper(0,Double.parseDouble(data)));
             }
         }
+
     }
 
     // **** PUBLIC METHODS ****
@@ -286,4 +290,8 @@ public class ResultsCalculator {
     public String getJobCountIndex(String city) { return jobCountIndex.get(city); }
     public int getIterateCount() {return iterateCount; }
     public void addToIterateCount(int amt) {iterateCount+=amt;}
+    public void setCurrentLocation(double lat, double lng) {
+        currentLoc.setLongitude(lng);
+        currentLoc.setLatitude(lat);
+    }
 }
