@@ -235,10 +235,14 @@ public class ResultsCalculator {
             }
         }
         if (finishedGettingDistanceData(distanceCounts)) {
-            double test = DistanceCalculator.distanceInMiles(currentLoc,distanceCounts.get(parentCityIndex));
             double maxDi = parseDistanceString(maxDistance);
             // filter and remove cities with a distance further than 'maxDi'
-            
+            for (Map.Entry<String,CoordinatesWrapper> entry : distanceCounts.entrySet()) {
+                double dist = DistanceCalculator.distanceInMiles(currentLoc,entry.getValue());
+                if (dist > maxDi) {
+                    cityScores.put(citiesIndex.get(entry.getKey()),0);
+                }
+            }
         }
     }
 

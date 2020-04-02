@@ -98,6 +98,12 @@ public class QuestionActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         resultEngine = new ResultsCalculator(); //reset engine
+        // set current location
+        GPSTracker g = new GPSTracker(getApplicationContext());
+        Location l = g.getLocation();
+        if (l != null) {
+            resultEngine.setCurrentLocation(l.getLatitude(), l.getLongitude());
+        }
     }
 
     // ***** PRIVATE HELPER METHODS ***** //
@@ -284,12 +290,6 @@ public class QuestionActivity extends AppCompatActivity {
                                        int position, long id) {
                 String s = (String) parent.getItemAtPosition(position);
                 resultEngine.setMaxDistance(s);
-                // set current location
-                GPSTracker g = new GPSTracker(getApplicationContext());
-                Location l = g.getLocation();
-                if (l != null) {
-                    resultEngine.setCurrentLocation(l.getLatitude(), l.getLongitude());
-                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
