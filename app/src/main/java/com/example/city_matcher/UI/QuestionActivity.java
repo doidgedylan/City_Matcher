@@ -37,7 +37,7 @@ public class QuestionActivity extends AppCompatActivity {
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference mCityRef = mRootRef.child("cities");
     private ValueEventListener processFirebaseRead;
-    private QuestionActivity test = this;
+    private QuestionActivity tLocal = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +114,7 @@ public class QuestionActivity extends AppCompatActivity {
                 String readKey = dataSnapshot.getRef().getKey();
 
                 resultEngine.processData(cityReadResult, readKey, parentCity);
+                Log.d(TAG, "onDataChange: result " + resultEngine.getIterateCount());
                 processShowResultCommand();
             }
             @Override
@@ -134,9 +135,13 @@ public class QuestionActivity extends AppCompatActivity {
         switch(resultEngine.getHighestValue()) {
             case ("Career"):
                 // calculate based on job count
-                String jobCountIndexByIndustry = resultEngine.getJobCountIndex(resultEngine.getIndustry());
-                for (int i = 1; i <= 10; i++) {
-                    mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
+                if (industrySelected()) {
+                    String jobCountIndexByIndustry = resultEngine.getJobCountIndex(resultEngine.getIndustry());
+                    for (int i = 1; i <= 10; i++) {
+                        mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
+                    }
+                } else {
+                    Toast.makeText(getBaseContext(), "select industry" , Toast.LENGTH_SHORT).show();
                 }
                 break;
             case ("Family"):
@@ -159,12 +164,38 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 break;
             default:
-                Toast.makeText(getBaseContext(), "Please select what's most important" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "select highest value" , Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean industrySelected() {
+        if (resultEngine.getIndustry().equals("Select")) {
+            return false;
+        } else {
+            return true;
         }
     }
 
     private void processDrinkScore() {
-        Log.d(TAG, "processDrinkScore: ");
+        switch(resultEngine.getDrink()) {
+            case("Coffee"):
+                for (int i = 1; i <= 10; i++) {
+                    mCityRef.child(Integer.toString(i)).child("6").addValueEventListener(processFirebaseRead);
+                }
+                break;
+            case("Beer"):
+                for (int i = 1; i <= 10; i++) {
+                    mCityRef.child(Integer.toString(i)).child("4").addValueEventListener(processFirebaseRead);
+                }
+                break;
+            case("Select"):
+                Toast.makeText(getBaseContext(), "select favorite drink" , Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                // add ten iterations for result processing to be activated. But don't process data because
+                // "soda" and "water" answers don't really affect a moving choice.
+                resultEngine.addTenIterateCount();
+        }
     }
 
     private void processDistanceScore() {
@@ -173,16 +204,16 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void processShowResultCommand() {
         if (resultEngine.getHighestValue().equals("Warm Weather") &&
-                resultEngine.getIterateCount() >= 20) { //***
+                resultEngine.getIterateCount() >= 30) { //***
             showResult();
         } else if (!resultEngine.getHighestValue().equals("Warm Weather") &&
-                resultEngine.getIterateCount() >= 10) {
+                resultEngine.getIterateCount() >= 20) {
             showResult();
         }
     }
 
     private void showResult() {
-        Intent mIntent = new Intent(test, ResultActivity.class);
+        Intent mIntent = new Intent(tLocal, ResultActivity.class);
         mIntent.putExtra("result", resultEngine.getResult());
         startActivity(mIntent);
     }

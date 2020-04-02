@@ -32,14 +32,16 @@ public class ResultsCalculator {
 
     // map to store city index numbers for firebase reference
     private HashMap<String, String> jobCountIndex;
+    private static HashMap<String, String> citiesIndex;
+
     // map to store real time database data for processing
     private static HashMap<String,Integer> industryJobCounts;
     private static HashMap<String, Integer> costOfLivingCounts;
     private static HashMap<String, Integer> parkCounts;
     private static HashMap<String, WeatherWrapper> weatherCounts;
+    private static HashMap<String, Integer> drinkCounts;
 
     // used to keep track of city scores and answers
-    private static HashMap<String, String> citiesIndex;
     private static HashMap<String, Integer> cityScores;
     private static String highestValue;
     private static String industry;
@@ -51,9 +53,10 @@ public class ResultsCalculator {
         industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
         costOfLivingCounts = new HashMap<>(); // keep track of cost of living indexes by city
         parkCounts = new HashMap<>(); // keep track of park counts by city for score calculations
+        weatherCounts = new HashMap<>(); //hold weather data for processing
+        drinkCounts = new HashMap<>(); // keep track of how many drinks are in each city for processing
         citiesIndex = new HashMap<>(); // index of cities in real time database
         jobCountIndex = new HashMap<>(); // index of job count in real time database
-        weatherCounts = new HashMap<>(); //hold weather data for processing
         iterateCount = 0;
 
         // scores to track option
@@ -136,7 +139,7 @@ public class ResultsCalculator {
         }
     }
 
-    private static void processParkData (String data, String parentCityIndex) {
+    private static void processParkData(String data, String parentCityIndex) {
         parkCounts.put(parentCityIndex, Integer.parseInt(data));
         if (parkCounts.size() >= 10) {
             // add points according to ranking now that we've added every city index
@@ -194,10 +197,25 @@ public class ResultsCalculator {
         return true;
     }
 
+    private static void processDrinkData(String data, String parentCityIndex) {
+        drinkCounts.put(parentCityIndex, Integer.parseInt(data));
+        if (drinkCounts.size() >= 10) {
+            // add points according to ranking now that we've added every city index
+            HashMap<String, Integer> sortedCounts = sortByValues(drinkCounts);
+            int i = 1;
+            for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
+                String city = citiesIndex.get(entry.getKey());
+                cityScores.put(city, cityScores.get(city) + i);
+                i += 1;
+            }
+            Log.d(TAG, "processDrinkData: " + sortedCounts.toString());
+        }
+    }
+
     // **** PUBLIC METHODS ****
     public void processData(String data, String valueIndex, String parentCity) {
         iterateCount+=1; // when this is 10 move to result page
-        if (Integer.parseInt(valueIndex) > 6) {
+        if (Integer.parseInt(valueIndex) > 6 && Integer.parseInt(valueIndex) < 13) {
             processIndustryData(data, parentCity);
         }
         else if(Integer.parseInt(valueIndex) == 3) {
@@ -209,6 +227,10 @@ public class ResultsCalculator {
         else if (Integer.parseInt(valueIndex) == 1
                 || Integer.parseInt(valueIndex)== 2) {
             processWeatherData(data, valueIndex, parentCity);
+        }
+        else if (Integer.parseInt(valueIndex) == 4
+                || Integer.parseInt(valueIndex) == 6) {
+            processDrinkData(data, parentCity);
         }
     }
 
@@ -225,6 +247,17 @@ public class ResultsCalculator {
         return result;
     }
 
+    public void clearData() {
+        cityScores = new HashMap<>(); // keep track of city scores
+        industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
+        costOfLivingCounts = new HashMap<>(); // keep track of cost of living indexes by city
+        parkCounts = new HashMap<>(); // keep track of park counts by city for score calculations
+        citiesIndex = new HashMap<>(); // index of cities in real time database
+        jobCountIndex = new HashMap<>(); // index of job count in real time database
+        weatherCounts = new HashMap<>(); //hold weather data for processing
+        iterateCount = 0;
+    }
+
     // setter methods for question activity to call
     public void setValue(String highestPriority) { highestValue = highestPriority; }
     public void setIndustry(String mIndustry) { industry = mIndustry; }
@@ -234,4 +267,5 @@ public class ResultsCalculator {
     public String getDrink() {return drink; }
     public String getJobCountIndex(String city) { return jobCountIndex.get(city); }
     public int getIterateCount() {return iterateCount; }
+    public void addTenIterateCount() {iterateCount+=10;}
 }
