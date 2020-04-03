@@ -2,6 +2,7 @@ package com.example.city_matcher.UI;
 
 import android.Manifest;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.city_matcher.Controller.GPSTracker;
 import com.example.city_matcher.Model.AccountSingleton;
 import com.example.city_matcher.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,6 +47,7 @@ public class LandingFragment extends Fragment {
     private Button displayMatchedCityButton;
     private Button logoutButton;
     private Button deleteAccountButton;
+    private Button showCoordinatesButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +61,7 @@ public class LandingFragment extends Fragment {
         logoutButton = v.findViewById(R.id.logoutButton);
         deleteAccountButton = v.findViewById(R.id.deleteAccountButton);
         displayMatchedCityButton = v.findViewById(R.id.showMatchedCityButton);
+        showCoordinatesButton = v.findViewById(R.id.showCoordinatesButton);
 
         // init auth reference
         mAuth = FirebaseAuth.getInstance();
@@ -93,6 +97,12 @@ public class LandingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 deleteAccount();
+            }
+        });
+        showCoordinatesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toastCoordinates();
             }
         });
         postListener = new ValueEventListener() {
@@ -146,5 +156,16 @@ public class LandingFragment extends Fragment {
     private void toastCity() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         mAccountsRef.child(user.getUid()).child("city").addValueEventListener(postListener);
+    }
+
+    private void toastCoordinates() {
+        GPSTracker locTracker = new GPSTracker(getContext());
+        Location loc = locTracker.getLocation();
+        if (loc != null) {
+            String coordinates = "Latitude: " + loc.getLatitude() + "\nLongitude: " + loc.getLongitude();
+            Toast.makeText(getContext(), coordinates , Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getContext(), "Turn Location On" , Toast.LENGTH_LONG).show();
+        }
     }
 }

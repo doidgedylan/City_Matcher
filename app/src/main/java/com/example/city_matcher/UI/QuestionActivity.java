@@ -97,10 +97,10 @@ public class QuestionActivity extends AppCompatActivity {
         super.onResume();
         resultEngine = new ResultHandler(); //reset engine
         // set current location
-        GPSTracker g = new GPSTracker(getApplicationContext());
-        Location l = g.getLocation();
-        if (l != null) {
-            resultEngine.setCurrentLocation(l.getLatitude(), l.getLongitude());
+        GPSTracker locTracker = new GPSTracker(getApplicationContext());
+        Location loc = locTracker.getLocation();
+        if (loc != null) {
+            resultEngine.setCurrentLocation(loc.getLatitude(), loc.getLongitude());
         }
     }
 

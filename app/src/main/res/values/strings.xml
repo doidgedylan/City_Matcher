@@ -5,6 +5,7 @@
     <string name="logoutButtonPrompt">Logout</string>
     <string name="deleteButtonPrompt">Delete Account</string>
     <string name="currentMatchedCityPrompt">Track Currently Matched City</string>
+    <string name="showCoordinatesButtonPrompt">What are my coordinates?</string>
 
     <!--  login page / new user page  -->
     <string name="enterEmailPrompt">enter email</string>
