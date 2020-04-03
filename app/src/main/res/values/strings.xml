@@ -69,5 +69,28 @@
         The city is known for its cultural activities, including opera, ballet,
         musicals, and symphony concerts</string>
     <string name="dallasCOL">Cost of Living Index: 65</string>
+    <string name="houstonDesc">
+        Houston is the eighth most expansive city in the United States
+        (including consolidated city-counties). It is the largest city
+        in the United States by total area
+    </string>
+    <string name="houstonCOL">Cost of Living Index: 70</string>
+    <string name="losAngelesDesc">
+        Los Angeles lies in a basin in Southern California, adjacent to the Pacific Ocean,
+        with mountains as high as 10,000 feet (3,000 m), and deserts. It\'s the entertainment
+        capital of America, and has a vibrant coffee and beer scene.
+    </string>
+    <string name="losAngelesCOL">Cost of Living Index: 82</string>
+    <string name="philadelphiaDesc">
+        Frequently called "The City of Brotherly Love", it is known for its arts, culture,
+        cuisine, and colonial history, attracting 42 million domestic tourists in 2016.
+    </string>
+    <string name="philadelphiaCOL">Cost of Living Index: 83</string>
+    <string name="phoenixDesc">
+        Phoenix was settled in 1867 as an agricultural community near the confluence of
+        the Salt and Gila Rivers and was incorporated as a city in 1881. It\'s has very hot
+        summers and an affordable cost of living.
+    </string>
+    <string name="phoenixCOL">Cost of Living Index: 66</string>
 
 </resources>
