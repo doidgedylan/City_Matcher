@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.city_matcher.Controller.GPSTracker;
 import com.example.city_matcher.R;
-import com.example.city_matcher.Controller.ResultsCalculator;
+import com.example.city_matcher.Controller.ResultHandler;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 public class QuestionActivity extends AppCompatActivity {
 
     private static final String TAG = "QuestionActivity";
-    private ResultsCalculator resultEngine;
+    private ResultHandler resultEngine;
     private Button submitButton;
 
     private Spinner valuesSpinner;
@@ -92,7 +92,7 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        resultEngine = new ResultsCalculator(); //reset engine
+        resultEngine = new ResultHandler(); //reset engine
         // set current location
         GPSTracker g = new GPSTracker(getApplicationContext());
         Location l = g.getLocation();

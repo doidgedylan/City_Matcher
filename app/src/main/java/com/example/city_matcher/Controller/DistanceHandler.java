@@ -2,9 +2,9 @@ package com.example.city_matcher.Controller;
 import com.example.city_matcher.Model.CoordinatesWrapper;
 
 /* class to perform distance calculations for gps sensor */
-public class DistanceCalculator {
-    private DistanceCalculator() {} // class can't be instantiated
-    private static final String TAG = "DistanceCalculator";
+public class DistanceHandler {
+    private DistanceHandler() {} // class can't be instantiated
+    private static final String TAG = "DistanceHandler";
     // class to get distance between coordinates in miles
     public static double distanceInMiles(CoordinatesWrapper loc1, CoordinatesWrapper loc2) {
         double result = 0;

@@ -1,7 +1,5 @@
 package com.example.city_matcher.Controller;
 
-import android.content.Context;
-import android.location.Location;
 import android.util.Log;
 
 import com.example.city_matcher.Model.CoordinatesWrapper;
@@ -16,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ResultsCalculator {
+public class ResultHandler {
     /*
      * BASIC IDEA:
      * calculate a score for each city based on the users answers
@@ -54,7 +52,7 @@ public class ResultsCalculator {
     private static int iterateCount;
     private static CoordinatesWrapper currentLoc;
 
-    public ResultsCalculator() {
+    public ResultHandler() {
 
         cityScores = new HashMap<>(); // keep track of city scores
         industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
@@ -238,7 +236,7 @@ public class ResultsCalculator {
             double maxDi = parseDistanceString(maxDistance);
             // filter and remove cities with a distance further than 'maxDi'
             for (Map.Entry<String,CoordinatesWrapper> entry : distanceCounts.entrySet()) {
-                double dist = DistanceCalculator.distanceInMiles(currentLoc,entry.getValue());
+                double dist = DistanceHandler.distanceInMiles(currentLoc,entry.getValue());
                 Log.d(TAG, "processDistanceData: dist " + dist);
                 Log.d(TAG, "processDistanceData: maxDi " + maxDi);
                 if (dist > maxDi) {
@@ -275,25 +273,18 @@ public class ResultsCalculator {
     // **** PUBLIC METHODS ****
     public void processData(String data, String valueIndex, String parentCity) {
         iterateCount+=1; // when this is 10 move to result page
-        if (Integer.parseInt(valueIndex) > 6 && Integer.parseInt(valueIndex) < 13) {
+        if (Integer.parseInt(valueIndex) > 6 && Integer.parseInt(valueIndex) < 13){
             processIndustryData(data, parentCity);
         }
-        else if(Integer.parseInt(valueIndex) == 3) {
-            processCostOfLivingData(data, parentCity);
-        }
-        else if (Integer.parseInt(valueIndex) == 5) {
-            processParkData(data, parentCity);
-        }
-        else if (Integer.parseInt(valueIndex) == 1
-                || Integer.parseInt(valueIndex)== 2) {
+        else if(Integer.parseInt(valueIndex) == 3) { processCostOfLivingData(data, parentCity); }
+        else if (Integer.parseInt(valueIndex) == 5) {processParkData(data, parentCity);}
+        else if (Integer.parseInt(valueIndex) == 1 || Integer.parseInt(valueIndex)== 2) {
             processWeatherData(data, valueIndex, parentCity);
         }
-        else if (Integer.parseInt(valueIndex) == 4
-                || Integer.parseInt(valueIndex) == 6) {
+        else if (Integer.parseInt(valueIndex) == 4 || Integer.parseInt(valueIndex) == 6) {
             processDrinkData(data, parentCity);
         }
-        else if (Integer.parseInt(valueIndex) == 13
-                || Integer.parseInt(valueIndex) == 14) {
+        else if (Integer.parseInt(valueIndex) == 13 || Integer.parseInt(valueIndex) == 14) {
             processDistanceData(data, valueIndex, parentCity);
         }
     }
@@ -312,29 +303,6 @@ public class ResultsCalculator {
             result = "nothing found";
         }
         return result;
-    }
-
-    public void clear() {
-        cityScores = new HashMap<>(); // keep track of city scores
-        industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
-        costOfLivingCounts = new HashMap<>(); // keep track of cost of living indexes by city
-        parkCounts = new HashMap<>(); // keep track of park counts by city for score calculations
-        weatherCounts = new HashMap<>(); //hold weather data for processing
-        distanceCounts = new HashMap<>(); //hold distance calc from each city
-        drinkCounts = new HashMap<>(); // keep track of how many drinks are in each city for processing
-        iterateCount = 0;
-
-        // scores to track option
-        cityScores.put("Chicago", 0);
-        cityScores.put("New York", 0);
-        cityScores.put("Los Angeles", 0);
-        cityScores.put("Houston", 0);
-        cityScores.put("Phoenix", 0);
-        cityScores.put("Philadelphia", 0);
-        cityScores.put("San Antonio", 0);
-        cityScores.put("San Diego", 0);
-        cityScores.put("Dallas", 0);
-        cityScores.put("San Jose", 0);
     }
 
     // setter methods for question activity to call
