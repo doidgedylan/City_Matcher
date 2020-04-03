@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.city_matcher.Controller.GPSTracker;
+import com.example.city_matcher.Model.JobIndustryToIndex;
 import com.example.city_matcher.R;
 import com.example.city_matcher.Controller.ResultHandler;
 import com.google.firebase.database.DataSnapshot;
@@ -27,9 +28,10 @@ import com.google.firebase.database.ValueEventListener;
 public class QuestionActivity extends AppCompatActivity {
 
     private static final String TAG = "QuestionActivity";
+    private QuestionActivity tLocal = this;
     private ResultHandler resultEngine;
+    
     private Button submitButton;
-
     private Spinner valuesSpinner;
     private Spinner industrySpinner;
     private Spinner drinkSpinner;
@@ -39,7 +41,6 @@ public class QuestionActivity extends AppCompatActivity {
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference mCityRef = mRootRef.child("cities");
     private ValueEventListener processFirebaseRead;
-    private QuestionActivity tLocal = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,7 +166,7 @@ public class QuestionActivity extends AppCompatActivity {
         switch(resultEngine.getHighestValue()) {
             case ("Career"):
                 // calculate based on job count
-                String jobCountIndexByIndustry = resultEngine.getJobCountIndex(resultEngine.getIndustry());
+                String jobCountIndexByIndustry = JobIndustryToIndex.convertJob(resultEngine.getIndustry());
                 for (int i = 1; i <= 10; i++) {
                     mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
                 }

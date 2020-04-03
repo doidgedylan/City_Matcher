@@ -1,10 +1,8 @@
 package com.example.city_matcher.Controller;
-
 import android.util.Log;
-
+import com.example.city_matcher.Model.CityIndexToName;
 import com.example.city_matcher.Model.CoordinatesWrapper;
 import com.example.city_matcher.Model.WeatherWrapper;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -12,7 +10,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
 
 public class ResultHandler {
     /*
@@ -30,10 +27,6 @@ public class ResultHandler {
 
     // error logging
     private static final String TAG = "ResultCalculator";
-
-    // map to store city index numbers for firebase reference
-    private HashMap<String, String> jobCountIndex;
-    private static HashMap<String, String> citiesIndex;
 
     // map to store real time database data for processing
     private static HashMap<String,Integer> industryJobCounts;
@@ -53,7 +46,6 @@ public class ResultHandler {
     private static CoordinatesWrapper currentLoc;
 
     public ResultHandler() {
-
         cityScores = new HashMap<>(); // keep track of city scores
         industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
         costOfLivingCounts = new HashMap<>(); // keep track of cost of living indexes by city
@@ -61,8 +53,6 @@ public class ResultHandler {
         weatherCounts = new HashMap<>(); //hold weather data for processing
         distanceCounts = new HashMap<>(); //hold distance calc from each city
         drinkCounts = new HashMap<>(); // keep track of how many drinks are in each city for processing
-        citiesIndex = new HashMap<>(); // index of cities in real time database
-        jobCountIndex = new HashMap<>(); // index of job count in real time database
         currentLoc = new CoordinatesWrapper(0,0);
         iterateCount = 0;
 
@@ -77,24 +67,6 @@ public class ResultHandler {
         cityScores.put("San Diego", 0);
         cityScores.put("Dallas", 0);
         cityScores.put("San Jose", 0);
-
-        // corresponds to firebase index for easy retrieval
-        citiesIndex.put("1", "New York");
-        citiesIndex.put("2", "Chicago");
-        citiesIndex.put("3", "Dallas");
-        citiesIndex.put("4", "Houston");
-        citiesIndex.put("5", "Los Angeles");
-        citiesIndex.put("6", "Philadelphia");
-        citiesIndex.put("7", "Phoenix");
-        citiesIndex.put("8", "San Antonio");
-        citiesIndex.put("9", "San Diego");
-        citiesIndex.put("10", "San Jose");
-        jobCountIndex.put("Engineering", "7");
-        jobCountIndex.put("Marketing", "8");
-        jobCountIndex.put("Finance and Accounting", "9");
-        jobCountIndex.put("Teaching", "10");
-        jobCountIndex.put("Human Resources", "11");
-        jobCountIndex.put("Arts and Design", "12");
     }
 
     // function to sort hashmap by values
@@ -125,7 +97,7 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(industryJobCounts);
             int i = 1;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = citiesIndex.get(entry.getKey());
+                String city = CityIndexToName.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i += 1;
             }
@@ -139,7 +111,7 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(costOfLivingCounts);
             int i = 10; // because lower is better for cost of living index
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = citiesIndex.get(entry.getKey());
+                String city = CityIndexToName.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i -= 1;
             }
@@ -153,7 +125,7 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(parkCounts);
             int i = 1;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = citiesIndex.get(entry.getKey());
+                String city = CityIndexToName.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i += 1;
             }
@@ -187,7 +159,7 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(weatherDifferenceMapping);
             int i = 10;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = citiesIndex.get(entry.getKey());
+                String city = CityIndexToName.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i -= 1;
             }
@@ -211,7 +183,7 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(drinkCounts);
             int i = 1;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = citiesIndex.get(entry.getKey());
+                String city = CityIndexToName.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i += 1;
             }
@@ -237,14 +209,10 @@ public class ResultHandler {
             // filter and remove cities with a distance further than 'maxDi'
             for (Map.Entry<String,CoordinatesWrapper> entry : distanceCounts.entrySet()) {
                 double dist = DistanceHandler.distanceInMiles(currentLoc,entry.getValue());
-                Log.d(TAG, "processDistanceData: dist " + dist);
-                Log.d(TAG, "processDistanceData: maxDi " + maxDi);
                 if (dist > maxDi) {
-                    cityScores.put(citiesIndex.get(entry.getKey()),0);
-                    Log.d(TAG, "processDistanceData: in if " + citiesIndex.get(entry.getKey()));
+                    cityScores.put(CityIndexToName.convertIndex(entry.getKey()),0);
                 }
             }
-            Log.d(TAG, "processDistanceData: finished " + cityScores);
         }
     }
 
@@ -291,7 +259,6 @@ public class ResultHandler {
 
     public String getResult() {
         String result = "";
-        Log.d(TAG, "getResult: cityScores " + cityScores.toString());
         int maxScore = 0;
         for (Map.Entry<String,Integer> entry : cityScores.entrySet()) {
             if (entry.getValue() > maxScore) {
@@ -314,7 +281,6 @@ public class ResultHandler {
     public String getIndustry() {return industry; }
     public String getDrink() {return drink; }
     public String getMaxDistance() {return maxDistance; }
-    public String getJobCountIndex(String city) { return jobCountIndex.get(city); }
     public int getIterateCount() {return iterateCount; }
     public void addToIterateCount(int amt) {iterateCount+=amt;}
     public void setCurrentLocation(double lat, double lng) {
