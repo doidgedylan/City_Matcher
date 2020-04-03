@@ -32,6 +32,7 @@ public class QuestionActivity extends AppCompatActivity {
     private QuestionActivity tLocal = this;
     private ResultHandler resultEngine;
 
+    // ui elements
     private Button submitButton;
     private Spinner valuesSpinner;
     private Spinner industrySpinner;
@@ -75,7 +76,6 @@ public class QuestionActivity extends AppCompatActivity {
                 String parentCity = dataSnapshot.getRef().getParent().getKey();
                 String readKey = dataSnapshot.getRef().getKey();
 
-                Log.d(TAG, "onDataChange: iterateCount " + resultEngine.getIterateCount());
                 resultEngine.processData(cityReadResult, readKey, parentCity);
                 processShowResultCommand();
             }
@@ -208,23 +208,18 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 break;
             default:
-                // add ten iterations for result processing to be activated. But don't process data because
-                // "soda" and "water" answers don't really affect a moving choice.
+                // add ten iterations for result processing to be activated.
                 resultEngine.addToIterateCount(10);
         }
     }
 
     private void processDistanceScore() {
-        switch (resultEngine.getMaxDistance()) {
-            case("no limit"):
-                Log.d(TAG, "processDistanceScore: no limit ");
-                break;
-            default:
-                // calculate based on lowest difference between avg winter temp and avg summer temp
-                for (int i = 1; i <= 10; i++) {
-                    mCityRef.child(Integer.toString(i)).child("13").addValueEventListener(processFirebaseRead);
-                    mCityRef.child(Integer.toString(i)).child("14").addValueEventListener(processFirebaseRead);
-                }
+        if (!resultEngine.getMaxDistance().equals("no limit")) {
+            // calculate based on lowest difference between avg winter temp and avg summer temp
+            for (int i = 1; i <= 10; i++) {
+                mCityRef.child(Integer.toString(i)).child("13").addValueEventListener(processFirebaseRead);
+                mCityRef.child(Integer.toString(i)).child("14").addValueEventListener(processFirebaseRead);
+            }
         }
     }
 
@@ -240,7 +235,7 @@ public class QuestionActivity extends AppCompatActivity {
         boolean isWarmWeather = resultEngine.getHighestValue().equals("Warm Weather");
         boolean isDistanceSelected = !resultEngine.getMaxDistance().equals("no limit");
         boolean isDistanceNotSelected = resultEngine.getMaxDistance().equals("no limit");
-        if (isWarmWeather && isDistanceSelected) { //***
+        if (isWarmWeather && isDistanceSelected) {
             // warm weather 20 drink 10, distance 20
             result = 50;
         } else if (!isWarmWeather && isDistanceSelected) {
