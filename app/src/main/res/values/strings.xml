@@ -62,5 +62,12 @@
     <string name="newYorkCityDesc">Situated on one of the world\'s largest natural harbors, New York
         offers incredible big city amenities that, unfortunately, come at a high price.</string>
     <string name="newYorkCityCOL">Cost of Living Index: 100</string>
+    <string name="chicagoDesc">Chicago is the principal city of the Chicago metropolitan area,
+        often referred to as Chicagoland or chicity.</string>
+    <string name="chicagoCOL">Cost of Living Index: 80</string>
+    <string name="dallasDesc">Dallas is located in North Texas.
+        The city is known for its cultural activities, including opera, ballet,
+        musicals, and symphony concerts</string>
+    <string name="dallasCOL">Cost of Living Index: 65</string>
 
 </resources>

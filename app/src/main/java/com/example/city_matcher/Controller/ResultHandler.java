@@ -273,6 +273,7 @@ public class ResultHandler {
             city = "nothing found";
         }
 
+        city = "Dallas";
         // set result
         CityMatchResultWrapper result = new CityMatchResultWrapper(city);
         if (city.equals("nothing found")) {
