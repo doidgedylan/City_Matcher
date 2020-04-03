@@ -13,7 +13,6 @@
     <string name="createAccountPrompt">Create Account</string>
     <string name="confirmPasswordPrompt">confirm Password</string>
 
-
     <!-- quiz page -->
     <string name="app_name">City-Matcher</string>
     <string name="quizHeader">Personality And Preference Quiz</string>
@@ -92,5 +91,22 @@
         summers and an affordable cost of living.
     </string>
     <string name="phoenixCOL">Cost of Living Index: 66</string>
+    <string name="sanAntonioDesc">
+        The city of San Antonio, is the seventh-most populous city in the United States,
+        and the second-most populous city in both Texas and the Southern United States,
+        with more than 1.5 million residents.
+    </string>
+    <string name="sanAntonioCOL">Cost of Living Index: 60</string>
+    <string name="sanDiegoDesc">
+        Located on the coast of the Pacific Ocean in Southern California, San Diego is widely known
+        as “America\'s Finest City.” Famous for its miles and miles of white-sand beaches and amazing weather.
+    </string>
+    <string name="sanDiegoCOL">Cost of Living Index: 77</string>
+    <string name="sanJoseDesc">
+        Nicknamed the capital of Silicon Valley, San Jose is a diverse area with an innovative spirit.
+        While it has a distinct downtown, San Jose is a sprawling metro area that is as much defined by its
+        suburban neighborhoods and large tech campuses as it is by the high-rises in its business district
+    </string>
+    <string name="sanJoseCOL">Cost of Living Index: 62</string>
 
 </resources>
