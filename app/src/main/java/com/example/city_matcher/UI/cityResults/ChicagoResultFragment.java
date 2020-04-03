@@ -20,22 +20,4 @@ public class ChicagoResultFragment extends Fragment {
         Log.d(TAG, "OnCreateView: started.");
         return inflater.inflate(R.layout.chicago_fragment, container, false);
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "onAttach: started.");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(TAG, "onDetach: hit (debugging print message)");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView: hit (debugging print message)");
-    }
 }
