@@ -26,11 +26,17 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class ResultActivity extends AppCompatActivity {
-    private static final String TAG = "ResultActivity";
-
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mAccountsRef = mRootRef.child("accounts");
+    // get database reference
+    private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference mAccountsRef = mRootRef.child("accounts");
     private FirebaseUser user;
+
+    //fragment manager
+    private FragmentManager fm;
+    private Fragment fragment;
+
+    //max city
+    String maxScoreCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +44,21 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.result_activity);
 
         // get max city
-        String maxScoreCity = getIntent().getStringExtra("result");
-        if (maxScoreCity.isEmpty()) {
-            maxScoreCity = "New York";
-        }
+        maxScoreCity = getIntent().getStringExtra("result");
 
         // update database with max city
         user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();
         mAccountsRef.child(id).child("city").setValue(maxScoreCity);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
         // display max value fragment
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+        fm = getSupportFragmentManager();
+        fragment = fm.findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             switch (maxScoreCity) {
                 case ("New York"): fragment = new NewYorkResultFragment(); break;
@@ -64,19 +72,10 @@ public class ResultActivity extends AppCompatActivity {
                 case ("Dallas"): fragment = new DallasResultFragment(); break;
                 case ("San Jose"): fragment = new SanJoseResultFragment(); break;
                 case ("nothing found"): fragment = new NothingResultFragment(); break;
-                default: fragment = new NewYorkResultFragment();
             }
         }
-        fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // update database with max city
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        String id = AccountSingleton.getInstance().getID(user.getEmail());
-        Log.d(TAG, "onStart: " + AccountSingleton.getInstance().getMap().toString() );
-        Log.d(TAG, "onCreate: ******* " + id + " ******");
+        if (!fragment.isAdded()) {
+            fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
+        }
     }
 }

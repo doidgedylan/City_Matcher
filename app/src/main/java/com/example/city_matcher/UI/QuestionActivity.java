@@ -30,7 +30,7 @@ public class QuestionActivity extends AppCompatActivity {
     private static final String TAG = "QuestionActivity";
     private QuestionActivity tLocal = this;
     private ResultHandler resultEngine;
-    
+
     private Button submitButton;
     private Spinner valuesSpinner;
     private Spinner industrySpinner;
