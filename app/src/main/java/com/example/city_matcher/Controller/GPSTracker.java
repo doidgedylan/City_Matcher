@@ -20,7 +20,6 @@ public class GPSTracker implements LocationListener {
     public Location getLocation() {
         //is location enabled by the user
         if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(context, "permission not granted",Toast.LENGTH_SHORT).show();
             return null;
         }
         //get location
@@ -31,11 +30,10 @@ public class GPSTracker implements LocationListener {
             Location loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             return loc;
         } else {
-            Toast.makeText(context, "enable gps first",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "enable gps please",Toast.LENGTH_SHORT).show();
         }
         return null;
     }
-
     @Override
     public void onLocationChanged(Location location) { }
     @Override

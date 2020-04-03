@@ -239,10 +239,14 @@ public class ResultsCalculator {
             // filter and remove cities with a distance further than 'maxDi'
             for (Map.Entry<String,CoordinatesWrapper> entry : distanceCounts.entrySet()) {
                 double dist = DistanceCalculator.distanceInMiles(currentLoc,entry.getValue());
+                Log.d(TAG, "processDistanceData: dist " + dist);
+                Log.d(TAG, "processDistanceData: maxDi " + maxDi);
                 if (dist > maxDi) {
                     cityScores.put(citiesIndex.get(entry.getKey()),0);
+                    Log.d(TAG, "processDistanceData: in if " + citiesIndex.get(entry.getKey()));
                 }
             }
+            Log.d(TAG, "processDistanceData: finished " + cityScores);
         }
     }
 
@@ -296,6 +300,7 @@ public class ResultsCalculator {
 
     public String getResult() {
         String result = "";
+        Log.d(TAG, "getResult: cityScores " + cityScores.toString());
         int maxScore = 0;
         for (Map.Entry<String,Integer> entry : cityScores.entrySet()) {
             if (entry.getValue() > maxScore) {
@@ -303,7 +308,33 @@ public class ResultsCalculator {
                 result = entry.getKey();
             }
         }
+        if (maxScore == 0) {
+            result = "nothing found";
+        }
         return result;
+    }
+
+    public void clear() {
+        cityScores = new HashMap<>(); // keep track of city scores
+        industryJobCounts = new HashMap<>(); // keep track of jobs for selected industry
+        costOfLivingCounts = new HashMap<>(); // keep track of cost of living indexes by city
+        parkCounts = new HashMap<>(); // keep track of park counts by city for score calculations
+        weatherCounts = new HashMap<>(); //hold weather data for processing
+        distanceCounts = new HashMap<>(); //hold distance calc from each city
+        drinkCounts = new HashMap<>(); // keep track of how many drinks are in each city for processing
+        iterateCount = 0;
+
+        // scores to track option
+        cityScores.put("Chicago", 0);
+        cityScores.put("New York", 0);
+        cityScores.put("Los Angeles", 0);
+        cityScores.put("Houston", 0);
+        cityScores.put("Phoenix", 0);
+        cityScores.put("Philadelphia", 0);
+        cityScores.put("San Antonio", 0);
+        cityScores.put("San Diego", 0);
+        cityScores.put("Dallas", 0);
+        cityScores.put("San Jose", 0);
     }
 
     // setter methods for question activity to call

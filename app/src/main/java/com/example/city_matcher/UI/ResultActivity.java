@@ -13,6 +13,7 @@ import com.example.city_matcher.UI.cityResults.DallasResultFragment;
 import com.example.city_matcher.UI.cityResults.HoustonResultFragment;
 import com.example.city_matcher.UI.cityResults.LosAngelesResultFragment;
 import com.example.city_matcher.UI.cityResults.NewYorkResultFragment;
+import com.example.city_matcher.UI.cityResults.NothingResultFragment;
 import com.example.city_matcher.UI.cityResults.PhiladelphiaResultFragment;
 import com.example.city_matcher.UI.cityResults.PhoenixResultFragment;
 import com.example.city_matcher.UI.cityResults.SanAntonioResultFragment;
@@ -62,6 +63,7 @@ public class ResultActivity extends AppCompatActivity {
                 case ("San Diego"): fragment = new SanDiegoResultFragment(); break;
                 case ("Dallas"): fragment = new DallasResultFragment(); break;
                 case ("San Jose"): fragment = new SanJoseResultFragment(); break;
+                case ("nothing found"): fragment = new NothingResultFragment(); break;
                 default: fragment = new NewYorkResultFragment();
             }
         }

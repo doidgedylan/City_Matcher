@@ -1,12 +1,8 @@
 package com.example.city_matcher.UI;
 
-import android.Manifest;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.example.city_matcher.Controller.GPSTracker;
 import com.example.city_matcher.R;
@@ -77,8 +72,8 @@ public class QuestionActivity extends AppCompatActivity {
                 String parentCity = dataSnapshot.getRef().getParent().getKey();
                 String readKey = dataSnapshot.getRef().getKey();
 
+                Log.d(TAG, "onDataChange: iterateCount " + resultEngine.getIterateCount());
                 resultEngine.processData(cityReadResult, readKey, parentCity);
-                Log.d(TAG, "onDataChange: result " + resultEngine.getIterateCount());
                 processShowResultCommand();
             }
             @Override
@@ -139,22 +134,40 @@ public class QuestionActivity extends AppCompatActivity {
         * note: industry input is to calculate "career"
         * value, so no processing needed for that option
         */
-        processValueScore();
-        processDrinkScore();
-        processDistanceScore();
+
+        // process select checks before calling these
+        if(statementsAreAllChosen()) {
+            processValueScore();
+            processDrinkScore();
+            processDistanceScore();
+        }
+    }
+
+    private boolean statementsAreAllChosen() {
+        boolean result = true;
+        if (resultEngine.getIndustry().equals("Select")) {
+            result = false;
+            Toast.makeText(getBaseContext(), "select industry" , Toast.LENGTH_SHORT).show();
+        } else if (resultEngine.getHighestValue().equals("Select")) {
+            result = false;
+            Toast.makeText(getBaseContext(), "select highest value" , Toast.LENGTH_SHORT).show();
+        } else if (resultEngine.getDrink().equals("Select")) {
+            result = false;
+            Toast.makeText(getBaseContext(), "select drink" , Toast.LENGTH_SHORT).show();
+        } else if (resultEngine.getMaxDistance().equals("Select")) {
+            result = false;
+            Toast.makeText(getBaseContext(), "select a distance", Toast.LENGTH_SHORT).show();
+        }
+        return result;
     }
 
     private void processValueScore() {
         switch(resultEngine.getHighestValue()) {
             case ("Career"):
                 // calculate based on job count
-                if (industrySelected()) {
-                    String jobCountIndexByIndustry = resultEngine.getJobCountIndex(resultEngine.getIndustry());
-                    for (int i = 1; i <= 10; i++) {
-                        mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
-                    }
-                } else {
-                    Toast.makeText(getBaseContext(), "select industry" , Toast.LENGTH_SHORT).show();
+                String jobCountIndexByIndustry = resultEngine.getJobCountIndex(resultEngine.getIndustry());
+                for (int i = 1; i <= 10; i++) {
+                    mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
                 }
                 break;
             case ("Family"):
@@ -176,16 +189,6 @@ public class QuestionActivity extends AppCompatActivity {
                     mCityRef.child(Integer.toString(i)).child("2").addValueEventListener(processFirebaseRead);
                 }
                 break;
-            default:
-                Toast.makeText(getBaseContext(), "select highest value" , Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private boolean industrySelected() {
-        if (resultEngine.getIndustry().equals("Select")) {
-            return false;
-        } else {
-            return true;
         }
     }
 
@@ -201,9 +204,6 @@ public class QuestionActivity extends AppCompatActivity {
                     mCityRef.child(Integer.toString(i)).child("4").addValueEventListener(processFirebaseRead);
                 }
                 break;
-            case("Select"):
-                Toast.makeText(getBaseContext(), "select favorite drink" , Toast.LENGTH_SHORT).show();
-                break;
             default:
                 // add ten iterations for result processing to be activated. But don't process data because
                 // "soda" and "water" answers don't really affect a moving choice.
@@ -216,9 +216,6 @@ public class QuestionActivity extends AppCompatActivity {
             case("no limit"):
                 Log.d(TAG, "processDistanceScore: no limit ");
                 break;
-            case ("Select"):
-                Toast.makeText(getBaseContext(), "select a distance" , Toast.LENGTH_SHORT).show();
-                break;
             default:
                 // calculate based on lowest difference between avg winter temp and avg summer temp
                 for (int i = 1; i <= 10; i++) {
@@ -229,13 +226,31 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void processShowResultCommand() {
-        if (resultEngine.getHighestValue().equals("Warm Weather") &&
-                resultEngine.getIterateCount() >= 50) { //***
-            showResult();
-        } else if (!resultEngine.getHighestValue().equals("Warm Weather") &&
-                resultEngine.getIterateCount() >= 40) {
+        double totalIterations = getTotalFinalIterations();
+        if (resultEngine.getIterateCount() >= totalIterations) {
             showResult();
         }
+    }
+
+    private double getTotalFinalIterations() {
+        double result = 0;
+        boolean isWarmWeather = resultEngine.getHighestValue().equals("Warm Weather");
+        boolean isDistanceSelected = !resultEngine.getMaxDistance().equals("no limit");
+        boolean isDistanceNotSelected = resultEngine.getMaxDistance().equals("no limit");
+        if (isWarmWeather && isDistanceSelected) { //***
+            // warm weather 20 drink 10, distance 20
+            result = 50;
+        } else if (!isWarmWeather && isDistanceSelected) {
+            // job count 10, drink 10, location 20
+            result = 40;
+        } else if (isWarmWeather && isDistanceNotSelected) {
+            // warm weather 20 drink 10
+            result = 30;
+        } else if (!isWarmWeather && isDistanceNotSelected) {
+            // job count 10, drink 10
+            result = 20;
+        }
+        return result;
     }
 
     private void showResult() {
