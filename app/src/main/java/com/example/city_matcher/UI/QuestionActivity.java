@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.city_matcher.Controller.GPSTracker;
+import com.example.city_matcher.Model.CityMatchResultWrapper;
 import com.example.city_matcher.Model.JobIndustryToIndex;
 import com.example.city_matcher.R;
 import com.example.city_matcher.Controller.ResultHandler;
@@ -46,6 +47,7 @@ public class QuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // grab ui elements
         valuesSpinner = findViewById(R.id.valuesSpinner);
@@ -256,8 +258,11 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void showResult() {
         Intent mIntent = new Intent(tLocal, ResultActivity.class);
-        mIntent.putExtra("result", resultEngine.getResult());
+        CityMatchResultWrapper result = resultEngine.getResult();
+        mIntent.putExtra("city", result.getCity());
+        mIntent.putExtra("jobCount", result.getJobCount());
         startActivity(mIntent);
+        this.finish();
     }
 
     public void valuesSpinnerData() {

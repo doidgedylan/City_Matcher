@@ -1,12 +1,16 @@
 package com.example.city_matcher.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.city_matcher.Model.AccountSingleton;
+import com.example.city_matcher.Model.CityMatchResultWrapper;
 import com.example.city_matcher.R;
 import com.example.city_matcher.UI.cityResults.ChicagoResultFragment;
 import com.example.city_matcher.UI.cityResults.DallasResultFragment;
@@ -26,6 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class ResultActivity extends AppCompatActivity {
+
+    private static final String TAG = "ResultActivity";
+
     // get database reference
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference mAccountsRef = mRootRef.child("accounts");
@@ -35,8 +42,9 @@ public class ResultActivity extends AppCompatActivity {
     private FragmentManager fm;
     private Fragment fragment;
 
-    //max city
-    String maxScoreCity;
+    //matched city
+    private String maxScoreCity;
+    private int jobCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +52,10 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.result_activity);
 
         // get max city
-        maxScoreCity = getIntent().getStringExtra("result");
+        maxScoreCity = getIntent().getStringExtra("city");
+        jobCount = getIntent().getIntExtra("jobCount", -1);
+        Log.d(TAG, "onCreate: job count result " + jobCount);
+        Log.d(TAG, "onCreate: city result " + maxScoreCity);
 
         // update database with max city
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -59,6 +70,9 @@ public class ResultActivity extends AppCompatActivity {
         // display max value fragment
         fm = getSupportFragmentManager();
         fragment = fm.findFragmentById(R.id.fragment_container);
+        Bundle arguments = new Bundle();
+        arguments.putInt("jobCount", jobCount);
+
         if (fragment == null) {
             switch (maxScoreCity) {
                 case ("New York"): fragment = new NewYorkResultFragment(); break;
@@ -71,10 +85,11 @@ public class ResultActivity extends AppCompatActivity {
                 case ("San Diego"): fragment = new SanDiegoResultFragment(); break;
                 case ("Dallas"): fragment = new DallasResultFragment(); break;
                 case ("San Jose"): fragment = new SanJoseResultFragment(); break;
-                case ("nothing found"): fragment = new NothingResultFragment(); break;
+                default: fragment = new NothingResultFragment(); break;
             }
         }
         if (!fragment.isAdded()) {
+            fragment.setArguments(arguments);
             fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
     }

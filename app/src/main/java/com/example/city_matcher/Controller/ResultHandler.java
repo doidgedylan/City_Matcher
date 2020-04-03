@@ -1,6 +1,8 @@
 package com.example.city_matcher.Controller;
 import android.util.Log;
-import com.example.city_matcher.Model.CityIndexToName;
+
+import com.example.city_matcher.Model.CityIndexConverter;
+import com.example.city_matcher.Model.CityMatchResultWrapper;
 import com.example.city_matcher.Model.CoordinatesWrapper;
 import com.example.city_matcher.Model.WeatherWrapper;
 import java.util.Collections;
@@ -97,10 +99,11 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(industryJobCounts);
             int i = 1;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = CityIndexToName.convertIndex(entry.getKey());
+                String city = CityIndexConverter.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i += 1;
             }
+            Log.d(TAG, "processIndustryData: finished" + industryJobCounts.toString());
         }
     }
 
@@ -111,7 +114,7 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(costOfLivingCounts);
             int i = 10; // because lower is better for cost of living index
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = CityIndexToName.convertIndex(entry.getKey());
+                String city = CityIndexConverter.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i -= 1;
             }
@@ -125,7 +128,7 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(parkCounts);
             int i = 1;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = CityIndexToName.convertIndex(entry.getKey());
+                String city = CityIndexConverter.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i += 1;
             }
@@ -159,7 +162,7 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(weatherDifferenceMapping);
             int i = 10;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = CityIndexToName.convertIndex(entry.getKey());
+                String city = CityIndexConverter.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i -= 1;
             }
@@ -183,7 +186,7 @@ public class ResultHandler {
             HashMap<String, Integer> sortedCounts = sortByValues(drinkCounts);
             int i = 1;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
-                String city = CityIndexToName.convertIndex(entry.getKey());
+                String city = CityIndexConverter.convertIndex(entry.getKey());
                 cityScores.put(city, cityScores.get(city) + i);
                 i += 1;
             }
@@ -210,7 +213,7 @@ public class ResultHandler {
             for (Map.Entry<String,CoordinatesWrapper> entry : distanceCounts.entrySet()) {
                 double dist = DistanceHandler.distanceInMiles(currentLoc,entry.getValue());
                 if (dist > maxDi) {
-                    cityScores.put(CityIndexToName.convertIndex(entry.getKey()),0);
+                    cityScores.put(CityIndexConverter.convertIndex(entry.getKey()),0);
                 }
             }
         }
@@ -257,17 +260,29 @@ public class ResultHandler {
         }
     }
 
-    public String getResult() {
-        String result = "";
+    public CityMatchResultWrapper getResult() {
+        String city = "";
         int maxScore = 0;
         for (Map.Entry<String,Integer> entry : cityScores.entrySet()) {
             if (entry.getValue() > maxScore) {
                 maxScore = entry.getValue();
-                result = entry.getKey();
+                city = entry.getKey();
             }
         }
         if (maxScore == 0) {
-            result = "nothing found";
+            city = "nothing found";
+        }
+
+        // set result
+        CityMatchResultWrapper result = new CityMatchResultWrapper(city);
+        if (city.equals("nothing found")) {
+            result.setJobCount(0);
+        } else {
+            if (industryJobCounts.containsKey(CityIndexConverter.convertCity(city))) {
+                result.setJobCount(industryJobCounts.get(CityIndexConverter.convertCity(city)));
+            } else {
+                result.setJobCount(0);
+            }
         }
         return result;
     }

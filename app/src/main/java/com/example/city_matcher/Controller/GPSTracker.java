@@ -6,13 +6,16 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
 public class GPSTracker implements LocationListener {
     private Context context;
+    private static final String TAG = "GPSTracker";
     public GPSTracker(Context c) {
         context = c;
     }
@@ -30,7 +33,7 @@ public class GPSTracker implements LocationListener {
             Location loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             return loc;
         } else {
-            Toast.makeText(context, "enable gps please",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "enable gps to continue please",Toast.LENGTH_SHORT).show();
         }
         return null;
     }

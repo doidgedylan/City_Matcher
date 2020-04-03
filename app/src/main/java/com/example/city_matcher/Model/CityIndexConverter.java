@@ -2,10 +2,10 @@ package com.example.city_matcher.Model;
 
 import java.util.HashMap;
 
-public class CityIndexToName {
+public class CityIndexConverter {
     // indexed of cities in real time database
     private static HashMap<String, String> citiesIndex = new HashMap<>();
-    private CityIndexToName() {} //shouldn't be instantiated
+    private CityIndexConverter() {} //shouldn't be instantiated
 
     // for firebase data retrieval, map index to city
     public static String convertIndex(String index) {
@@ -20,5 +20,18 @@ public class CityIndexToName {
         citiesIndex.put("9", "San Diego");
         citiesIndex.put("10", "San Jose");
         return citiesIndex.get(index);
+    }
+    public static String convertCity(String city) {
+        citiesIndex.put("New York", "1");
+        citiesIndex.put("Chicago", "2");
+        citiesIndex.put("Dallas", "3");
+        citiesIndex.put("Houston", "4");
+        citiesIndex.put("Los Angeles", "5");
+        citiesIndex.put("Philadelphia", "6");
+        citiesIndex.put("Phoenix", "7");
+        citiesIndex.put("San Antonio", "8");
+        citiesIndex.put("San Diego", "9");
+        citiesIndex.put("San Jose", "10");
+        return citiesIndex.get(city);
     }
 }

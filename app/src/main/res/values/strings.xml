@@ -57,4 +57,10 @@
 
     <string name="hello_blank_fragment">Hello blank fragment for testing fragment injection</string>
 
+    <!--  result information  -->
+    <string name="returnHomePrompt">Return Home</string>
+    <string name="newYorkCityDesc">Situated on one of the world\'s largest natural harbors, New York
+        offers incredible big city amenities that, unfortunately, come at a high price.</string>
+    <string name="newYorkCityCOL">Cost of Living Index: 100</string>
+
 </resources>
