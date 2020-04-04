@@ -59,15 +59,16 @@ public class QuestionActivity extends AppCompatActivity {
 
         // init spinners and grab submitted values
         initSpinners();
-        valuesSpinnerData();
-        industrySpinnerData();
-        drinkSpinnerData();
-        distanceSpinnerData();
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        valuesSpinnerData();
+        industrySpinnerData();
+        drinkSpinnerData();
+        distanceSpinnerData();
+
         // calculate and get result and pass the information to the result activity/fragment
         processFirebaseRead = new ValueEventListener() {
             @Override

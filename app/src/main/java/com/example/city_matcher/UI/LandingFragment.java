@@ -10,11 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-
 import com.example.city_matcher.Controller.GPSTracker;
 import com.example.city_matcher.Model.AccountSingleton;
 import com.example.city_matcher.R;
@@ -67,7 +65,6 @@ public class LandingFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         return v;
     }
-
 
     @Override
     public void onStart() {
