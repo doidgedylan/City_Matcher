@@ -78,7 +78,6 @@ public class QuestionActivity extends AppCompatActivity {
                 String readKey = dataSnapshot.getRef().getKey();
 
                 resultEngine.processData(cityReadResult, readKey, parentCity);
-                Log.d(TAG, "onDataChange: " + resultEngine.getResult().getCity());
                 processShowResultCommand();
             }
             @Override

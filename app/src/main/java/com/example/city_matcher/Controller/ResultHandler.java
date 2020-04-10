@@ -222,10 +222,7 @@ public class ResultHandler {
             for (Map.Entry<String,CoordinatesWrapper> entry : distanceCounts.entrySet()) {
                 double dist = DistanceHandler.distanceInMiles(currentLoc,entry.getValue());
                 if (dist > maxDi) {
-                    //cityScores.put(CityIndexConverter.convertIndex(entry.getKey()),0);
-                    //if (cityScores.containsKey(CityIndexConverter.convertIndex(entry.getKey()))) {
                     cityScores.remove(CityIndexConverter.convertIndex(entry.getKey()));
-                    //}
                 }
             }
         }
@@ -273,7 +270,6 @@ public class ResultHandler {
     }
 
     public CityMatchResultWrapper getResult() {
-        Log.d(TAG, "getResult: result " + cityScores.toString());
         String city = "";
         int maxScore = 0;
         for (Map.Entry<String,Integer> entry : cityScores.entrySet()) {
