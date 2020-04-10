@@ -78,6 +78,7 @@ public class QuestionActivity extends AppCompatActivity {
                 String readKey = dataSnapshot.getRef().getKey();
 
                 resultEngine.processData(cityReadResult, readKey, parentCity);
+                Log.d(TAG, "onDataChange: " + resultEngine.getResult().getCity());
                 processShowResultCommand();
             }
             @Override
@@ -216,7 +217,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void processDistanceScore() {
         if (!resultEngine.getMaxDistance().equals("no limit")) {
-            // calculate based on lowest difference between avg winter temp and avg summer temp
+            // calculate based on difference between coordinates of current location and city location
             for (int i = 1; i <= 10; i++) {
                 mCityRef.child(Integer.toString(i)).child("13").addValueEventListener(processFirebaseRead);
                 mCityRef.child(Integer.toString(i)).child("14").addValueEventListener(processFirebaseRead);

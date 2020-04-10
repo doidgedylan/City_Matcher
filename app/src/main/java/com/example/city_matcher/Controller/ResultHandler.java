@@ -100,10 +100,11 @@ public class ResultHandler {
             int i = 1;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
                 String city = CityIndexConverter.convertIndex(entry.getKey());
-                cityScores.put(city, cityScores.get(city) + i);
-                i += 1;
+                if (cityScores.containsKey(city)) {
+                    cityScores.put(city, cityScores.get(city) + i);
+                    i += 1;
+                }
             }
-            Log.d(TAG, "processIndustryData: finished" + industryJobCounts.toString());
         }
     }
 
@@ -115,8 +116,10 @@ public class ResultHandler {
             int i = 10; // because lower is better for cost of living index
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
                 String city = CityIndexConverter.convertIndex(entry.getKey());
-                cityScores.put(city, cityScores.get(city) + i);
-                i -= 1;
+                if (cityScores.containsKey(city)) {
+                    cityScores.put(city, cityScores.get(city) + i);
+                    i -= 1;
+                }
             }
         }
     }
@@ -129,8 +132,10 @@ public class ResultHandler {
             int i = 1;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
                 String city = CityIndexConverter.convertIndex(entry.getKey());
-                cityScores.put(city, cityScores.get(city) + i);
-                i += 1;
+                if (cityScores.containsKey(city)) {
+                    cityScores.put(city, cityScores.get(city) + i);
+                    i += 1;
+                }
             }
         }
     }
@@ -163,8 +168,10 @@ public class ResultHandler {
             int i = 10;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
                 String city = CityIndexConverter.convertIndex(entry.getKey());
-                cityScores.put(city, cityScores.get(city) + i);
-                i -= 1;
+                if (cityScores.containsKey(city)) {
+                    cityScores.put(city, cityScores.get(city) + i);
+                    i -= 1;
+                }
             }
         }
     }
@@ -187,8 +194,10 @@ public class ResultHandler {
             int i = 1;
             for (Map.Entry<String,Integer> entry : sortedCounts.entrySet()) {
                 String city = CityIndexConverter.convertIndex(entry.getKey());
-                cityScores.put(city, cityScores.get(city) + i);
-                i += 1;
+                if (cityScores.containsKey(city)) {
+                    cityScores.put(city, cityScores.get(city) + i);
+                    i += 1;
+                }
             }
         }
     }
@@ -213,8 +222,10 @@ public class ResultHandler {
             for (Map.Entry<String,CoordinatesWrapper> entry : distanceCounts.entrySet()) {
                 double dist = DistanceHandler.distanceInMiles(currentLoc,entry.getValue());
                 if (dist > maxDi) {
-                    Log.d(TAG, "processDistanceData: zero city " + CityIndexConverter.convertIndex(entry.getKey()));
-                    cityScores.put(CityIndexConverter.convertIndex(entry.getKey()),0);
+                    //cityScores.put(CityIndexConverter.convertIndex(entry.getKey()),0);
+                    //if (cityScores.containsKey(CityIndexConverter.convertIndex(entry.getKey()))) {
+                    cityScores.remove(CityIndexConverter.convertIndex(entry.getKey()));
+                    //}
                 }
             }
         }
