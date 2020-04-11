@@ -8,7 +8,6 @@ import com.example.city_matcher.R;
 
 
 public class LoginActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

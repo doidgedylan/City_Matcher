@@ -1,18 +1,23 @@
 package com.example.city_matcher.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.city_matcher.Model.AccountSingleton;
+import com.example.city_matcher.Model.CityMatchResultWrapper;
 import com.example.city_matcher.R;
 import com.example.city_matcher.UI.cityResults.ChicagoResultFragment;
 import com.example.city_matcher.UI.cityResults.DallasResultFragment;
 import com.example.city_matcher.UI.cityResults.HoustonResultFragment;
 import com.example.city_matcher.UI.cityResults.LosAngelesResultFragment;
 import com.example.city_matcher.UI.cityResults.NewYorkResultFragment;
+import com.example.city_matcher.UI.cityResults.NothingResultFragment;
 import com.example.city_matcher.UI.cityResults.PhiladelphiaResultFragment;
 import com.example.city_matcher.UI.cityResults.PhoenixResultFragment;
 import com.example.city_matcher.UI.cityResults.SanAntonioResultFragment;
@@ -25,11 +30,21 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class ResultActivity extends AppCompatActivity {
+
     private static final String TAG = "ResultActivity";
 
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mAccountsRef = mRootRef.child("accounts");
+    // get database reference
+    private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference mAccountsRef = mRootRef.child("accounts");
     private FirebaseUser user;
+
+    //fragment manager
+    private FragmentManager fm;
+    private Fragment fragment;
+
+    //matched city
+    private String maxScoreCity;
+    private int jobCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +52,27 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.result_activity);
 
         // get max city
-        String maxScoreCity = getIntent().getStringExtra("result");
-        Toast.makeText(this, "Select: " + maxScoreCity, Toast.LENGTH_SHORT).show();
-        if (maxScoreCity.isEmpty()) {
-            maxScoreCity = "New York";
-        }
+        maxScoreCity = getIntent().getStringExtra("city");
+        jobCount = getIntent().getIntExtra("jobCount", -1);
+        Log.d(TAG, "onCreate: job count result " + jobCount);
+        Log.d(TAG, "onCreate: city result " + maxScoreCity);
 
         // update database with max city
         user = FirebaseAuth.getInstance().getCurrentUser();
         String id = user.getUid();
         mAccountsRef.child(id).child("city").setValue(maxScoreCity);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
         // display max value fragment
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+        fm = getSupportFragmentManager();
+        fragment = fm.findFragmentById(R.id.fragment_container);
+        Bundle arguments = new Bundle();
+        arguments.putInt("jobCount", jobCount);
+
         if (fragment == null) {
             switch (maxScoreCity) {
                 case ("New York"): fragment = new NewYorkResultFragment(); break;
@@ -63,23 +85,12 @@ public class ResultActivity extends AppCompatActivity {
                 case ("San Diego"): fragment = new SanDiegoResultFragment(); break;
                 case ("Dallas"): fragment = new DallasResultFragment(); break;
                 case ("San Jose"): fragment = new SanJoseResultFragment(); break;
-                default: fragment = new NewYorkResultFragment();
+                default: fragment = new NothingResultFragment(); break;
             }
         }
-        fm.beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .commit();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // update database with max city
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        String id = AccountSingleton.getInstance().getID(user.getEmail());
-        Log.d(TAG, "onStart: " +AccountSingleton.getInstance().getMap().toString() );
-        Log.d(TAG, "onCreate: ******* " + id + " ******");
-        Log.d(TAG, "UID: " + user.getUid());
+        if (!fragment.isAdded()) {
+            fragment.setArguments(arguments);
+            fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
+        }
     }
 }
-

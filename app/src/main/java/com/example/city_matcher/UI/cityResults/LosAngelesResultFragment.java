@@ -1,41 +1,67 @@
 package com.example.city_matcher.UI.cityResults;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.city_matcher.R;
+import com.example.city_matcher.UI.LandingActivity;
 
 public class LosAngelesResultFragment extends Fragment {
-    private static final String TAG = "LAResultFragment";
+    private static final String TAG = "LosAngelesFragment";
+
+    private int jobCount;
+    private TextView textInjectJobsParks;
+    private TextView weatherSummer;
+    private TextView weatherWinter;
+    private Button returnHomeButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "OnCreateView: started.");
-        return inflater.inflate(R.layout.los_angeles_fragment, container, false);
+        View v = inflater.inflate(R.layout.los_angeles_fragment, container, false);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            jobCount = bundle.getInt("jobCount", -1);
+        }
+        textInjectJobsParks = v.findViewById(R.id.openingsOrParkTextView);
+        weatherSummer = v.findViewById(R.id.weatherSummer);
+        weatherWinter = v.findViewById(R.id.weatherWinter);
+        returnHomeButton = v.findViewById(R.id.returnHomeButton);
+        return v;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d(TAG, "onAttach: started.");
-    }
+    public void onStart() {
+        super.onStart();
+        int parkCount = 196;
+        int summerTemp = 77;
+        int winterTemp = 57;
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d(TAG, "onDetach: hit (debugging print message)");
-    }
+        if (jobCount != 0) {
+            textInjectJobsParks.append("Job openings in your industry: " + jobCount);
+        } else {
+            textInjectJobsParks.append("Estimate of total number of parks: " + parkCount);
+        }
+        weatherSummer.append("AVG summer temp: " + summerTemp);
+        weatherWinter.append("AVG winter temp: " + winterTemp);
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView: hit (debugging print message)");
+        //listener
+        returnHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(getActivity(), LandingActivity.class);
+                startActivity(mIntent);
+                getActivity().finish();
+            }
+        });
     }
 }

@@ -31,14 +31,12 @@ public class NewUserFragment extends Fragment {
     private FirebaseAuth mAuth;
 
     // storage props
-    private Account account;
     private String email;
     private String password;
 
     // set UI element properties
     private EditText EditTextEmail;
     private EditText EditTextPassword;
-    private EditText EditTextConfirmPassword;
     private Button mCreateAccountButton;
 
     @Override
@@ -48,7 +46,6 @@ public class NewUserFragment extends Fragment {
         // get UI references by id
         EditTextEmail = v.findViewById(R.id.newAccountEmail);
         EditTextPassword = v.findViewById(R.id.newAccountPassword);
-        EditTextConfirmPassword = v.findViewById(R.id.newAccountPasswordConfirm);
         mCreateAccountButton = v.findViewById(R.id.submitCreateAccountButton);
 
         // firebase inits
@@ -57,7 +54,6 @@ public class NewUserFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         return v;
     }
-
 
     @Override
     public void onStart() {

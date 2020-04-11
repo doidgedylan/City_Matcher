@@ -26,13 +26,12 @@ public class LoginFragment extends Fragment {
     private FirebaseAuth mAuth;
 
     // define UI elements
-    EditText emailEdit;
-    EditText passwordEdit;
-    String email;
-    String password;
-    Button loginButton;
-    Button newAccountButton;
-
+    private EditText emailEdit;
+    private EditText passwordEdit;
+    private String email;
+    private String password;
+    private Button loginButton;
+    private Button newAccountButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,10 +39,10 @@ public class LoginFragment extends Fragment {
         View v = inflater.inflate(R.layout.login_fragment, container, false);
 
         // get UI elements
-        emailEdit = (EditText) v.findViewById(R.id.username);
-        passwordEdit = (EditText) v.findViewById(R.id.password);
-        loginButton = (Button) v.findViewById(R.id.submitLogin);
-        newAccountButton = (Button) v.findViewById(R.id.goToCreateAccount);
+        emailEdit = v.findViewById(R.id.username);
+        passwordEdit = v.findViewById(R.id.password);
+        loginButton = v.findViewById(R.id.submitLogin);
+        newAccountButton = v.findViewById(R.id.goToCreateAccount);
 
         // init auth reference
         mAuth = FirebaseAuth.getInstance();
