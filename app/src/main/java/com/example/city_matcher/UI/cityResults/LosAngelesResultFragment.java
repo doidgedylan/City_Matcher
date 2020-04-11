@@ -59,6 +59,7 @@ public class LosAngelesResultFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent mIntent = new Intent(getActivity(), LandingActivity.class);
+                mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(mIntent);
                 getActivity().finish();
             }
