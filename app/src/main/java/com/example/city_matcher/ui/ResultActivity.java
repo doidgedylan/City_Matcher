@@ -32,11 +32,6 @@ public class ResultActivity extends AppCompatActivity {
     // get database reference
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference mAccountsRef = mRootRef.child("accounts");
-    private FirebaseUser user;
-
-    //fragment manager
-    private FragmentManager fm;
-    private Fragment fragment;
 
     //matched city
     private String maxScoreCity;
@@ -53,19 +48,23 @@ public class ResultActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: job count result " + jobCount);
         Log.d(TAG, "onCreate: city result " + maxScoreCity);
 
-        // update database with max city
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        String id = user.getUid();
-        mAccountsRef.child(id).child("city").setValue(maxScoreCity);
+        // set real time database persistence
+        mAccountsRef.keepSynced(true);
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
+        // update database with max city
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String id = user.getUid();
+        mAccountsRef.child(id).child("city").setValue(maxScoreCity);
+
+
         // display max value fragment
-        fm = getSupportFragmentManager();
-        fragment = fm.findFragmentById(R.id.fragment_container);
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
         Bundle arguments = new Bundle();
         arguments.putInt("jobCount", jobCount);
 

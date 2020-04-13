@@ -60,6 +60,9 @@ public class LandingFragment extends Fragment {
         displayMatchedCityButton = v.findViewById(R.id.showMatchedCityButton);
         showCoordinatesButton = v.findViewById(R.id.showCoordinatesButton);
 
+        // set real time database persistence for accounts
+        mAccountsRef.keepSynced(true);
+
         // init auth reference
         mAuth = FirebaseAuth.getInstance();
         return v;
@@ -161,7 +164,7 @@ public class LandingFragment extends Fragment {
             String coordinates = "Latitude: " + loc.getLatitude() + "\nLongitude: " + loc.getLongitude();
             Toast.makeText(getContext(), coordinates , Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getContext(), "Turn Location On" , Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Turn Location/Permissions On" , Toast.LENGTH_LONG).show();
         }
     }
 }

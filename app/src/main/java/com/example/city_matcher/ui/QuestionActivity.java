@@ -56,6 +56,9 @@ public class QuestionActivity extends AppCompatActivity {
         distSpinner = findViewById(R.id.distanceSpinner);
         submitButton = findViewById(R.id.submitButton);
 
+        // set city data persistence
+        mCityRef.keepSynced(true);
+
         // init spinners and grab submitted values
         initSpinners();
     }

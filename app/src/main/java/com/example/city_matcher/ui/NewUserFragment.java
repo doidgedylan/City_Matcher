@@ -52,6 +52,10 @@ public class NewUserFragment extends Fragment {
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mAccountsRef = mRootRef.child("accounts");
         mAuth = FirebaseAuth.getInstance();
+
+        // set database persistence for real time database
+        mAccountsRef.keepSynced(true);
+
         return v;
     }
 
