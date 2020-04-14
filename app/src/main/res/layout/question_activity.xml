@@ -20,7 +20,7 @@
             android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="@string/quizHeader"
-            android:textColor="#000"
+            android:textColor="#E91E63"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
             android:layout_marginBottom="20dp"
             android:gravity="center_vertical"
             android:text="@string/priorityQuestionPrompt"
-            android:textColor="#FF5945"
+            android:textColor="#E8EAF6"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
             android:layout_marginBottom="20dp"
             android:gravity="center_vertical"
             android:text="@string/industryQuestionPrompt"
-            android:textColor="#FF5945"
+            android:textColor="#E8EAF6"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
             android:layout_marginBottom="20dp"
             android:gravity="center_vertical"
             android:text="@string/drinkQuestionPrompt"
-            android:textColor="#FF5945"
+            android:textColor="#E8EAF6"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +107,7 @@
             android:layout_marginBottom="20dp"
             android:gravity="center_vertical"
             android:text="@string/distanceQuestionPrompt"
-            android:textColor="#FF5945"
+            android:textColor="#E8EAF6"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,9 +122,13 @@
         <!-- Submit button -->
         <Button
             android:id="@+id/submitButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit"/>
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:background="@drawable/roundedbutton"
+            android:text="Submit"
+            android:textAlignment="center"
+            android:textColor="#E8EAF6" />
 
     </LinearLayout>
 </ScrollView>

@@ -72,10 +72,15 @@
 
         <Button
             android:id="@+id/returnHomeButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/roundedbutton"
+            android:textAlignment="center"
+            android:textColor="#E8EAF6"
+            android:textStyle="bold"
+            android:visibility="visible"
             android:text="@string/returnHomePrompt"/>
     </LinearLayout>
 </ScrollView>

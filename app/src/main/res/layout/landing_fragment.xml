@@ -4,56 +4,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_map"
     tools:context=".UI.LandingFragment"
     android:orientation="vertical">
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="158dp"
+        android:src="@drawable/logo_cropped" />
+
     <TextView
-        android:id="@+id/landingHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:text="@string/app_name"
-        android:textColor="#000"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:id="@+id/loginPageTitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="25dp"
+        android:text="City Matcher"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="40dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/goToQuizButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/quizButtonPrompt"/>
+        android:text="@string/quizButtonPrompt"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:background="@drawable/roundedbutton"
+        android:textAlignment="center"
+        android:textColor="#E8EAF6"
+        android:textStyle="bold"
+        android:visibility="visible"/>
 
     <Button
         android:id="@+id/showMatchedCityButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/currentMatchedCityPrompt" />
-
-    <Button
-        android:id="@+id/showCoordinatesButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/showCoordinatesButtonPrompt"/>
-
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/logoutButtonPrompt" />
+        android:text="@string/currentMatchedCityPrompt"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:background="@drawable/roundedbutton"
+        android:textAlignment="center"
+        android:textColor="#E8EAF6"
+        android:textStyle="bold"
+        android:visibility="visible"/>
 
     <Button
         android:id="@+id/deleteAccountButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/deleteButtonPrompt" />
+        android:text="@string/deleteButtonPrompt"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:background="@drawable/roundedbutton"
+        android:textAlignment="center"
+        android:textColor="#E8EAF6"
+        android:textStyle="bold"
+        android:visibility="visible"/>
+
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:text="@string/logoutButtonPrompt"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:background="@drawable/roundedbutton"
+        android:textAlignment="center"
+        android:textColor="#E8EAF6"
+        android:textStyle="bold"
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/showCoordinatesButton"
+        android:text="@string/showCoordinatesButtonPrompt"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:background="@drawable/roundedbutton"
+        android:textAlignment="center"
+        android:textColor="#E8EAF6"
+        android:textStyle="bold"
+        android:visibility="visible"/>
 
 </LinearLayout>

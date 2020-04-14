@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_map"
+    android:gravity="center_vertical"
     tools:context=".UI.LoginFragment">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="158dp"
+            android:src="@drawable/logo_cropped" />
 
         <TextView
             android:id="@+id/loginPageTitle"
@@ -12,10 +21,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="25dp"
+            android:text="City Matcher"
+            android:textColor="@color/colorAccent"
             android:textSize="40dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/loginHeader" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/usernamePrompt"
@@ -49,14 +58,23 @@
 
         <Button
             android:id="@+id/submitLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/loginButtonPrompt" />
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_margin="16dp"
+            android:layout_gravity="center"
+            android:background="@drawable/roundedbutton"
+            android:text="Login"
+            android:textAlignment="center"
+            android:textColor="#E8EAF6" />
 
         <Button
             android:id="@+id/goToCreateAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/createAccountPrompt" />
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:background="@drawable/roundedbutton"
+            android:text="@string/createAccountPrompt"
+            android:textAlignment="center"
+            android:textColor="#E8EAF6" />
 
 </LinearLayout>
