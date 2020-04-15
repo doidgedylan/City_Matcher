@@ -30,4 +30,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.google.firebase:firebase-database:19.2.0'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'junit:junit:4.13'
 }

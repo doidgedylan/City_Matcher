@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <fragment
-        android:name="com.example.city_matcher.UI.LandingFragment"
+        android:name="com.example.city_matcher.ui.LandingFragment"
         android:id="@+id/landingFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
