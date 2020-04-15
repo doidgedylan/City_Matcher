@@ -277,7 +277,11 @@ public class ResultHandler {
                 city = entry.getKey();
             }
         }
-        if (maxScore == 0) {
+
+        // set 'nothing found' if all cities were removed OR
+        // if some cities were removed but the currentLocation wasn't set (no sensor)
+        if (maxScore == 0 || (currentLoc.getLatitude() == 0
+                && currentLoc.getLongitude() == 0 && cityScores.size() < 10)) {
             city = "nothing found";
         }
 
