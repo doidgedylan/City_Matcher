@@ -1,0 +1,140 @@
+<resources>
+    <!--  landing page  -->
+    <string name="quizButtonPrompt">¡Encuentra un lugar para vivir!</string>
+    <string name="loginButtonPrompt">Login</string>
+    <string name="logoutButtonPrompt">Logout</string>
+    <string name="deleteButtonPrompt">Delete Account</string>
+    <string name="currentMatchedCityPrompt">Track Currently Matched City</string>
+    <string name="showCoordinatesButtonPrompt">What are my coordinates?</string>
+
+    <!--  login page / new user page  -->
+    <string name="enterEmailPrompt">enter email</string>
+    <string name="enterPasswordPrompt">enter password</string>
+    <string name="loginHeader">City-Matcher Login</string>
+    <string name="createAccountPrompt">Create Account</string>
+    <string name="confirmPasswordPrompt">confirm Password</string>
+
+    <!-- quiz page -->
+    <string name="app_name">City-Matcher</string>
+    <string name="quizHeader">Personality And Preference Quiz</string>
+
+    <string name="priorityQuestionPrompt">1. What would you consider most important?</string>
+    <string-array name="priorityQuestionAnswers">
+        <item>Select</item>
+        <item>Career</item>
+        <item>Family</item>
+        <item>Cost of Living</item>
+        <item>Warm Weather</item>
+    </string-array>
+
+    <string name="industryQuestionPrompt">2. What industry are you in?</string>
+    <string-array name="industryQuestionAnswers">
+        <item>Select</item>
+        <item>Engineering</item>
+        <item>Marketing</item>
+        <item>Finance and Accounting</item>
+        <item>Teaching</item>
+        <item>Human Resources</item>
+        <item>Arts and Design</item>
+    </string-array>
+
+    <string name="drinkQuestionPrompt">3. whats your favorite drink?</string>
+    <string-array name="drinkQuestionAnswers">
+        <item>Select</item>
+        <item>Coffee</item>
+        <item>Beer</item>
+        <item>Soda</item>
+        <item>Water</item>
+    </string-array>
+
+    <string name="distanceQuestionPrompt">4. How far away are you willing to move?</string>
+    <string-array name="distanceQuestionAnswers">
+        <item>Select</item>
+        <item>less than 250mi</item>
+        <item>less than 500mi</item>
+        <item>no limit</item>
+    </string-array>
+
+    <string name="submitButton">Submit</string>
+
+    <!--  nothing found result  -->
+    <string name="noResultPrompt">Sorry, no result found</string>
+    <string name="noResultExplanation">Try expanding the distance allowed or turning on location permissions.</string>
+
+
+    <!--  result information  -->
+    <string name="chicagoResultHeader">We recommend Chicago!</string>
+    <string name="newYorkResultHeader">We recommend New York!</string>
+    <string name="dallasResultHeader">We recommend Dallas!</string>
+    <string name="houstonResultHeader">We recommend Houston!</string>
+    <string name="losAngelesResultHeader">We recommend Los Angeles!</string>
+    <string name="philadelphiaResultHeader">We recommend Philadelphia!</string>
+    <string name="phoenixResultHeader">We recommend Phoenix!</string>
+    <string name="sanAntonioResultHeader">We recommend San Antonio!</string>
+    <string name="sanDiegoResultHeader">We recommend San Diego!</string>
+    <string name="sanJoseResultHeader">We recommend San Jose!</string>
+
+    <string name="jobOpeningsPrompt">Job openings in your industry: </string>
+    <string name="parkCountPrompt">Estimate of total number of parks: </string>
+    <string name="returnHomePrompt">Return Home</string>
+
+    <string name="newYorkCityDesc">Situated on one of the world\'s largest natural harbors, New York
+        offers incredible big city amenities that, unfortunately, come at a high price.</string>
+    <string name="newYorkCityCOL">Cost of Living Index: 100</string>
+
+    <string name="chicagoDesc">Chicago is the principal city of the Chicago metropolitan area,
+        often referred to as Chicagoland or chicity.</string>
+    <string name="chicagoCOL">Cost of Living Index: 80</string>
+
+    <string name="dallasDesc">Dallas is located in North Texas.
+        The city is known for its cultural activities, including opera, ballet,
+        musicals, and symphony concerts</string>
+    <string name="dallasCOL">Cost of Living Index: 65</string>
+
+    <string name="houstonDesc">
+        Houston is the eighth most expansive city in the United States
+        (including consolidated city-counties). It is the largest city
+        in the United States by total area
+    </string>
+    <string name="houstonCOL">Cost of Living Index: 70</string>
+
+    <string name="losAngelesDesc">
+        Los Angeles lies in a basin in Southern California, adjacent to the Pacific Ocean,
+        with mountains as high as 10,000 feet (3,000 m), and deserts. It\'s the entertainment
+        capital of America, and has a vibrant coffee and beer scene.
+    </string>
+    <string name="losAngelesCOL">Cost of Living Index: 82</string>
+
+    <string name="philadelphiaDesc">
+        Frequently called "The City of Brotherly Love", it is known for its arts, culture,
+        cuisine, and colonial history, attracting 42 million domestic tourists in 2016.
+    </string>
+    <string name="philadelphiaCOL">Cost of Living Index: 83</string>
+
+    <string name="phoenixDesc">
+        Phoenix was settled in 1867 as an agricultural community near the confluence of
+        the Salt and Gila Rivers and was incorporated as a city in 1881. It\'s has very hot
+        summers and an affordable cost of living.
+    </string>
+    <string name="phoenixCOL">Cost of Living Index: 66</string>
+
+    <string name="sanAntonioDesc">
+        The city of San Antonio, is the seventh-most populous city in the United States,
+        and the second-most populous city in both Texas and the Southern United States,
+        with more than 1.5 million residents.
+    </string>
+    <string name="sanAntonioCOL">Cost of Living Index: 60</string>
+
+    <string name="sanDiegoDesc">
+        Located on the coast of the Pacific Ocean in Southern California, San Diego is widely known
+        as “America\'s Finest City.” Famous for its miles and miles of white-sand beaches and amazing weather.
+    </string>
+    <string name="sanDiegoCOL">Cost of Living Index: 77</string>
+
+    <string name="sanJoseDesc">
+        Nicknamed the capital of Silicon Valley, San Jose is a diverse area with an innovative spirit.
+        While it has a distinct downtown, San Jose is a sprawling metro area that is as much defined by its
+        suburban neighborhoods and large tech campuses as it is by the high-rises in its business district
+    </string>
+    <string name="sanJoseCOL">Cost of Living Index: 62</string>
+</resources>
