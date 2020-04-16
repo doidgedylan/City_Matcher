@@ -26,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class ResultActivity extends AppCompatActivity {
-
     private static final String TAG = "ResultActivity";
 
     // get database reference
@@ -45,8 +44,6 @@ public class ResultActivity extends AppCompatActivity {
         // get max city
         maxScoreCity = getIntent().getStringExtra("city");
         jobCount = getIntent().getIntExtra("jobCount", -1);
-        Log.d(TAG, "onCreate: job count result " + jobCount);
-        Log.d(TAG, "onCreate: city result " + maxScoreCity);
 
         // set real time database persistence
         mAccountsRef.keepSynced(true);

@@ -160,10 +160,12 @@ public class LandingFragment extends Fragment {
         GPSTracker locTracker = new GPSTracker(getContext());
         Location loc = locTracker.getLocation();
         if (loc != null) {
-            String coordinates = "Latitude: " + loc.getLatitude() + "\nLongitude: " + loc.getLongitude();
+            String coordinates = this.getResources().getString(R.string.latitude)
+                    + loc.getLatitude() + "\n" + this.getResources().getString(R.string.longitude)
+                    + loc.getLongitude();
             Toast.makeText(getContext(), coordinates , Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getContext(), "Turn Location/Permissions On" , Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), this.getResources().getString(R.string.locOffToast) , Toast.LENGTH_LONG).show();
         }
     }
 }

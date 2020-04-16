@@ -239,10 +239,10 @@ public class ResultHandler {
 
     private static double parseDistanceString(String disString) {
         double result = 0;
-        if (maxDistance.equals("less than 250mi")) {
+        if (maxDistance.indexOf('2') > 0) {
             String number = disString.substring(disString.indexOf("2"),disString.indexOf("2")+3);
             result = Double.parseDouble(number);
-        } else if (maxDistance.equals("less than 500mi")) {
+        } else if (maxDistance.indexOf('5') > 0) {
             String number = disString.substring(disString.indexOf("5"),disString.indexOf("5")+3);
             result = Double.parseDouble(number);
         }

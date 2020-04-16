@@ -47,12 +47,12 @@ public class SanAntonioResultFragment extends Fragment {
         int winterTemp = 54;
 
         if (jobCount != 0) {
-            textInjectJobsParks.append("Job openings in your industry: " + jobCount);
+            textInjectJobsParks.append(getContext().getResources().getString(R.string.jobOpeningsPrompt) + " " + jobCount);
         } else {
-            textInjectJobsParks.append("Estimate of total number of parks: " + parkCount);
+            textInjectJobsParks.append(getContext().getResources().getString(R.string.parkCountPrompt) + " " + parkCount);
         }
-        weatherSummer.append("AVG summer temp: " + summerTemp);
-        weatherWinter.append("AVG winter temp: " + winterTemp);
+        weatherSummer.append(getContext().getResources().getString(R.string.avgSummerTemp) + summerTemp);
+        weatherWinter.append(getContext().getResources().getString(R.string.avgWinterTemp) + winterTemp);
 
         //listener
         returnHomeButton.setOnClickListener(new View.OnClickListener() {
