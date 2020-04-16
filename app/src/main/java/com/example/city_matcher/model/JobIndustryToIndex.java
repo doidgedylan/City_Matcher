@@ -1,5 +1,9 @@
 package com.example.city_matcher.model;
 
+import android.content.Context;
+
+import com.example.city_matcher.R;
+
 import java.util.HashMap;
 
 public class JobIndustryToIndex {
@@ -8,13 +12,13 @@ public class JobIndustryToIndex {
     private JobIndustryToIndex() {} // shouldn't be instantiated
 
     // for firebase data, map industry to job count index
-    public static String convertJob(String job) {
-        jobCountIndex.put("Engineering", "7");
-        jobCountIndex.put("Marketing", "8");
-        jobCountIndex.put("Finance and Accounting", "9");
-        jobCountIndex.put("Teaching", "10");
-        jobCountIndex.put("Human Resources", "11");
-        jobCountIndex.put("Arts and Design", "12");
+    public static String convertJob(String job, Context context) {
+        jobCountIndex.put(context.getResources().getString(R.string.Engineering), "7");
+        jobCountIndex.put(context.getResources().getString(R.string.Marketing), "8");
+        jobCountIndex.put(context.getResources().getString(R.string.financeAndAccounting), "9");
+        jobCountIndex.put(context.getResources().getString(R.string.Teaching), "10");
+        jobCountIndex.put(context.getResources().getString(R.string.humanResources), "11");
+        jobCountIndex.put(context.getResources().getString(R.string.artsAndDesign), "12");
         return jobCountIndex.get(job);
     }
 }

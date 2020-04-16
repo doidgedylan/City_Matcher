@@ -170,7 +170,7 @@ public class QuestionActivity extends AppCompatActivity {
     private void processValueScore() {
         if (resultEngine.getHighestValue().equals(this.getResources().getString(R.string.Career))) {
             // calculate based on job count
-            String jobCountIndexByIndustry = JobIndustryToIndex.convertJob(resultEngine.getIndustry());
+            String jobCountIndexByIndustry = JobIndustryToIndex.convertJob(resultEngine.getIndustry(), this);
             for (int i = 1; i <= 10; i++) {
                 mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
             }
