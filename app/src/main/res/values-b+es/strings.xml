@@ -1,19 +1,19 @@
 <resources>
     <!--  prompts and comparisons in calculations -->
-    <string name="warmWeather">Warm Weather</string>
-    <string name="noLimit">no limit</string>
-    <string name="Coffee">Coffee</string>
-    <string name="Beer">Beer</string>
-    <string name="costOfLiving">Cost of Living</string>
-    <string name="Family">Family</string>
-    <string name="Career">Career</string>
-    <string name="Select">Select</string>
-    <string name="Engineering">Engineering</string>
-    <string name="Marketing">Marketing</string>
-    <string name="financeAndAccounting">Finance and Accounting</string>
-    <string name="Teaching">Teaching</string>
-    <string name="humanResources">Human Resources</string>
-    <string name="artsAndDesign">Arts and Design</string>
+    <string name="warmWeather">Clima cálido</string>
+    <string name="noLimit">sin límite</string>
+    <string name="Coffee">café</string>
+    <string name="Beer">Cerveza</string>
+    <string name="costOfLiving">Costo de la vida</string>
+    <string name="Family">Familia</string>
+    <string name="Career">Carrera</string>
+    <string name="Select">Seleccione</string>
+    <string name="Engineering">Ingenieria</string>
+    <string name="Marketing">Márketing</string>
+    <string name="financeAndAccounting">Finanzas y Contabilidad</string>
+    <string name="Teaching">Enseñando</string>
+    <string name="humanResources">Recursos humanos</string>
+    <string name="artsAndDesign">Arte y diseño</string>
 
     <!--  landing page  -->
     <string name="quizButtonPrompt">¡Encuentra un lugar para vivir!</string>
