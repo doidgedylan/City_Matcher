@@ -26,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class ResultActivity extends AppCompatActivity {
-
     private static final String TAG = "ResultActivity";
 
     // get database reference

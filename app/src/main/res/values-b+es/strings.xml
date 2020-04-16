@@ -1,4 +1,20 @@
 <resources>
+    <!--  prompts and comparisons in calculations -->
+    <string name="warmWeather">Warm Weather</string>
+    <string name="noLimit">no limit</string>
+    <string name="Coffee">Coffee</string>
+    <string name="Beer">Beer</string>
+    <string name="costOfLiving">Cost of Living</string>
+    <string name="Family">Family</string>
+    <string name="Career">Career</string>
+    <string name="Select">Select</string>
+    <string name="Engineering">Engineering</string>
+    <string name="Marketing">Marketing</string>
+    <string name="financeAndAccounting">Finance and Accounting</string>
+    <string name="Teaching">Teaching</string>
+    <string name="humanResources">Human Resources</string>
+    <string name="artsAndDesign">Arts and Design</string>
+
     <!--  landing page  -->
     <string name="quizButtonPrompt">¡Encuentra un lugar para vivir!</string>
     <string name="loginButtonPrompt">Iniciar sesión</string>
