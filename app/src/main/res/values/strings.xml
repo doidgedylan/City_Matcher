@@ -77,55 +77,64 @@
     <string name="jobOpeningsPrompt">Job openings in your industry: </string>
     <string name="parkCountPrompt">Estimate of total number of parks: </string>
     <string name="returnHomePrompt">Return Home</string>
+
     <string name="newYorkCityDesc">Situated on one of the world\'s largest natural harbors, New York
         offers incredible big city amenities that, unfortunately, come at a high price.</string>
     <string name="newYorkCityCOL">Cost of Living Index: 100</string>
+
     <string name="chicagoDesc">Chicago is the principal city of the Chicago metropolitan area,
         often referred to as Chicagoland or chicity.</string>
     <string name="chicagoCOL">Cost of Living Index: 80</string>
+
     <string name="dallasDesc">Dallas is located in North Texas.
         The city is known for its cultural activities, including opera, ballet,
         musicals, and symphony concerts</string>
     <string name="dallasCOL">Cost of Living Index: 65</string>
+
     <string name="houstonDesc">
         Houston is the eighth most expansive city in the United States
         (including consolidated city-counties). It is the largest city
         in the United States by total area
     </string>
     <string name="houstonCOL">Cost of Living Index: 70</string>
+
     <string name="losAngelesDesc">
         Los Angeles lies in a basin in Southern California, adjacent to the Pacific Ocean,
         with mountains as high as 10,000 feet (3,000 m), and deserts. It\'s the entertainment
         capital of America, and has a vibrant coffee and beer scene.
     </string>
     <string name="losAngelesCOL">Cost of Living Index: 82</string>
+
     <string name="philadelphiaDesc">
         Frequently called "The City of Brotherly Love", it is known for its arts, culture,
         cuisine, and colonial history, attracting 42 million domestic tourists in 2016.
     </string>
     <string name="philadelphiaCOL">Cost of Living Index: 83</string>
+
     <string name="phoenixDesc">
         Phoenix was settled in 1867 as an agricultural community near the confluence of
         the Salt and Gila Rivers and was incorporated as a city in 1881. It\'s has very hot
         summers and an affordable cost of living.
     </string>
     <string name="phoenixCOL">Cost of Living Index: 66</string>
+
     <string name="sanAntonioDesc">
         The city of San Antonio, is the seventh-most populous city in the United States,
         and the second-most populous city in both Texas and the Southern United States,
         with more than 1.5 million residents.
     </string>
     <string name="sanAntonioCOL">Cost of Living Index: 60</string>
+
     <string name="sanDiegoDesc">
         Located on the coast of the Pacific Ocean in Southern California, San Diego is widely known
         as “America\'s Finest City.” Famous for its miles and miles of white-sand beaches and amazing weather.
     </string>
     <string name="sanDiegoCOL">Cost of Living Index: 77</string>
+
     <string name="sanJoseDesc">
         Nicknamed the capital of Silicon Valley, San Jose is a diverse area with an innovative spirit.
         While it has a distinct downtown, San Jose is a sprawling metro area that is as much defined by its
         suburban neighborhoods and large tech campuses as it is by the high-rises in its business district
     </string>
     <string name="sanJoseCOL">Cost of Living Index: 62</string>
-
 </resources>
