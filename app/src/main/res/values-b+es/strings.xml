@@ -1,140 +1,144 @@
 <resources>
     <!--  landing page  -->
     <string name="quizButtonPrompt">¡Encuentra un lugar para vivir!</string>
-    <string name="loginButtonPrompt">Login</string>
-    <string name="logoutButtonPrompt">Logout</string>
-    <string name="deleteButtonPrompt">Delete Account</string>
-    <string name="currentMatchedCityPrompt">Track Currently Matched City</string>
-    <string name="showCoordinatesButtonPrompt">What are my coordinates?</string>
+    <string name="loginButtonPrompt">Iniciar sesión</string>
+    <string name="logoutButtonPrompt">Cerrar sesión</string>
+    <string name="deleteButtonPrompt">Borrar cuenta</string>
+    <string name="currentMatchedCityPrompt">Seguir la ciudad actualmente coincidente</string>
+    <string name="showCoordinatesButtonPrompt">¿Cuáles son mis coordenadas?</string>
 
     <!--  login page / new user page  -->
-    <string name="enterEmailPrompt">enter email</string>
-    <string name="enterPasswordPrompt">enter password</string>
-    <string name="loginHeader">City-Matcher Login</string>
-    <string name="createAccountPrompt">Create Account</string>
-    <string name="confirmPasswordPrompt">confirm Password</string>
+    <string name="enterEmailPrompt">ingrese correo electrónico</string>
+    <string name="enterPasswordPrompt">introducir la contraseña</string>
+    <string name="loginHeader">Inicio de sesión de City-Matcher</string>
+    <string name="createAccountPrompt">Crear una cuenta</string>
+    <string name="confirmPasswordPrompt">Confirmar contraseña</string>
 
     <!-- quiz page -->
     <string name="app_name">City-Matcher</string>
-    <string name="quizHeader">Personality And Preference Quiz</string>
+    <string name="quizHeader">Prueba de personalidad y preferencia</string>
 
-    <string name="priorityQuestionPrompt">1. What would you consider most important?</string>
+    <string name="priorityQuestionPrompt">1. ¿Qué considerarías más importante?</string>
     <string-array name="priorityQuestionAnswers">
-        <item>Select</item>
-        <item>Career</item>
-        <item>Family</item>
-        <item>Cost of Living</item>
-        <item>Warm Weather</item>
+        <item>Seleccione</item>
+        <item>Carrera</item>
+        <item>Familia</item>
+        <item>Costo de la vida</item>
+        <item>Clima cálido</item>
     </string-array>
 
-    <string name="industryQuestionPrompt">2. What industry are you in?</string>
+    <string name="industryQuestionPrompt">2. ¿En qué industria estás?</string>
     <string-array name="industryQuestionAnswers">
-        <item>Select</item>
-        <item>Engineering</item>
-        <item>Marketing</item>
-        <item>Finance and Accounting</item>
-        <item>Teaching</item>
-        <item>Human Resources</item>
-        <item>Arts and Design</item>
+        <item>Seleccione</item>
+        <item>Ingenieria</item>
+        <item>Márketing</item>
+        <item>Finanzas y Contabilidad</item>
+        <item>Enseñando</item>
+        <item>Recursos humanos</item>
+        <item>Arte y diseño</item>
     </string-array>
 
-    <string name="drinkQuestionPrompt">3. whats your favorite drink?</string>
+    <string name="drinkQuestionPrompt">3. ¿Cuál es tu bebida favorita?</string>
     <string-array name="drinkQuestionAnswers">
-        <item>Select</item>
-        <item>Coffee</item>
-        <item>Beer</item>
-        <item>Soda</item>
-        <item>Water</item>
+        <item>Seleccione</item>
+        <item>café</item>
+        <item>Cerveza</item>
+        <item>soda</item>
+        <item>Agua</item>
     </string-array>
 
-    <string name="distanceQuestionPrompt">4. How far away are you willing to move?</string>
+    <string name="distanceQuestionPrompt">4. ¿A qué distancia estás dispuesto a moverte?</string>
     <string-array name="distanceQuestionAnswers">
-        <item>Select</item>
-        <item>less than 250mi</item>
-        <item>less than 500mi</item>
-        <item>no limit</item>
+        <item>Seleccione</item>
+        <item>menos de 250mi</item>
+        <item>menos de 500mi</item>
+        <item>sin límite</item>
     </string-array>
 
-    <string name="submitButton">Submit</string>
+
+    <string name="submitButton">Enviar</string>
+
 
     <!--  nothing found result  -->
-    <string name="noResultPrompt">Sorry, no result found</string>
-    <string name="noResultExplanation">Try expanding the distance allowed or turning on location permissions.</string>
+    <string name="noResultPrompt">Lo sentimos, no se encontraron resultados</string>
+    <string name="noResultExplanation">Intenta expandir la distancia permitida o activa los permisos de ubicación.</string>
 
 
     <!--  result information  -->
-    <string name="chicagoResultHeader">We recommend Chicago!</string>
-    <string name="newYorkResultHeader">We recommend New York!</string>
-    <string name="dallasResultHeader">We recommend Dallas!</string>
-    <string name="houstonResultHeader">We recommend Houston!</string>
-    <string name="losAngelesResultHeader">We recommend Los Angeles!</string>
-    <string name="philadelphiaResultHeader">We recommend Philadelphia!</string>
-    <string name="phoenixResultHeader">We recommend Phoenix!</string>
-    <string name="sanAntonioResultHeader">We recommend San Antonio!</string>
-    <string name="sanDiegoResultHeader">We recommend San Diego!</string>
-    <string name="sanJoseResultHeader">We recommend San Jose!</string>
+    <string name="chicagoResultHeader">¡Recomendamos Chicago!</string>
+    <string name="newYorkResultHeader">¡Recomendamos Nueva York!</string>
+    <string name="dallasResultHeader">¡Recomendamos Dallas!</string>
+    <string name="houstonResultHeader">¡Recomendamos Houston!</string>
+    <string name="losAngelesResultHeader">¡Recomendamos Los Angeles!</string>
+    <string name="philadelphiaResultHeader">¡Recomendamos Philadelphia!</string>
+    <string name="phoenixResultHeader">¡Recomendamos Phoenix!</string>
+    <string name="sanAntonioResultHeader">¡Recomendamos San Antonio!</string>
+    <string name="sanDiegoResultHeader">¡Recomendamos San Diego!</string>
+    <string name="sanJoseResultHeader">¡Recomendamos San Jose!</string>
 
-    <string name="jobOpeningsPrompt">Job openings in your industry: </string>
-    <string name="parkCountPrompt">Estimate of total number of parks: </string>
-    <string name="returnHomePrompt">Return Home</string>
+    <string name="jobOpeningsPrompt">Ofertas de trabajo en su industria: </string>
+    <string name="parkCountPrompt">Estimación del número total de parques: </string>
+    <string name="returnHomePrompt">Volver a casa</string>
 
-    <string name="newYorkCityDesc">Situated on one of the world\'s largest natural harbors, New York
-        offers incredible big city amenities that, unfortunately, come at a high price.</string>
-    <string name="newYorkCityCOL">Cost of Living Index: 100</string>
+    <string name="newYorkCityDesc"> Situado en uno de los puertos naturales más grandes del mundo, Nueva York
+        ofrece increíbles comodidades en la gran ciudad que, desafortunadamente, tienen un alto precio.</string>
+    <string name="newYorkCityCOL">Índice de costo de vida: 100</string>
 
-    <string name="chicagoDesc">Chicago is the principal city of the Chicago metropolitan area,
-        often referred to as Chicagoland or chicity.</string>
-    <string name="chicagoCOL">Cost of Living Index: 80</string>
-
-    <string name="dallasDesc">Dallas is located in North Texas.
-        The city is known for its cultural activities, including opera, ballet,
-        musicals, and symphony concerts</string>
-    <string name="dallasCOL">Cost of Living Index: 65</string>
-
-    <string name="houstonDesc">
-        Houston is the eighth most expansive city in the United States
-        (including consolidated city-counties). It is the largest city
-        in the United States by total area
+    <string name="chicagoDesc"> Chicago es la ciudad principal del área metropolitana de Chicago, a
+        menudo conocida como Chicagoland o chicity.
     </string>
-    <string name="houstonCOL">Cost of Living Index: 70</string>
+    <string name="chicagoCOL">Índice de costo de vida: 80</string>
+
+    <string name="dallasDesc">Dallas se encuentra en el norte de Texas. La ciudad es
+        conocida por sus actividades culturales, que incluyen ópera, ballet, musicales y conciertos sinfónicos.
+    </string>
+    <string name="dallasCOL">Índice de costo de vida: 65</string>
+
+    <string name="houstonDesc"> Houston es la octava ciudad más expansiva de los Estados Unidos
+        (incluidos los condados urbanos consolidados). Es la ciudad más grande de los Estados Unidos
+        por área total.
+    </string>
+    <string name="houstonCOL">Índice de costo de vida: 70</string>
 
     <string name="losAngelesDesc">
-        Los Angeles lies in a basin in Southern California, adjacent to the Pacific Ocean,
-        with mountains as high as 10,000 feet (3,000 m), and deserts. It\'s the entertainment
-        capital of America, and has a vibrant coffee and beer scene.
+        Los Ángeles se encuentra en una cuenca en el sur de California, adyacente al Océano Pacífico,
+        con montañas de hasta 10,000 pies (3,000 m) y desiertos. Es la capital del entretenimiento
+        de Estados Unidos y tiene una vibrante escena de café y cerveza.
     </string>
-    <string name="losAngelesCOL">Cost of Living Index: 82</string>
+    <string name="losAngelesCOL">Índice de costo de vida: 82</string>
 
     <string name="philadelphiaDesc">
-        Frequently called "The City of Brotherly Love", it is known for its arts, culture,
-        cuisine, and colonial history, attracting 42 million domestic tourists in 2016.
+        Frecuentemente llamada "La ciudad del amor fraternal", es conocida por sus artes, cultura,
+        gastronomía e historia colonial, y atrajo a 42 millones de turistas nacionales en 2016.
     </string>
-    <string name="philadelphiaCOL">Cost of Living Index: 83</string>
+    <string name="philadelphiaCOL">Índice de costo de vida: 83</string>
 
     <string name="phoenixDesc">
-        Phoenix was settled in 1867 as an agricultural community near the confluence of
-        the Salt and Gila Rivers and was incorporated as a city in 1881. It\'s has very hot
-        summers and an affordable cost of living.
+        Phoenix se estableció en 1867 como una comunidad agrícola cerca de la confluencia de los
+        ríos Salt y Gila y se incorporó como ciudad en 1881. Tiene veranos muy calurosos y
+        un costo de vida asequible.
     </string>
-    <string name="phoenixCOL">Cost of Living Index: 66</string>
+    <string name="phoenixCOL">Índice de costo de vida: 66</string>
 
     <string name="sanAntonioDesc">
-        The city of San Antonio, is the seventh-most populous city in the United States,
-        and the second-most populous city in both Texas and the Southern United States,
-        with more than 1.5 million residents.
+        La ciudad de San Antonio, es la séptima ciudad más poblada de los Estados Unidos, y la
+        segunda ciudad más poblada tanto en Texas como en el sur de los Estados Unidos, con más
+        de 1.5 millones de residentes.
     </string>
-    <string name="sanAntonioCOL">Cost of Living Index: 60</string>
+    <string name="sanAntonioCOL">Índice de costo de vida: 60</string>
 
     <string name="sanDiegoDesc">
-        Located on the coast of the Pacific Ocean in Southern California, San Diego is widely known
-        as “America\'s Finest City.” Famous for its miles and miles of white-sand beaches and amazing weather.
+        Ubicada en la costa del Océano Pacífico en el sur de California, San Diego es ampliamente
+        conocida como "la mejor ciudad de América". Famoso por sus kilómetros y kilómetros de
+        playas de arena blanca y clima increíble.
     </string>
-    <string name="sanDiegoCOL">Cost of Living Index: 77</string>
+    <string name="sanDiegoCOL">Índice de costo de vida: 77</string>
 
     <string name="sanJoseDesc">
-        Nicknamed the capital of Silicon Valley, San Jose is a diverse area with an innovative spirit.
-        While it has a distinct downtown, San Jose is a sprawling metro area that is as much defined by its
-        suburban neighborhoods and large tech campuses as it is by the high-rises in its business district
+        Apodada la capital de Silicon Valley, San José es un área diversa con un espíritu innovador.
+        Si bien tiene un centro distintivo, San José es un área metropolitana en expansión que se
+        define tanto por sus vecindarios suburbanos y grandes campus tecnológicos como por los rascacielos
+        en su distrito comercial
     </string>
-    <string name="sanJoseCOL">Cost of Living Index: 62</string>
+    <string name="sanJoseCOL">Índice de costo de vida: 62</string>
 </resources>

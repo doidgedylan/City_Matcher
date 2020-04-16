@@ -52,7 +52,7 @@ public class NewUserFragment extends Fragment {
         EditTextPasswordConfirm = v.findViewById(R.id.newAccountPasswordConfirm);
         mCreateAccountButton = v.findViewById(R.id.submitCreateAccountButton);
 
-        // firebase inits
+        // real time database inits
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mAccountsRef = mRootRef.child("accounts");
         mAuth = FirebaseAuth.getInstance();
@@ -66,7 +66,6 @@ public class NewUserFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG, "onStart: TEST");
         // onClick sign up new user
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
