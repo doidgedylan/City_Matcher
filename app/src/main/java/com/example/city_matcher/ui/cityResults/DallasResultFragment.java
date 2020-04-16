@@ -51,8 +51,8 @@ public class DallasResultFragment extends Fragment {
         } else {
             textInjectJobsParks.append(getContext().getResources().getString(R.string.parkCountPrompt) + " " + parkCount);
         }
-        weatherSummer.append("AVG summer temp: " + summerTemp);
-        weatherWinter.append("AVG winter temp: " + winterTemp);
+        weatherSummer.append(getContext().getResources().getString(R.string.avgSummerTemp) + summerTemp);
+        weatherWinter.append(getContext().getResources().getString(R.string.avgWinterTemp) + winterTemp);
 
         //listener
         returnHomeButton.setOnClickListener(new View.OnClickListener() {

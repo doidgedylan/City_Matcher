@@ -1,4 +1,21 @@
 <resources>
+    <!--  Toast Messages  -->
+    <string name="locOffToast">Activar ubicación / permisos</string>
+    <string name="latitude">Latitud: </string>
+    <string name="longitude">Longitud: </string>
+    <string name="loginFailToast">Error de inicio de sesion</string>
+    <string name="successfullyCreatedAccToast">Cuenta creada exitosamente</string>
+    <string name="registrationFailureToast">error (prueba una contraseña más larga)</string>
+    <string name="missingEmailToast">error: ingrese un correo electrónico</string>
+    <string name="missingPasswordToast">error: ingrese una contraseña</string>
+    <string name="missingConfirmPasswordToast">error: confirma tu contraseña</string>
+    <string name="passwordsDontMatchToast">error: las contraseñas no coinciden</string>
+    <string name="missingIndustryToast">industria selecta</string>
+    <string name="missingHighestValueToast">seleccione el valor más alto</string>
+    <string name="missingDrinkToast">seleccione bebida</string>
+    <string name="missingDistanceToast">seleccione una distancia</string>
+
+
     <!--  prompts and comparisons in calculations -->
     <string name="warmWeather">Clima cálido</string>
     <string name="noLimit">sin límite</string>
@@ -14,6 +31,8 @@
     <string name="Teaching">Enseñando</string>
     <string name="humanResources">Recursos humanos</string>
     <string name="artsAndDesign">Arte y diseño</string>
+    <string name="avgSummerTemp">media de verano: </string>
+    <string name="avgWinterTemp">temperatura de invierno: </string>
 
     <!--  landing page  -->
     <string name="quizButtonPrompt">¡Encuentra un lugar para vivir!</string>
@@ -92,8 +111,8 @@
     <string name="sanDiegoResultHeader">¡Recomendamos San Diego!</string>
     <string name="sanJoseResultHeader">¡Recomendamos San Jose!</string>
 
-    <string name="jobOpeningsPrompt">Ofertas de trabajo en su industria: </string>
-    <string name="parkCountPrompt">Estimación del número total de parques: </string>
+    <string name="jobOpeningsPrompt">trabajo en su industria: </string>
+    <string name="parkCountPrompt">Estimación total de parques: </string>
     <string name="returnHomePrompt">Volver a casa</string>
 
     <string name="newYorkCityDesc"> Situado en uno de los puertos naturales más grandes del mundo, Nueva York

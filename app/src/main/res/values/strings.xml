@@ -1,4 +1,20 @@
 <resources>
+    <!--  Toast Messages  -->
+    <string name="locOffToast">Turn Location/Permissions On</string>
+    <string name="latitude">Latitude: </string>
+    <string name="longitude">Longitude: </string>
+    <string name="loginFailToast">Login Failed</string>
+    <string name="successfullyCreatedAccToast">Successfully Created Account</string>
+    <string name="registrationFailureToast">error (try a longer password)</string>
+    <string name="missingEmailToast">error: please input an email</string>
+    <string name="missingPasswordToast">error: please input a password</string>
+    <string name="missingConfirmPasswordToast">error: please confirm your password</string>
+    <string name="passwordsDontMatchToast">error: passwords don\'t match</string>
+    <string name="missingIndustryToast">select industry</string>
+    <string name="missingHighestValueToast">select highest value</string>
+    <string name="missingDrinkToast">select drink</string>
+    <string name="missingDistanceToast">select a distance</string>
+
     <!--  prompts and comparisons in calculations -->
     <string name="warmWeather">Warm Weather</string>
     <string name="noLimit">no limit</string>
@@ -14,6 +30,8 @@
     <string name="Teaching">Teaching</string>
     <string name="humanResources">Human Resources</string>
     <string name="artsAndDesign">Arts and Design</string>
+    <string name="avgSummerTemp">AVG summer temp: </string>
+    <string name="avgWinterTemp">AVG winter temp: </string>
 
     <!--  landing page  -->
     <string name="quizButtonPrompt"> Find a place to live!</string>

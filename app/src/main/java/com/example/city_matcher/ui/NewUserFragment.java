@@ -91,10 +91,13 @@ public class NewUserFragment extends Fragment {
                                         AccountSingleton.getInstance().addAccount(email, id);
 
                                         // provide confirmation to user of successful account
-                                        Toast.makeText(getContext(), "Successfully Created Account", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getActivity(),
+                                                getActivity().getResources().getString(R.string.successfullyCreatedAccToast),
+                                                Toast.LENGTH_LONG).show();
                                     } else {
-                                        Log.d(TAG, "createUser failed", task.getException());
-                                        Toast.makeText(getContext(), "error", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getActivity(),
+                                                getActivity().getResources().getString(R.string.registrationFailureToast),
+                                                Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -106,16 +109,24 @@ public class NewUserFragment extends Fragment {
     private static boolean inputValid(String email, String password, String passwordConfirm, Context c) {
         boolean answer = true;
         if (email.equals("")) {
-            Toast.makeText(c, "error: please input an email", Toast.LENGTH_LONG).show();
+            Toast.makeText(c,
+                    c.getResources().getString(R.string.missingEmailToast),
+                    Toast.LENGTH_LONG).show();
             answer = false;
         } else if (password.equals("")) {
-            Toast.makeText(c, "error: please input a password", Toast.LENGTH_LONG).show();
+            Toast.makeText(c,
+                    c.getResources().getString(R.string.missingPasswordToast),
+                    Toast.LENGTH_LONG).show();
             answer = false;
         } else if (passwordConfirm.equals("")) {
-            Toast.makeText(c, "error: please confirm your password", Toast.LENGTH_LONG).show();
+            Toast.makeText(c,
+                    c.getResources().getString(R.string.missingConfirmPasswordToast),
+                    Toast.LENGTH_LONG).show();
             answer = false;
         } else if (!passwordConfirm.equals(password)) {
-            Toast.makeText(c, "error: passwords don't match", Toast.LENGTH_LONG).show();
+            Toast.makeText(c,
+                    c.getResources().getString(R.string.passwordsDontMatchToast),
+                    Toast.LENGTH_LONG).show();
             answer = false;
         }
         return answer;

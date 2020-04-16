@@ -67,8 +67,6 @@ public class LoginFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Log.d(TAG, "signInWithEmail:Success");
-
                                     // go to landing page
                                     Intent mIntent = new Intent(getActivity(), LandingActivity.class);
                                     startActivity(mIntent);
@@ -76,8 +74,9 @@ public class LoginFragment extends Fragment {
                                     getActivity().finish();
 
                                 } else {
-                                    Log.d(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(getActivity(), "login failed", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(),
+                                            getActivity().getResources().getString(R.string.loginFailToast),
+                                            Toast.LENGTH_LONG).show();
                                 }
                             }
                         });

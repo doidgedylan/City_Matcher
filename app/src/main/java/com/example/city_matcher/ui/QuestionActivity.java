@@ -153,16 +153,16 @@ public class QuestionActivity extends AppCompatActivity {
         boolean result = true;
         if (resultEngine.getIndustry().equals(this.getResources().getString(R.string.Select))) {
             result = false;
-            Toast.makeText(getBaseContext(), "select industry" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), this.getResources().getString(R.string.missingIndustryToast) , Toast.LENGTH_SHORT).show();
         } else if (resultEngine.getHighestValue().equals(this.getResources().getString(R.string.Select))) {
             result = false;
-            Toast.makeText(getBaseContext(), "select highest value" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), this.getResources().getString(R.string.missingHighestValueToast) , Toast.LENGTH_SHORT).show();
         } else if (resultEngine.getDrink().equals(this.getResources().getString(R.string.Select))) {
             result = false;
-            Toast.makeText(getBaseContext(), "select drink" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), this.getResources().getString(R.string.missingDrinkToast) , Toast.LENGTH_SHORT).show();
         } else if (resultEngine.getMaxDistance().equals(this.getResources().getString(R.string.Select))) {
             result = false;
-            Toast.makeText(getBaseContext(), "select a distance", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), this.getResources().getString(R.string.missingDistanceToast), Toast.LENGTH_SHORT).show();
         }
         return result;
     }
