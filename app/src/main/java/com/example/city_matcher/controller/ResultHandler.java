@@ -310,6 +310,7 @@ public class ResultHandler {
     public String getMaxDistance() {return maxDistance; }
     public int getIterateCount() {return iterateCount; }
     public void addToIterateCount(int amt) {iterateCount+=amt;}
+    public CoordinatesWrapper getCurrentLocation() { return currentLoc; }
     public void setCurrentLocation(double lat, double lng) {
         currentLoc.setLongitude(lng);
         currentLoc.setLatitude(lat);

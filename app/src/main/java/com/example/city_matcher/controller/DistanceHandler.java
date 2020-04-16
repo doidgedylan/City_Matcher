@@ -4,7 +4,7 @@ import com.example.city_matcher.model.CoordinatesWrapper;
 /* class to perform distance calculations for gps sensor */
 public class DistanceHandler {
     private DistanceHandler() {} // class can't be instantiated
-    // class to get distance between coordinates in miles
+    // function to get distance between coordinates in miles
     public static double distanceInMiles(CoordinatesWrapper loc1, CoordinatesWrapper loc2) {
         double result = 0;
 

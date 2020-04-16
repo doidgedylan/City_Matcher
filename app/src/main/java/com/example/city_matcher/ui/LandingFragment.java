@@ -1,6 +1,7 @@
 package com.example.city_matcher.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -107,15 +108,13 @@ public class LandingFragment extends Fragment {
         postListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null && getActivity() != null) {
                     String city = dataSnapshot.getValue().toString();
-                    Toast.makeText(getContext(), city , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), city , Toast.LENGTH_LONG).show();
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         };
     }
 
