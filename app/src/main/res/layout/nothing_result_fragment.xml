@@ -7,9 +7,9 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sorry, no result found"
+        android:text="@string/noResultPrompt"
         android:gravity="center"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"/>
 
@@ -23,7 +23,7 @@
         android:id="@+id/nothingResultDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Try expanding the distance allowed or turning on location permissions."
+        android:text="@string/noResultExplanation"
         android:gravity="center_horizontal"
-        android:textSize="25dp"/>
+        android:textSize="25sp"/>
 </LinearLayout>

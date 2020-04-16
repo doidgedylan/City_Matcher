@@ -19,7 +19,7 @@
             android:textSize="30sp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:text="We recommend Philadelphia!"/>
+            android:text="@string/philadelphiaResultHeader"/>
 
         <ImageView
             android:id="@+id/imageView"

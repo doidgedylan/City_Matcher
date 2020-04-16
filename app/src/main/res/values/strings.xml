@@ -55,9 +55,27 @@
         <item>no limit</item>
     </string-array>
 
-    <string name="hello_blank_fragment">Hello blank fragment for testing fragment injection</string>
+    <string name="submitButton">Submit</string>
+
+    <!--  nothing found result  -->
+    <string name="noResultPrompt">Sorry, no result found</string>
+    <string name="noResultExplanation">Try expanding the distance allowed or turning on location permissions.</string>
+
 
     <!--  result information  -->
+    <string name="chicagoResultHeader">We recommend Chicago!</string>
+    <string name="newYorkResultHeader">We recommend New York!</string>
+    <string name="dallasResultHeader">We recommend Dallas!</string>
+    <string name="houstonResultHeader">We recommend Houston!</string>
+    <string name="losAngelesResultHeader">We recommend Los Angeles!</string>
+    <string name="philadelphiaResultHeader">We recommend Philadelphia!</string>
+    <string name="phoenixResultHeader">We recommend Phoenix!</string>
+    <string name="sanAntonioResultHeader">We recommend San Antonio!</string>
+    <string name="sanDiegoResultHeader">We recommend San Diego!</string>
+    <string name="sanJoseResultHeader">We recommend San Jose!</string>
+
+    <string name="jobOpeningsPrompt">Job openings in your industry: </string>
+    <string name="parkCountPrompt">Estimate of total number of parks: </string>
     <string name="returnHomePrompt">Return Home</string>
     <string name="newYorkCityDesc">Situated on one of the world\'s largest natural harbors, New York
         offers incredible big city amenities that, unfortunately, come at a high price.</string>

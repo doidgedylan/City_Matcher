@@ -47,9 +47,9 @@ public class NewYorkResultFragment extends Fragment {
         int winterTemp = 34;
 
         if (jobCount != 0) {
-            textInjectJobsParks.append("Job openings in your industry: " + jobCount);
+            textInjectJobsParks.append(getContext().getResources().getString(R.string.jobOpeningsPrompt) + " " + jobCount);
         } else {
-            textInjectJobsParks.append("Estimate of total number of parks: " + parkCount);
+            textInjectJobsParks.append(getContext().getResources().getString(R.string.parkCountPrompt) + " " + parkCount);
         }
         weatherSummer.append("AVG summer temp: " + summerTemp);
         weatherWinter.append("AVG winter temp: " + winterTemp);
