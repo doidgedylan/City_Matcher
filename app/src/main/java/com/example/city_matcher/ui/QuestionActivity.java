@@ -151,16 +151,16 @@ public class QuestionActivity extends AppCompatActivity {
 
     private boolean statementsAreAllChosen() {
         boolean result = true;
-        if (resultEngine.getIndustry().equals("Select")) {
+        if (resultEngine.getIndustry().equals(this.getResources().getString(R.string.Select))) {
             result = false;
             Toast.makeText(getBaseContext(), "select industry" , Toast.LENGTH_SHORT).show();
-        } else if (resultEngine.getHighestValue().equals("Select")) {
+        } else if (resultEngine.getHighestValue().equals(this.getResources().getString(R.string.Select))) {
             result = false;
             Toast.makeText(getBaseContext(), "select highest value" , Toast.LENGTH_SHORT).show();
-        } else if (resultEngine.getDrink().equals("Select")) {
+        } else if (resultEngine.getDrink().equals(this.getResources().getString(R.string.Select))) {
             result = false;
             Toast.makeText(getBaseContext(), "select drink" , Toast.LENGTH_SHORT).show();
-        } else if (resultEngine.getMaxDistance().equals("Select")) {
+        } else if (resultEngine.getMaxDistance().equals(this.getResources().getString(R.string.Select))) {
             result = false;
             Toast.makeText(getBaseContext(), "select a distance", Toast.LENGTH_SHORT).show();
         }
@@ -168,56 +168,53 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void processValueScore() {
-        switch(resultEngine.getHighestValue()) {
-            case ("Career"):
-                // calculate based on job count
-                String jobCountIndexByIndustry = JobIndustryToIndex.convertJob(resultEngine.getIndustry());
-                for (int i = 1; i <= 10; i++) {
-                    mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
-                }
-                break;
-            case ("Family"):
-                // calculate based on cost of living and public park count
-                for (int i = 1; i <=10; i++) {
-                    mCityRef.child(Integer.toString(i)).child("5").addValueEventListener(processFirebaseRead);
-                }
-                break;
-            case ("Cost of Living"):
-                // calculate based on cost of living index
-                for (int i = 1; i <= 10; i++) {
-                    mCityRef.child(Integer.toString(i)).child("3").addValueEventListener(processFirebaseRead);
-                }
-                break;
-            case ("Warm Weather"):
-                // calculate based on lowest difference between avg winter temp and avg summer temp
-                for (int i = 1; i <= 10; i++) {
-                    mCityRef.child(Integer.toString(i)).child("1").addValueEventListener(processFirebaseRead);
-                    mCityRef.child(Integer.toString(i)).child("2").addValueEventListener(processFirebaseRead);
-                }
-                break;
+        if (resultEngine.getHighestValue().equals(this.getResources().getString(R.string.Career))) {
+            // calculate based on job count
+            String jobCountIndexByIndustry = JobIndustryToIndex.convertJob(resultEngine.getIndustry());
+            for (int i = 1; i <= 10; i++) {
+                mCityRef.child(Integer.toString(i)).child(jobCountIndexByIndustry).addValueEventListener(processFirebaseRead);
+            }
+        } else if (resultEngine.getHighestValue().equals(this.getResources().getString(R.string.Family))) {
+            // calculate based on cost of living and public park count
+            for (int i = 1; i <= 10; i++) {
+                mCityRef.child(Integer.toString(i)).child("5").addValueEventListener(processFirebaseRead);
+            }
+        } else if (resultEngine.getHighestValue().equals(this.getResources().getString(R.string.costOfLiving))) {
+            // calculate based on cost of living index
+            for (int i = 1; i <= 10; i++) {
+                mCityRef.child(Integer.toString(i)).child("3").addValueEventListener(processFirebaseRead);
+            }
+        } else if (resultEngine.getHighestValue().equals(this.getResources().getString(R.string.warmWeather))) {
+            // calculate based on lowest difference between avg winter temp and avg summer temp
+            for (int i = 1; i <= 10; i++) {
+                mCityRef.child(Integer.toString(i)).child("1").addValueEventListener(processFirebaseRead);
+                mCityRef.child(Integer.toString(i)).child("2").addValueEventListener(processFirebaseRead);
+            }
         }
     }
 
     private void processDrinkScore() {
-        switch(resultEngine.getDrink()) {
-            case("Coffee"):
-                for (int i = 1; i <= 10; i++) {
-                    mCityRef.child(Integer.toString(i)).child("6").addValueEventListener(processFirebaseRead);
-                }
-                break;
-            case("Beer"):
-                for (int i = 1; i <= 10; i++) {
-                    mCityRef.child(Integer.toString(i)).child("4").addValueEventListener(processFirebaseRead);
-                }
-                break;
-            default:
-                // add ten iterations for result processing to be activated.
-                resultEngine.addToIterateCount(10);
+        String beer = this.getResources().getString(R.string.Beer);
+        String coffee = this.getResources().getString(R.string.Coffee);
+
+        if (resultEngine.getDrink().equals(coffee)) {
+            for (int i = 1; i <= 10; i++) {
+                mCityRef.child(Integer.toString(i)).child("6").addValueEventListener(processFirebaseRead);
+            }
+        }
+        else if(resultEngine.getDrink().equals(beer)) {
+            for (int i = 1; i <= 10; i++) {
+                mCityRef.child(Integer.toString(i)).child("4").addValueEventListener(processFirebaseRead);
+            }
+        }
+        else {
+            // add ten iterations for result processing to be activated.
+            resultEngine.addToIterateCount(10);
         }
     }
 
     private void processDistanceScore() {
-        if (!resultEngine.getMaxDistance().equals("no limit")) {
+        if (!resultEngine.getMaxDistance().equals(this.getResources().getString(R.string.noLimit))) {
             // calculate based on difference between coordinates of current location and city location
             for (int i = 1; i <= 10; i++) {
                 mCityRef.child(Integer.toString(i)).child("13").addValueEventListener(processFirebaseRead);
@@ -235,9 +232,12 @@ public class QuestionActivity extends AppCompatActivity {
 
     private double getTotalFinalIterations() {
         double result = 0;
-        boolean isWarmWeather = resultEngine.getHighestValue().equals("Warm Weather");
-        boolean isDistanceSelected = !resultEngine.getMaxDistance().equals("no limit");
-        boolean isDistanceNotSelected = resultEngine.getMaxDistance().equals("no limit");
+        boolean isWarmWeather = resultEngine.getHighestValue()
+                .equals(this.getResources().getString(R.string.warmWeather));
+        boolean isDistanceSelected = !resultEngine.getMaxDistance()
+                .equals(this.getResources().getString(R.string.noLimit));
+        boolean isDistanceNotSelected = resultEngine.getMaxDistance()
+                .equals(this.getResources().getString(R.string.noLimit));
         if (isWarmWeather && isDistanceSelected) {
             // warm weather 20 drink 10, distance 20
             result = 50;
