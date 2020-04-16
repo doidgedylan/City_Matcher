@@ -1,5 +1,6 @@
 package com.example.city_matcher.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,10 +34,12 @@ public class NewUserFragment extends Fragment {
     // storage props
     private String email;
     private String password;
+    private String passwordConfirm;
 
     // set UI element properties
     private EditText EditTextEmail;
     private EditText EditTextPassword;
+    private EditText EditTextPasswordConfirm;
     private Button mCreateAccountButton;
 
     @Override
@@ -46,6 +49,7 @@ public class NewUserFragment extends Fragment {
         // get UI references by id
         EditTextEmail = v.findViewById(R.id.newAccountEmail);
         EditTextPassword = v.findViewById(R.id.newAccountPassword);
+        EditTextPasswordConfirm = v.findViewById(R.id.newAccountPasswordConfirm);
         mCreateAccountButton = v.findViewById(R.id.submitCreateAccountButton);
 
         // firebase inits
@@ -69,31 +73,52 @@ public class NewUserFragment extends Fragment {
             public void onClick(View v) {
                 email = EditTextEmail.getText().toString();
                 password = EditTextPassword.getText().toString();
+                passwordConfirm = EditTextPasswordConfirm.getText().toString();
 
-                // create a new user
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // write user to real time database to access later
-                                    Account loginAccount = new Account(email, "nothing");
-                                    //String id = mAccountsRef.push().getKey();
-                                    String id = mAuth.getCurrentUser().getUid();
-                                    mAccountsRef.child(id).setValue(loginAccount);
+                if (inputValid(email, password, passwordConfirm, getContext())) {
+                    // create a new user
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // write user to real time database to access later
+                                        Account loginAccount = new Account(email, "nothing");
+                                        //String id = mAccountsRef.push().getKey();
+                                        String id = mAuth.getCurrentUser().getUid();
+                                        mAccountsRef.child(id).setValue(loginAccount);
 
-                                    // save unique id
-                                    AccountSingleton.getInstance().addAccount(email, id);
+                                        // save unique id
+                                        AccountSingleton.getInstance().addAccount(email, id);
 
-                                    // provide confirmation to user of successful account
-                                    Toast.makeText(getContext(), "Successfully Created Account", Toast.LENGTH_LONG).show();
-                                } else {
-                                    Log.d(TAG, "createUser failed", task.getException());
-                                    Toast.makeText(getContext(), "error", Toast.LENGTH_LONG).show();
+                                        // provide confirmation to user of successful account
+                                        Toast.makeText(getContext(), "Successfully Created Account", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Log.d(TAG, "createUser failed", task.getException());
+                                        Toast.makeText(getContext(), "error", Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
+    }
+
+    private static boolean inputValid(String email, String password, String passwordConfirm, Context c) {
+        boolean answer = true;
+        if (email.equals("")) {
+            Toast.makeText(c, "error: please input an email", Toast.LENGTH_LONG).show();
+            answer = false;
+        } else if (password.equals("")) {
+            Toast.makeText(c, "error: please input a password", Toast.LENGTH_LONG).show();
+            answer = false;
+        } else if (passwordConfirm.equals("")) {
+            Toast.makeText(c, "error: please confirm your password", Toast.LENGTH_LONG).show();
+            answer = false;
+        } else if (!passwordConfirm.equals(password)) {
+            Toast.makeText(c, "error: passwords don't match", Toast.LENGTH_LONG).show();
+            answer = false;
+        }
+        return answer;
     }
 }
