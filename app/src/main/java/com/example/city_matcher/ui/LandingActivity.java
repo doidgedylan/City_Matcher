@@ -1,4 +1,5 @@
 package com.example.city_matcher.ui;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.city_matcher.R;
@@ -10,5 +11,3 @@ public class LandingActivity extends AppCompatActivity {
         setContentView(R.layout.landing_activity);
     }
 }
-
-
