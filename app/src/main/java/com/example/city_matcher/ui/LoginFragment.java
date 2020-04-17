@@ -61,25 +61,27 @@ public class LoginFragment extends Fragment {
                 email = emailEdit.getText().toString();
                 password = passwordEdit.getText().toString();
 
-                // sign in user
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // go to landing page
-                                    Intent mIntent = new Intent(getActivity(), LandingActivity.class);
-                                    startActivity(mIntent);
-                                    // finish activity so they can't go back without logging out
-                                    getActivity().finish();
+                if(inputValid(email, password)) {
+                    // sign in user
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // go to landing page
+                                        Intent mIntent = new Intent(getActivity(), LandingActivity.class);
+                                        startActivity(mIntent);
+                                        // finish activity so they can't go back without logging out
+                                        getActivity().finish();
 
-                                } else {
-                                    Toast.makeText(getActivity(),
-                                            getActivity().getResources().getString(R.string.loginFailToast),
-                                            Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(getActivity(),
+                                                getActivity().getResources().getString(R.string.loginFailToast),
+                                                Toast.LENGTH_LONG).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
 
@@ -91,5 +93,9 @@ public class LoginFragment extends Fragment {
                 startActivity(mIntent);
             }
         });
+    }
+
+    private static boolean inputValid(String email, String password) {
+        return !(email.equals("") || password.equals(""));
     }
 }
