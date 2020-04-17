@@ -18,7 +18,7 @@
             android:layout_marginBottom="25dp"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorAccent"
             android:text="@string/createAccountPrompt" />
 
         <TextView
@@ -69,8 +69,15 @@
 
         <Button
             android:id="@+id/submitCreateAccountButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/createAccountPrompt" />
+            android:text="@string/createAccountPrompt"
+            android:textAlignment="center"
+            android:background="@drawable/roundedbutton"
+            android:textColor="#E8EAF6"
+            android:textStyle="bold"
+            android:visibility="visible"
+            android:layout_width="300dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"/>
     </LinearLayout>
 </ScrollView>

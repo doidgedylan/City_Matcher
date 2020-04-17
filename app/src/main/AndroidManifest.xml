@@ -7,13 +7,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_logo"
+        android:roundIcon="@mipmap/app_logo_round"
         android:supportsRtl="true"
-        android:name=".model.City_Matcher"
-        android:theme="@style/Theme.AppCompat.DayNight">
+        android:theme="@style/MyTheme"
+        android:name=".model.City_Matcher">
         <activity android:name="com.example.city_matcher.ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

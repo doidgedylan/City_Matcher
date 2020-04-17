@@ -45,7 +45,7 @@
     <!--  login page / new user page  -->
     <string name="enterEmailPrompt">ingrese correo electrónico</string>
     <string name="enterPasswordPrompt">introducir la contraseña</string>
-    <string name="loginHeader">Inicio de sesión de City-Matcher</string>
+    <string name="loginHeader">City-Matcher sesión</string>
     <string name="createAccountPrompt">Crear una cuenta</string>
     <string name="confirmPasswordPrompt">Confirmar contraseña</string>
 
